@@ -1,9 +1,16 @@
-.login-container {
+.login-page {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 60px 80px;
+	height: 100vh;
+	width: 100vw;
+}
+
+.login-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 40px 80px;
 	border: black 1px solid;
 	border-radius: 10px;
 }
@@ -53,9 +60,56 @@
 	cursor: pointer;
 }
 
-.oauth-container {
+.login-sep {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 10px 0;
+	padding: 10px 16px;
+	margin: 10px 16px;
 }
+
+.oauth-container {
+	/* display: flex; */
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 0;
+	/* border: 1px solid black;
+	border-color: black;
+	border-radius: 10px;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1); */
+}
+
+.oauth-google {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 20px;
+	margin: 10px 0;
+}
+
+.oauth-facebook {
+	display: flex;
+	width: 200px;
+	height: 44px;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 20px;
+	background-color: #10182b;
+	color: white;
+	border-radius: 4px;
+	border: none;
+	font-size: 1px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	
+  }
+  
+  .oauth-facebook:hover {
+	background-color: #2d4373; /* Darken the button when hovered */
+  }
+  
+  .oauth-facebook:active {
+	background-color: #23345f; /* Further darken the button when clicked */
+  }
