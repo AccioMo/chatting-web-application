@@ -1,9 +1,25 @@
-.cascading-right {
-  margin-right: -50px;
+* {
+	padding: 0;
+	margin: 0;
 }
 
-@media (max-width: 900px) {
-  .cascading-right {
-    margin-right: 0;
-  }
+.page-container {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	justify-content: center;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.page-color {
+	background-color:#e4e5f1;
+}
+
+.page-font {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }

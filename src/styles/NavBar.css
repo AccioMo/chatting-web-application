@@ -1,22 +1,21 @@
-* {
-	/* display: flex; */
-	justify-content: center;
-	align-items: center;
-	margin: 0;
-}
-
 .navbar {
 	display: flex;
 	position: fixed;
+	padding: 7px 40px;
+	margin: 0;
 	width: 100vw;
-	background-color: rgb(45, 28, 65);
-	justify-content: space-between;
-	align-items: center;
-	padding: 20px;
+	max-width: 100%;
+	justify-content: center;
+	background-color: #303248;
 }
 
 .nav-item {
-	padding: 0 50px;
+	padding: 10px 20px;
 	color: white;
 	text-decoration: none;
+	cursor: pointer;
+}
+
+.nav-brand {
+	font-weight: 750;
 }

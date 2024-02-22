@@ -1,0 +1,23 @@
+.home-container {
+	width: 100vw;
+	height: 100vh;
+	padding: 60px 80px;
+	justify-content: center;
+	align-items: center;
+}
+
+.welcome-header {
+	display: flex;
+	justify-content: center;
+	font-size: 44px;
+	align-items: center;
+	padding: 24px 0;
+}
+
+.chats-container {
+	display: flex;
+	flex-wrap: wrap;
+	overflow-x: wrap;
+	justify-content:space-evenly;
+	align-items: center;
+}
