@@ -1,0 +1,22 @@
+* {
+	/* display: flex; */
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+}
+
+.navbar {
+	display: flex;
+	position: fixed;
+	width: 100vw;
+	background-color: rgb(45, 28, 65);
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+}
+
+.nav-item {
+	padding: 0 50px;
+	color: white;
+	text-decoration: none;
+}
