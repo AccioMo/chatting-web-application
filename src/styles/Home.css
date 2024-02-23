@@ -17,7 +17,6 @@
 .chats-container {
 	display: flex;
 	flex-wrap: wrap;
-	overflow-x: wrap;
 	justify-content:space-evenly;
 	align-items: center;
 }

@@ -1,13 +1,22 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
 import { GoogleOAuthProvider, GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 import '../styles/LoginPage.css';
 import LoginForm from './LoginForm';
 import FacebookLogin from '@greatsumini/react-facebook-login';
+import { FaFacebookF } from "react-icons/fa";
+import { useNavigate } from 'react-router';
+
+// const result = await pb.collection('example').getList(1, 20, {
+//     filter: 'status = true && created > "2022-08-01 10:00:00"'
+// });
+
+// const userData = await pb.collection('users').authWithPassword('test@example.com', '123456');
+
+// const adminData = await pb.admins.authWithPassword('test@example.com', '123456');
 
 function LoginPage() {
-	const UID = process.env.REACT_APP_GOOGLE_ID;
 	const nav = useNavigate();
+	const UID = process.env.REACT_APP_GOOGLE_ID;
 	return (
 		<div className='login-page'>
 			<div className='login-container'>
@@ -32,22 +41,19 @@ function LoginPage() {
 						</GoogleOAuthProvider>
 
 					</div>
-					<div className='oauth-facebook flex'>
-						// react icon mni nrj3
-						
-						<FacebookLogin
-						appId="1088597931155576"
-						style={{
-							display: "flex",
-							backgroundColor: "transparent",
-							color: "white",
-							border: "none",
-							fontSize: "12px",
-							fontWeight: "bold",
-							cursor: "pointer",
-						}}
-						/>
-						{/* <button  className='facebook-button'>Login with Facebook</button> */}
+					<div className='oauth-facebook'>
+						<div className='icon-facebook'><FaFacebookF color='white' size={16} /></div>
+							<FacebookLogin
+							appId="1088597931155576"
+							style={{
+								display: "flex",
+								backgroundColor: "transparent",
+								color: "white",
+								border: "none",
+								fontSize: "13px",
+								cursor: "pointer",
+							}}
+							/>
 					</div>
 				</div>
 			</div>
