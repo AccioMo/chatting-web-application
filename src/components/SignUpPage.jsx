@@ -2,7 +2,7 @@ import React from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import '../styles/LoginPage.css';
 import FacebookLogin from '@greatsumini/react-facebook-login';
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { useNavigate } from 'react-router';
 import SignUpForm from './SignUpForm';
 import PocketBase from 'pocketbase';
@@ -23,10 +23,16 @@ function SignUpPage() {
 				<h3 className='login-sep'>OR</h3>
 				<div className='oauth-container'>
 					<div className='oauth-google'>
-						<div onClick={googleSignUp} className='google-button'>Continue with Google</div>
+						<div onClick={googleSignUp} className='google-button'>
+							<FaGoogle color='white' size={16} />
+							Continue with Google
+						</div>
 					</div>
 					<div className='oauth-facebook'>
-						<div className='icon-facebook'><FaFacebookF color='white' size={16} />Continue with Facebook</div>
+						<div className='icon-facebook'>
+							<FaFacebookF color='white' size={16} />
+							Continue with Facebook
+						</div>
 					</div>
 				</div>
 			</div>
