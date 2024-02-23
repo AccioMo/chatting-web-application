@@ -9,12 +9,19 @@ function LoginForm() {
 	const nav = useNavigate();
 	const handleEmailPasswordLogin = async (email, password) => {
 		try {
+			// const authData = await pb.collection('users').authWithPassword(
+			// 	email,
+			// 	password,
+			// );
 			const data = {
-				"email": email,
-				"password": password
+				"username": "username",
+				"email": "test@example.com",
+				"emailVisibility": true,
+				"password": "12345678",
+				"passwordConfirm": "12345678",
+				"name": "test"
 			};
-
-			const record = await pb.collection('users').create(data);
+			const record = await pb.collection("users").create(data);
 			console.log('User logged in:', record);
 			// Redirect to home page or perform other actions
 		} catch (error) {
@@ -30,7 +37,7 @@ function LoginForm() {
 	}
 	return (
 		<div>
-			{/* <div className='login-header'>Welcome! Please Log In to Continue</div> */}
+			<div className='login-header'>{pb.authStore.isValid.toString()}</div>
 			<form onSubmit={logUserIn} className='login-form'>
 				<div className="input-field">
 					<label htmlFor="email">Email</label>

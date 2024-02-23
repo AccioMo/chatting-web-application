@@ -110,6 +110,18 @@
 	
   }
 
+.google-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 20px;
+	margin: 10px 0;
+	border: 1px solid black;
+	border-color: black;
+	border-radius: 10px;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
 .icon-facebook {
 	display: flex;
 	justify-content: center;

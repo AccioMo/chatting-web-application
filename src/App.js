@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import ChatsPage from "./components/ChatsPage.jsx";
 import AboutPage from "./components/AboutPage.jsx";
 import './styles/App.css';
+import SignUpPage from "./components/SignUpPage";
 
 function App() {
 	return (
@@ -15,6 +16,7 @@ function App() {
 					<Route path="/home" element={<Home />} />
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/login" element={<LoginPage />} />
+					<Route path="/signup" element={<SignUpPage />} />
 					<Route path="/chats" element={<ChatsPage />} />
 					<Route path="/about" element={<AboutPage />} />
 				</Routes>
