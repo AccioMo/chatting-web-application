@@ -1,0 +1,26 @@
+[
+    {
+		"id": "IFhbUYFyvu&T57Gh9O98&",
+        "name": "Alfred",
+        "topic": "History",
+        "desc": "Alfred, your guide to the past. Engage in enlightening conversations about historical events."
+    },
+    {
+		"id": "gvIUvTYVjbytF576HBbIBO",
+        "name": "Bethany",
+        "topic": "Science",
+        "desc": "Bethany, your companion in scientific exploration. Dive into the mysteries of the universe."
+    },
+    {
+		"id": "yTVJHbuyGi6bjhYbUYv578",
+        "name": "Charles",
+        "topic": "Literature",
+        "desc": "Charles, your literary connoisseur. Discuss your favorite books and authors."
+    },
+    {
+		"id": "u786t56uUjfTkbjbUvuHBbb",
+        "name": "Diana",
+        "topic": "Art",
+        "desc": "Diana, your art enthusiast. Explore the world of art, from classical to contemporary."
+    }
+]
