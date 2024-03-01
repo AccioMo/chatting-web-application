@@ -12,7 +12,7 @@ function LoginForm() {
 			const email = e.target.email.value;
 			const password = e.target.password.value;
 			const userData = await pb.collection('users').authWithPassword(email, password);
-			if (userData.code != 200)
+			if (userData.code !== 200)
 				throw new Error('Invalid credentials');
 			nav('/home');
 		}
