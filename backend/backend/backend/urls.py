@@ -15,14 +15,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework import routers
 from chatapp import views
 
 router = routers.DefaultRouter()
-router.register(r'chats', views.ChatView, 'chat')
+router.register(r'chats', views.ChatView, 'chats')
+router.register(r'users', views.UserView, 'users')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    re_path('login', views.login),
+    re_path('signup', views.UserView.signup),
+    # re_path('delete_user', views.delete_user),
+    re_path('check_token', views.check_token),
 ]
