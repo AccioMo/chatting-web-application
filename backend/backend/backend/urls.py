@@ -26,6 +26,7 @@ router.register(r'users', views.UserView, 'users')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    re_path('csrf', views.generate_csrf),
     re_path('login', views.login),
     re_path('signup', views.UserView.signup),
     # re_path('delete_user', views.delete_user),
