@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from .serializers import UserSerializer, ChatSerializer
 from django.middleware import csrf
 from django.shortcuts import get_object_or_404
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import status
 from .models import Chat
 
@@ -47,5 +48,6 @@ class UserView(viewsets.ModelViewSet):
 
 class ChatView(viewsets.ModelViewSet):
 	serializer_class = ChatSerializer
+	authentication_classes = [JWTAuthentication]
 	permission_classes = [permissions.IsAuthenticated]
 	queryset = Chat.objects.all()

@@ -10,14 +10,14 @@ function ChatContainer( {chat} ) {
   	return (
 		<div onClick={navToChat} className='chat-container'>
 			<div className='chat-header'>
-				{chat.name}
+				{chat.title}
 			</div>
 			<div className='chat-body'>
 				<div className='chat-topic'>
 					{chat.topic}
 				</div>
 				<div className='chat-text'>
-					{chat.desc}
+					{chat.description}
 				</div>
 			</div>
 			<div className='button-container'>

@@ -1,0 +1,7 @@
+GET http://127.0.0.1:8000/api/chats/
+# Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzExMTQwNDM2LCJpYXQiOjE3MTExNDAxMzYsImp0aSI6Ijg2MmM0ZTlhOGYyMzQ5YWVhMjhiYzU2YzJiYWExNDhlIiwidXNlcl9pZCI6MzZ9.ZTCQXMtuMU86ACrrcd_tmzsOGBWP7cOz1HX9sOejRr4
+
+# {
+# 	"refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxMTIyNjUzNiwiaWF0IjoxNzExMTQwMTM2LCJqdGkiOiIxNzJkY2QyMjcwMjk0ODhjOGMyOGNiNWRkODM3MGQ3NiIsInVzZXJfaWQiOjM2fQ.sQf36nvC4M69xn7Uw1tDIlFqtTuzFpoUxNS8-DYPetU"
+# }

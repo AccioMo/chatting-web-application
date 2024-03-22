@@ -10,11 +10,11 @@ import PocketBase from 'pocketbase';
 import './styles/App.css';
 
 const ProtectedRoute = ({ children }) => {
-	const pb = new PocketBase('http://127.0.0.1:8090');
-	if (pb.authStore.isValid)
+	// const pb = new PocketBase('http://127.0.0.1:8090');
+	// if (pb.authStore.isValid)
 		return children;
-	else
-		return <Navigate to='/login' replace />
+	// else
+	// 	return <Navigate to='/login' replace />
 }
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
 			<Routes>
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/signup" element={<SignUpPage />} />
-					<Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+					<Route path="/" element={<Home />} />
 					<Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
 					<Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 					<Route path="/chats" element={<ProtectedRoute><ChatsPage /></ProtectedRoute>} />
