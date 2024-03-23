@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import axios from 'axios'
-import '../styles/LoginPage.css';
+import '../styles/SignupPage.css';
 import PocketBase from 'pocketbase';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
@@ -33,45 +33,44 @@ function SignUpForm() {
 				{ "username": data.username, "password": data.password },
 				{ 'Content-Type': 'application/json' }
 			);
-			localStorage.setItem('access_token', jwt_token.data['access']);
-			localStorage.setItem('refresh_token', jwt_token.data['refresh']);
+			localStorage.setItem('authToken', JSON.stringify(jwt_token.data));
 			nav('/home');
 			return record.data['token'];
 		} catch (error) {
-			console.error('Login error:', error);
+			console.error('sign-up error:', error);
 		}
 	};
 	return (
 		<div>
-			<div className='login-header'></div>
-			<form onSubmit={handleSubmit(logUserIn)} className='login-form'>
+			<div className='sign-up-header'></div>
+			<form onSubmit={handleSubmit(logUserIn)} className='sign-up-form'>
 				<div className="input-field">
 					<label htmlFor="first_name">First Name</label>
-					<input required defaultValue='mo' className='login-input' type="first_name" id="first_name" {...register("first_name")} />
+					<input required defaultValue='mo' className='sign-up-input' type="first_name" id="first_name" {...register("first_name")} />
 				</div>
 				<div className="input-field">
 					<label htmlFor="last_name">Last Name</label>
-					<input required defaultValue='name' className='login-input' type="last_name" id="last_name" {...register("last_name")} />
+					<input required defaultValue='name' className='sign-up-input' type="last_name" id="last_name" {...register("last_name")} />
 				</div>
 				<div className="input-field">
 					<label htmlFor="username">Username</label>
-					<input required defaultValue='user123' className='login-input' type="username" id="username" {...register("username")} />
+					<input required defaultValue='user123' className='sign-up-input' type="username" id="username" {...register("username")} />
 				</div>
 				<div className="input-field">
 					<label htmlFor="email">Email</label>
-					<input required defaultValue='apah@gmail.com' className='login-input' type="email" id="email" {...register("email")} />
+					<input required defaultValue='apah@gmail.com' className='sign-up-input' type="email" id="email" {...register("email")} />
 				</div>
 				<div className="input-field">
 					<label htmlFor="password">Password</label>
-					<input required defaultValue='password12345?,.,><' className='login-input' type="password" id="password" {...register("password")} />
+					<input required defaultValue='password12345?,.,><' className='sign-up-input' type="password" id="password" {...register("password")} />
 				</div>
 				<div className="input-field">
 					<label htmlFor="password">Confirm Password</label>
-					<input required defaultValue='password12345?,.,><' className='login-input' type="password" id="passwordConfirm" {...register("passwordConfirm")} />
+					<input required defaultValue='password12345?,.,><' className='sign-up-input' type="password" id="passwordConfirm" {...register("passwordConfirm")} />
 				</div>
 				<input type="hidden" name="csrfmiddlewaretoken" value={csrf_token} />
 				<div className="input-field">
-					<button className='login-button' type='submit'>Login</button>
+					<button className='sign-up-button' type='submit'>Sign Up!</button>
 				</div>
 			</form>
 		</div>

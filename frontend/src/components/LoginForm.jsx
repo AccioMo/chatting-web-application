@@ -7,41 +7,55 @@ import { useNavigate } from 'react-router';
 
 function LoginForm() {
 	const nav = useNavigate();
-	// const [ csrf_token, setToken ] = useState('');
-	// useEffect( () => {
-	// 	const getCsrfToken = async () => {
-	// 		const csrfToken = await axios.get('/api/csrf/');
-	// 		setToken(csrfToken.data);
-	// 		console.log('CSRF token:', csrfToken.data);
-	// 	}
-	// 	getCsrfToken();
-	// }, []);
+	const [ buttonText, setButtonText ] = useState('Login');
+	const handleBlur = async (e) => {
+		try {
+			const username = e.target.value;
+			const headers = {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${JSON.parse(localStorage.getItem('authToken'))['access']}`
+			};
+			const user = await axios.get(`/api/users/${username}`, { headers });
+			console.log('User found:', user.data);
+			setButtonText('Login');
+		} catch (error) {
+			console.error('User not found:', error);
+			setButtonText('Sign Up');
+		}
+	}
+	const [ csrf_token, setToken ] = useState('');
+	useEffect( () => {
+		const getCsrfToken = async () => {
+			const csrfToken = await axios.get('/api/csrf/');
+			setToken(csrfToken.data);
+		}
+		getCsrfToken();
+	}, []);
 	const { register, handleSubmit } = useForm();
 	const logUserIn = async (data) => {
 		try {
 			const username = data.username;
 			const password = data.password;
+			console.log('username:', username);
 			const userData = {
 				"username": username,
 				"password": password,
 			};
-			// axios.defaults.headers.common['X-CSRFToken'] = csrf_token
+			axios.defaults.headers.common['X-CSRFToken'] = csrf_token
 			const record = await axios.post('/api/login/', userData);
 			console.log('User logged in:', record.status);
 			const jwt_token = await axios.post('/api/token/', userData,
 				{ 'Content-Type': 'application/json' }
 			);
-			console.log('JWT token:', jwt_token.data['access']);
-			localStorage.setItem('access_token', jwt_token.data['access']);
-			localStorage.setItem('refresh_token', jwt_token.data['refresh']);
+			localStorage.setItem('authToken', JSON.stringify(jwt_token.data));
 			nav('/home');
 		}
 		catch (error) {
-			if (error.response.status === 404)
-				console.log('incorrect password');
-			else if (error.response.status === 500)
-				console.log('username not found');
-			else
+			// if (error.response.status === 404)
+			// 	console.log('incorrect password');
+			// else if (error.response.status === 500)
+			// 	console.log('username not found');
+			// else
 				console.error('Login error:', error);
 		}
 	}
@@ -51,15 +65,15 @@ function LoginForm() {
 			<form onSubmit={handleSubmit(logUserIn)} className='login-form'>
 				<div className="input-field">
 					<label htmlFor="username">Username</label>
-					<input className='login-input' type="username" id="username" {...register("username")} />
+					<input className='login-input' type="username" id="username" {...register("username")} onBlur={handleBlur} />
 				</div>
 				<div className="input-field">
 					<label htmlFor="password">Password</label>
 					<input className='login-input' type="password" id="password" {...register("password")} />
 				</div>
-				{/* <input type="hidden" name="csrfmiddlewaretoken" value={csrf_token} /> */}
+				<input type="hidden" name="csrfmiddlewaretoken" value={csrf_token} />
 				<div className="input-field">
-					<button className='login-button' type='submit'>Login</button>
+					<button className='login-button' type='submit'>{buttonText}</button>
 				</div>
 			</form>
 		</div>

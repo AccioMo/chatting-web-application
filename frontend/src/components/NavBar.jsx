@@ -6,8 +6,7 @@ function NavBar() {
 	const nav = useNavigate();
 	const logOut = () => {
 		try {
-			localStorage.removeItem('access_token');
-			localStorage.removeItem('refresh_token');
+			localStorage.removeItem('authToken');
 			nav('/login');
 		} catch (error) {
 			console.error('Logout error:', error);

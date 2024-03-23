@@ -10,18 +10,15 @@ const Home = () => {
 	const nav = useNavigate();
 	const refreshToken = async () => {
 		try{
-			const access_token = localStorage.getItem('access_token');
-			const refresh_token = localStorage.getItem('refresh_token');
+			const access_token = localStorage.getItem('authToken');
 			const headers = {
-				'Authorization': `Bearer ${access_token}`
+				'Authorization': `Bearer ${token['access']}`
 			};
 			const payload = {
-				"refresh": refresh_token
+				"refresh": token['refresh']
 			};
 			const token = await axios.post('/api/token/refresh/', payload, { headers });
-			console.log('new access token:', token.data['access']);
-			localStorage.setItem('access_token', token.data['access']);
-			localStorage.setItem('refresh_token', token.data['refresh']);
+			localStorage.setItem('authToken', JSON.stringify(token.data));
 		} catch (error) {
 			console.error('error:', error);
 		}
@@ -30,7 +27,7 @@ const Home = () => {
 	useEffect(() => {
 		const getChats = async (retry = 1) => {
 			try {
-				const token = localStorage.getItem('access_token');
+				const token = JSON.parse(localStorage.getItem('authToken'))['access'];
 				const headers = {
 					'Authorization': `Bearer ${token}`
 				};

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/LoginPage.css';
+import '../styles/SignupPage.css';
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { useNavigate } from 'react-router';
 import SignUpForm from './SignUpForm';
@@ -16,16 +16,16 @@ function SignUpPage() {
 		nav("/home");
 	}
 	return (
-		<div className='login-page'>
-			<div className='login-container'>
+		<div className='sign-up-page'>
+			<div className='sign-up-container'>
 				<SignUpForm />
-				<h3 className='login-sep'>OR</h3>
+				{/* <h3 className='login-sep'>OR</h3>
 				<div className='oauth-container'>
 					<div onClick={googleSignUp} className='oauth-google'>
 						<FaGoogle color='black' size={16} />
 						Continue with Google
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
   )

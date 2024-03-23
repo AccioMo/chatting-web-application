@@ -11,27 +11,23 @@ import axios from "axios";
 import './styles/App.css';
 
 const PrivateRoute = ({ children }) => {
-	try {
-		const [isAuthenticated, setIsAuthenticated] = useState(null);
-		useEffect(() => {
-		  const checkAuthentication = async () => {
+	const [isAuthenticated, setIsAuthenticated] = useState(null);
+	useEffect(() => {
+		const checkAuthentication = async () => {
 			try {
-			  const response = await axios.post('api/token/verify/');
-			  setIsAuthenticated(response.status === 200);
+				const response = await axios.post('api/token/verify/', { token: JSON.parse(localStorage.getItem('authToken'))['access'] });
+				setIsAuthenticated(response.status === 200);
+				return (response.status === 200);
 			} catch (error) {
-			  console.error('error:', error);
-			  setIsAuthenticated(false);
+				console.error('error:', error);
+				setIsAuthenticated(false);
 			}
-		  };
-		  checkAuthentication();
-		}, []);
-		if (isAuthenticated)
-			return children;
-		else
-			return <Navigate to='/login' />;
-	} catch (error) {
-		console.error('error:', error);
-	}
+		};
+		checkAuthentication();
+	}, []);
+	if (isAuthenticated === null)
+		return null;
+	return (isAuthenticated ? children : <Navigate to='/login' />);
 }
 
 const App = () => {
@@ -41,7 +37,7 @@ const App = () => {
 				<Routes>
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/signup" element={<SignUpPage />} />
-					<Route path="/" element={<Home />} />
+					<Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
 					<Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
 					<Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
 					<Route path="/chats" element={<PrivateRoute><ChatsPage /></PrivateRoute>} />
