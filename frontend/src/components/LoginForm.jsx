@@ -32,7 +32,8 @@ function LoginForm() {
 				{ 'Content-Type': 'application/json' }
 			);
 			console.log('JWT token:', jwt_token.data['access']);
-			localStorage.setItem('jwt_token', jwt_token.data['access']);
+			localStorage.setItem('access_token', jwt_token.data['access']);
+			localStorage.setItem('refresh_token', jwt_token.data['refresh']);
 			nav('/home');
 		}
 		catch (error) {

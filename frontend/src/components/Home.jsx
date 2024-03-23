@@ -7,41 +7,47 @@ import axios from 'axios';
 import '../styles/Home.css';
 
 const Home = () => {
-	const pb = new PocketBase('http://127.0.0.1:8090');
 	const nav = useNavigate();
+	const refreshToken = async () => {
+		try{
+			const access_token = localStorage.getItem('access_token');
+			const refresh_token = localStorage.getItem('refresh_token');
+			const headers = {
+				'Authorization': `Bearer ${access_token}`
+			};
+			const payload = {
+				"refresh": refresh_token
+			};
+			const token = await axios.post('/api/token/refresh/', payload, { headers });
+			console.log('new access token:', token.data['access']);
+			localStorage.setItem('access_token', token.data['access']);
+			localStorage.setItem('refresh_token', token.data['refresh']);
+		} catch (error) {
+			console.error('error:', error);
+		}
+	}
 	const [chats, setChats] = useState(null);
 	useEffect(() => {
-		// let ignore = false;
-		const getChats = async () => {
+		const getChats = async (retry = 1) => {
 			try {
-				const token = localStorage.getItem('jwt_token');
+				const token = localStorage.getItem('access_token');
 				const headers = {
 					'Authorization': `Bearer ${token}`
 				};
 				const chats = await axios.get('/api/chats/', { headers });
-				console.log(chats.data); // logs the chats
 				return (chats.data);
 			} catch (error) {
-				console.error("error: ", error); // logs any error that occurred
-				// throw error;
+				if (error.response.status === 401 && retry > 0) {
+					return refreshToken().then(() => getChats(retry - 1));
+				} else {
+					console.error("error: ", error);
+				}
 			}
 		}
-		// const chats = getChats();
-		// 	setChats(null);
 		getChats().then(chats => {
-			// if (ignore) return;
-			// console.log("chats:", chats); // logs the chats
 			setChats(chats);
 		});
-		
-			//     return () => {
-			// 		ignore = true;
-			// };
 		}, []);
-	// if (pb.authStore.isValid === false) {
-	// 	nav('/login');
-	// 	return null;
-	// }
 	return (
 		<>
 			<NavBar />
@@ -54,6 +60,7 @@ const Home = () => {
 						)):null
 					}
 				</div>
+				<button onClick={refreshToken} className='new-chat-button'>refresh</button>
 			</div>
 		</>
 		// <GoogleOAuthProvider clientId={UIDD} >

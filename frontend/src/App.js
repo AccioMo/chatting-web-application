@@ -1,3 +1,4 @@
+import { React, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./components/LoginPage";
 import ProfilePage from "./components/ProfilePage";
@@ -6,29 +7,45 @@ import { Navigate } from 'react-router';
 import ChatsPage from "./components/ChatsPage.jsx";
 import AboutPage from "./components/AboutPage.jsx";
 import SignUpPage from "./components/SignUpPage";
-import PocketBase from 'pocketbase';
+import axios from "axios";
 import './styles/App.css';
 
-const ProtectedRoute = ({ children }) => {
-	// const pb = new PocketBase('http://127.0.0.1:8090');
-	// if (pb.authStore.isValid)
-		return children;
-	// else
-	// 	return <Navigate to='/login' replace />
+const PrivateRoute = ({ children }) => {
+	try {
+		const [isAuthenticated, setIsAuthenticated] = useState(null);
+		useEffect(() => {
+		  const checkAuthentication = async () => {
+			try {
+			  const response = await axios.post('api/token/verify/');
+			  setIsAuthenticated(response.status === 200);
+			} catch (error) {
+			  console.error('error:', error);
+			  setIsAuthenticated(false);
+			}
+		  };
+		  checkAuthentication();
+		}, []);
+		if (isAuthenticated)
+			return children;
+		else
+			return <Navigate to='/login' />;
+	} catch (error) {
+		console.error('error:', error);
+	}
 }
 
-function App() {
+const App = () => {
 	return (
 		<div className='page-container page-color page-font'>
 			<BrowserRouter>
-			<Routes>
+				<Routes>
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/signup" element={<SignUpPage />} />
 					<Route path="/" element={<Home />} />
-					<Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-					<Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-					<Route path="/chats" element={<ProtectedRoute><ChatsPage /></ProtectedRoute>} />
-					<Route path="/about" element={<ProtectedRoute><AboutPage /></ProtectedRoute>} />
+					<Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
+					<Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+					<Route path="/chats" element={<PrivateRoute><ChatsPage /></PrivateRoute>} />
+					<Route path="/about" element={<PrivateRoute><AboutPage /></PrivateRoute>} />
 				</Routes>
 			</BrowserRouter>
 		</div>

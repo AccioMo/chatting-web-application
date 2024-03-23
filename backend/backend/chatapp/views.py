@@ -21,10 +21,6 @@ def login(request):
 		return Response({"user": user.username, "password": user.password})
 	return Response({"detail": "Invalid Credentials"}, status=status.HTTP_404_NOT_FOUND)
 
-@api_view(['POST'])
-def check_token(request):
-	return Response({})
-
 @api_view(['GET'])
 def generate_csrf(request):
 	csrf_token = csrf.get_token(request)

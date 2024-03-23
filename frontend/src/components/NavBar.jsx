@@ -1,14 +1,17 @@
 import '../styles/NavBar.css';
-import PocketBase from 'pocketbase';
+import axios from 'axios';
 import { useNavigate } from 'react-router';
-
-const pb = new PocketBase('http://127.0.0.1:8090');
 
 function NavBar() {
 	const nav = useNavigate();
 	const logOut = () => {
-		pb.authStore.clear();
-		nav('/login');
+		try {
+			localStorage.removeItem('access_token');
+			localStorage.removeItem('refresh_token');
+			nav('/login');
+		} catch (error) {
+			console.error('Logout error:', error);
+		}
 	}
   	return (
 		<div className='navbar'>

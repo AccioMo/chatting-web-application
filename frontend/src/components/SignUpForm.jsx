@@ -33,7 +33,8 @@ function SignUpForm() {
 				{ "username": data.username, "password": data.password },
 				{ 'Content-Type': 'application/json' }
 			);
-			localStorage.setItem('jwt_token', jwt_token.data['access']);
+			localStorage.setItem('access_token', jwt_token.data['access']);
+			localStorage.setItem('refresh_token', jwt_token.data['refresh']);
 			nav('/home');
 			return record.data['token'];
 		} catch (error) {

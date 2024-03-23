@@ -36,7 +36,5 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     re_path('csrf', views.generate_csrf),
     re_path('login', views.login),
-    re_path('signup', views.UserView.signup),
-    # re_path('delete_user', views.delete_user),
-    re_path('check_token', views.check_token),
+    re_path('signup', views.UserView.signup)
 ]
