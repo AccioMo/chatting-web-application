@@ -13,14 +13,13 @@ function LoginForm() {
 			const username = e.target.value;
 			const headers = {
 				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${JSON.parse(localStorage.getItem('authToken'))['access']}`
+				// 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('authToken'))['access']}`
 			};
 			const user = await axios.get(`/api/users/${username}`, { headers });
 			console.log('User found:', user.data);
-			setButtonText('Login');
+			user.data.user_exists ? setButtonText('Login') : setButtonText('Sign Up');
 		} catch (error) {
 			console.error('User not found:', error);
-			setButtonText('Sign Up');
 		}
 	}
 	const [ csrf_token, setToken ] = useState('');
@@ -31,11 +30,11 @@ function LoginForm() {
 		}
 		getCsrfToken();
 	}, []);
-	const { register, handleSubmit } = useForm();
-	const logUserIn = async (data) => {
+	const logUserIn = async (e) => {
+		e.preventDefault();
 		try {
-			const username = data.username;
-			const password = data.password;
+			const username = e.target.elements.username.value;
+			const password = e.target.elements.password.value;
 			console.log('username:', username);
 			const userData = {
 				"username": username,
@@ -62,14 +61,14 @@ function LoginForm() {
 	return (
 		<div>
 			<div className='login-header'></div>
-			<form onSubmit={handleSubmit(logUserIn)} className='login-form'>
+			<form onSubmit={logUserIn} className='login-form'>
 				<div className="input-field">
 					<label htmlFor="username">Username</label>
-					<input className='login-input' type="username" id="username" {...register("username")} onBlur={handleBlur} />
+					<input className='login-input' type="username" id="username" onBlur={handleBlur} />
 				</div>
 				<div className="input-field">
 					<label htmlFor="password">Password</label>
-					<input className='login-input' type="password" id="password" {...register("password")} />
+					<input className='login-input' type="password" id="password" />
 				</div>
 				<input type="hidden" name="csrfmiddlewaretoken" value={csrf_token} />
 				<div className="input-field">

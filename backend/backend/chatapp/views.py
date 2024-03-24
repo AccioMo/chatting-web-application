@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, ChatSerializer
@@ -39,8 +38,8 @@ def generate_csrf(request):
 	return Response({csrf_token})
 
 @api_view(['GET'])
+@permission_classes([permissions.AllowAny])
 def check_user_exists(request, username):
-    permission_classes = [permissions.AllowAny]
     user_exists = User.objects.filter(username=username).exists()
     return Response({'user_exists': user_exists})
 
