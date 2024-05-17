@@ -3,35 +3,20 @@ import { useNavigate } from 'react-router';
 import NavBar from './NavBar.jsx';
 import PocketBase from 'pocketbase';
 import ChatContainer from './ChatContainer.jsx';
-import axios from 'axios';
+import { setCookie, getCookie } from './Cookies.jsx';
+import { refreshToken, apiClient } from './Auth.jsx';
 import '../styles/Home.css';
 
 const Home = () => {
 	const nav = useNavigate();
-	const refreshToken = async () => {
-		try{
-			const access_token = localStorage.getItem('authToken');
-			const headers = {
-				'Authorization': `Bearer ${token['access']}`
-			};
-			const payload = {
-				"refresh": token['refresh']
-			};
-			const token = await axios.post('/api/token/refresh/', payload, { headers });
-			localStorage.setItem('authToken', JSON.stringify(token.data));
-		} catch (error) {
-			console.error('error:', error);
-		}
-	}
 	const [chats, setChats] = useState(null);
 	useEffect(() => {
 		const getChats = async (retry = 1) => {
 			try {
-				const token = JSON.parse(localStorage.getItem('authToken'))['access'];
 				const headers = {
-					'Authorization': `Bearer ${token}`
+					'Authorization': `Bearer ${getCookie('access_token')}`
 				};
-				const chats = await axios.get('/api/chats/', { headers });
+				const chats = await apiClient.get('/api/chats/', { headers });
 				return (chats.data);
 			} catch (error) {
 				if (error.response.status === 401 && retry > 0) {

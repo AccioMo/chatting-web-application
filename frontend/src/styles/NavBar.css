@@ -3,8 +3,8 @@
 	position: fixed;
 	padding: 7px 40px;
 	margin: 0;
-	width: 100vw;
-	max-width: 100%;
+	width: 100%;
+	align-items: space-between;
 	justify-content: center;
 	background-color: #303248;
 }

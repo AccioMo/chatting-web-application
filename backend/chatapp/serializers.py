@@ -1,13 +1,25 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
-from .models import Chat
+from .models import AppUser, Chat
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+class MuyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username
+        token['email'] = user.email
+        # ...
+
+        return token
 
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = User
-		fields = ('id', 'first_name', 'last_name', 'username', 'email', 'password', 'is_staff', 'is_superuser', 'is_authenticated', 'last_login', 'date_joined')
+		model = AppUser
+		fields = ('uuid', 'username', 'email', 'password', 'first_name', 'last_name', 'is_staff', 'is_superuser', 'is_authenticated', 'date_joined')
 
 class ChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
-        fields = ('id', 'title', 'topic', 'description')
+        fields = ('id', 'topic', 'chatters')

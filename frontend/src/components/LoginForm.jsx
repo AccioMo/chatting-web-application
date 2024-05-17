@@ -1,7 +1,8 @@
 import { React, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import '../styles/LoginPage.css';
-import axios from 'axios';
+import { apiClient } from './Auth.jsx';
+import { setCookie, getCookie } from './Cookies.jsx';
 import { useNavigate } from 'react-router';
 
 
@@ -13,9 +14,9 @@ function LoginForm() {
 			const username = e.target.value;
 			const headers = {
 				'Content-Type': 'application/json',
-				// 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('authToken'))['access']}`
+				'Authorization': `Bearer ${getCookie('access_token')}`
 			};
-			const user = await axios.get(`/api/users/${username}`, { headers });
+			const user = await apiClient.get(`/api/users/${username}`, { headers });
 			console.log('User found:', user.data);
 			user.data.user_exists ? setButtonText('Login') : setButtonText('Sign Up');
 		} catch (error) {
@@ -25,7 +26,7 @@ function LoginForm() {
 	const [ csrf_token, setToken ] = useState('');
 	useEffect( () => {
 		const getCsrfToken = async () => {
-			const csrfToken = await axios.get('/api/csrf/');
+			const csrfToken = await apiClient.get('/api/csrf/');
 			setToken(csrfToken.data);
 		}
 		getCsrfToken();
@@ -38,15 +39,16 @@ function LoginForm() {
 			console.log('username:', username);
 			const userData = {
 				"username": username,
-				"password": password,
+				"password": password
 			};
-			axios.defaults.headers.common['X-CSRFToken'] = csrf_token
-			const record = await axios.post('/api/login/', userData);
-			console.log('User logged in:', record.status);
-			const jwt_token = await axios.post('/api/token/', userData,
+			apiClient.defaults.headers.common['X-CSRFToken'] = csrf_token
+			const record = await apiClient.post('/api/login/', userData)
+			const jwt_token = await apiClient.post('/api/token/', userData,
 				{ 'Content-Type': 'application/json' }
 			);
-			localStorage.setItem('authToken', JSON.stringify(jwt_token.data));
+			setCookie('refresh_token', jwt_token.data.refresh, 1);
+			setCookie('access_token', jwt_token.data.access, 1);
+			// localStorage.setItem('authToken', JSON.stringify(jwt_token.data));
 			nav('/home');
 		}
 		catch (error) {

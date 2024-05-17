@@ -1,12 +1,13 @@
 import '../styles/NavBar.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { deleteCookie } from './Cookies.jsx';
 
 function NavBar() {
 	const nav = useNavigate();
 	const logOut = () => {
 		try {
-			localStorage.removeItem('authToken');
+			deleteCookie('access_token');
+			deleteCookie('refresh_token');
 			nav('/login');
 		} catch (error) {
 			console.error('Logout error:', error);

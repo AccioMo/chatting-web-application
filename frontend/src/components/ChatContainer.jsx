@@ -8,7 +8,7 @@ function ChatContainer( {chat} ) {
 		nav('/chats/');
 	}
   	return (
-		<div onClick={navToChat} className='chat-container'>
+		<div onClick={navToChat} className='chat-container border'>
 			<div className='chat-header'>
 				{chat.title}
 			</div>
