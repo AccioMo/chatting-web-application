@@ -16,7 +16,7 @@ const refreshToken = async () => {
 	const token = await axios.post('/api/token/refresh/', payload, { headers });
 	setCookie('access_token', token.data.access, 1);
 	setCookie('refresh_token', token.data.refresh, 1);
-	return (true);
+	return (token.data.access);
 }
 
 export { refreshToken, apiClient };

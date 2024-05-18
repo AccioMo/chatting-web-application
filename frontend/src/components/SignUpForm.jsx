@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import axios from 'axios'
 import '../styles/SignupPage.css';
-import PocketBase from 'pocketbase';
+import { setCookie } from './Cookies';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
@@ -28,12 +28,13 @@ function SignUpForm() {
 			};
 			axios.defaults.headers.common['X-CSRFToken'] = csrf_token
 			const record = await axios.post('/api/signup/', userData);
-			console.log('User logged in:', record.data);
+			sessionStorage.setItem('uuid', record.data.uuid)
 			const jwt_token = await axios.post('/api/token/',
 				{ "username": data.username, "password": data.password },
 				{ 'Content-Type': 'application/json' }
 			);
-			localStorage.setItem('authToken', JSON.stringify(jwt_token.data));
+			setCookie('refresh_token', jwt_token.data.refresh, 1);
+			setCookie('access_token', jwt_token.data.access, 1);
 			nav('/home');
 			return record.data['token'];
 		} catch (error) {

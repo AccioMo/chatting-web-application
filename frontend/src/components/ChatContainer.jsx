@@ -5,7 +5,7 @@ import '../styles/ChatContainer.css';
 function ChatContainer( {chat} ) {
 	const nav = useNavigate();
 	const navToChat = () => {
-		nav('/chats/');
+		nav(`/chat/${chat.id}`);
 	}
   	return (
 		<div onClick={navToChat} className='chat-container border'>
@@ -17,7 +17,7 @@ function ChatContainer( {chat} ) {
 					{chat.topic}
 				</div>
 				<div className='chat-text'>
-					{chat.description}
+					{chat.id}
 				</div>
 			</div>
 			<div className='button-container'>

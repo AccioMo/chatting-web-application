@@ -17,3 +17,13 @@ class Chat(models.Model):
 
 	def _str_(self):
 		return self.title
+
+class Message(models.Model):
+	id = models.CharField(max_length=255, unique=True, primary_key=True, default=uuid4, editable=False)
+	chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
+	sender = models.ForeignKey(AppUser, related_name='sender', on_delete=models.CASCADE)
+	timestamp = models.DateTimeField(auto_now_add=True)
+	content = models.TextField()
+
+	def _str_(self):
+		return self.title

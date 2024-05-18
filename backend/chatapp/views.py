@@ -2,14 +2,15 @@ from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.authtoken.models import Token
-from .serializers import MuyTokenObtainPairSerializer, UserSerializer, ChatSerializer
+from .serializers import MuyTokenObtainPairSerializer, UserSerializer, \
+	ChatSerializer, MessageSerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.middleware import csrf
 from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
-from .models import AppUser, Chat
+from .models import AppUser, Chat, Message
 
 # Create your views here.
 
@@ -20,7 +21,12 @@ class MuyTokenObtainPairView(TokenObtainPairView):
 def login(request):
 	user = get_object_or_404(AppUser, username=request.data['username'])
 	if user.check_password(request.data['password']):
-		return Response({"user": user.username, "password": user.password})
+		return Response({
+			"uuid": user.uuid,
+			"user": user.username,
+			"first_name": user.first_name,
+			"last_name": user.last_name
+    	})
 	return Response({"detail": "Invalid Credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['POST'])
@@ -34,13 +40,62 @@ def signup(request):
 		return Response({"success": True, "user": serializer.data})
 	return Response(serializer.errors)
 
+@api_view(['GET'])
+def auth(request):
+	user = request.user
+	return Response({
+		"uuid": user.uuid,
+		"user": user.username,
+		"first_name": user.first_name,
+		"last_name": user.last_name,
+		"date_joined": user.date_joined
+	})
+
 @api_view(['POST'])
 def create_chat(request):
-	serializer = ChatSerializer(data=request.data)
+	data = {}
+	data['topic'] = request.data['topic']
+	data['chatters'] = []
+	data['chatters'].append(AppUser.objects.filter(username=request.data['username']).first().pk)
+	serializer = ChatSerializer(data=data)
+	print(AppUser.objects.filter(username=request.data['username']).first())
 	if (serializer.is_valid()):
 		serializer.save()
 		return Response(serializer.data)
 	return Response(serializer.errors)
+
+@api_view(['POST'])
+def add_message(request):
+	chat = Chat.objects.filter(id=request.data['chat_id']).first()
+	if chat:
+		message_data = {}
+		message_data['chat'] = chat.pk
+		message_data['sender'] = AppUser.objects.filter(uuid=request.data['from']).first().pk
+		message_data['content'] = request.data['content']
+		message = MessageSerializer(data=message_data)
+		if message.is_valid():
+			message.save()
+			return Response({
+				"success": True,
+				"message": message.data
+			})
+		else:
+			return Response({"detail": "Message not valid"}, status=status.HTTP_400_BAD_REQUEST)
+	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
+
+# @api_view(['POST'])
+# def get_message(request):
+# 	chat = Chat.objects.filter(pk=request.data['chat_id']).first()
+# 	if chat:
+# 		message = MessageSerializer(data=request.data)
+# 		if message.is_valid():
+# 			message.save()
+# 			return Response({
+# 				"topic": chat.topic,
+# 				"chatters": chat.chatters,
+# 				"messages": chat.messages
+# 			})
+# 	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
 def generate_csrf(request):
@@ -48,10 +103,13 @@ def generate_csrf(request):
 	return Response({csrf_token})
 
 @api_view(['GET'])
-@permission_classes([permissions.AllowAny])
-def check_user_exists(request, username):
-    user_exists = AppUser.objects.filter(username=username).exists()
-    return Response({'user_exists': user_exists})
+def find_user(request, username):
+    user = AppUser.objects.filter(username=username)
+    if user.exists():
+   		return Response({'user_exists': user.exists(), 'data': {
+			"username": user.first().username,
+			"uuid": user.first().uuid,
+		}})
 
 class UserView(viewsets.ModelViewSet):
 	serializer_class = UserSerializer
@@ -63,3 +121,9 @@ class ChatView(viewsets.ModelViewSet):
 	authentication_classes = [JWTAuthentication]
 	permission_classes = [permissions.IsAuthenticated]
 	queryset = Chat.objects.all()
+
+class MessageView(viewsets.ModelViewSet):
+	serializer_class = MessageSerializer
+	authentication_classes = [JWTAuthentication]
+	permission_classes = [permissions.IsAuthenticated]
+	queryset = Message.objects.all()

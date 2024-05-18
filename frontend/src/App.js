@@ -52,8 +52,9 @@ const App = () => {
 					<Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
 					<Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
 					<Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
-					<Route path="/chats" element={<PrivateRoute><ChatPage /></PrivateRoute>} />
 					<Route path="/about" element={<PrivateRoute><AboutPage /></PrivateRoute>} />
+					<Route path="/chats" element={<PrivateRoute><ChatPage /></PrivateRoute>} />
+					<Route path="/chat/:chat_id" element={<PrivateRoute><ChatPage /></PrivateRoute>} />
 				</Routes>
 			</BrowserRouter>
 		</div>

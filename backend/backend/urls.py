@@ -27,6 +27,7 @@ from rest_framework_simplejwt.views import (
 router = routers.DefaultRouter()
 router.register(r'chats', views.ChatView, 'chats')
 router.register(r'users', views.UserView, 'users')
+router.register(r'messages', views.MessageView, 'messages')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,10 +35,13 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-    path('api/users/<str:username>', views.check_user_exists),
+    path('api/users/<str:username>', views.find_user),
     path('api/create_chat', views.create_chat),
+    path('api/add_message', views.add_message),
+    # path('api/get_message', views.get_message),
     
     re_path('csrf', views.generate_csrf),
     re_path('login', views.login),
-    re_path('signup', views.signup)
+    re_path('signup', views.signup),
+    re_path('auth', views.auth)
 ]

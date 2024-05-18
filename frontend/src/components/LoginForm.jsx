@@ -43,6 +43,7 @@ function LoginForm() {
 			};
 			apiClient.defaults.headers.common['X-CSRFToken'] = csrf_token
 			const record = await apiClient.post('/api/login/', userData)
+			sessionStorage.setItem('uuid', record.data.uuid)
 			const jwt_token = await apiClient.post('/api/token/', userData,
 				{ 'Content-Type': 'application/json' }
 			);

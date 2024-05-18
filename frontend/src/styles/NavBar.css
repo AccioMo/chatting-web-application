@@ -1,17 +1,17 @@
 .navbar {
 	display: flex;
-	position: fixed;
+	position: sticky;
 	padding: 7px 40px;
 	margin: 0;
 	width: 100%;
 	align-items: space-between;
 	justify-content: center;
-	background-color: #303248;
+	background-color: var(--primary-color);
 }
 
 .nav-item {
 	padding: 10px 20px;
-	color: white;
+	color: var(--white-color);
 	text-decoration: none;
 	cursor: pointer;
 }

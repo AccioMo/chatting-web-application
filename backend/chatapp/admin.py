@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AppUser, Chat
+from .models import AppUser, Chat, Message
 
 class AppUserAdmin(admin.ModelAdmin):
 	list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'is_superuser', 'is_authenticated', 'date_joined')
@@ -11,7 +11,11 @@ class ChatAdmin(admin.ModelAdmin):
         return ", ".join([chatter.username for chatter in obj.chatters.all()])
     display_chatters.short_description = 'Chatters'
 
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'chat', 'sender', 'timestamp', 'content')
+
 # Register your models here.
 
 admin.site.register(AppUser, AppUserAdmin)
 admin.site.register(Chat, ChatAdmin)
+admin.site.register(Message, MessageAdmin)

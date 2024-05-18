@@ -2,7 +2,7 @@
 	display:grid;
 	width: 25%;
 	max-height: 25%;
-	background-color: #d2d3db;
+	background-color: var(--white-color);
 	justify-content: center;
 	align-items: center;
 	overflow-y: hidden;
@@ -23,7 +23,7 @@
 	font-size: 24px;
 	align-items: center;
 	padding: 10px 20px;
-	background-color: #d2d3db;
+	background-color: var(--white-color);
 }
 
 .chat-topic {
@@ -32,7 +32,7 @@
 	font-size: 20px;
 	align-items: center;
 	padding: 10px 20px;
-	background-color: #d2d3db;
+	background-color: var(--white-color);
 }
 
 .chat-text {
@@ -41,7 +41,7 @@
 	font-size: 16px;
 	align-items: center;
 	padding: 10px 20px;
-	background-color: #d2d3db;
+	background-color: var(--white-color);
 }
 
 .chat-body {

@@ -1,6 +1,6 @@
-import '../styles/NavBar.css';
 import { useNavigate } from 'react-router';
-import { deleteCookie } from './Cookies.jsx';
+import { deleteCookie } from './Cookies';
+import '../styles/NavBar.css';
 
 function NavBar() {
 	const nav = useNavigate();
@@ -15,13 +15,13 @@ function NavBar() {
 	}
   	return (
 		<div className='navbar'>
-			<div className='nav-item nav-brand' href="/home">La Balena Seguena</div>
-			<div className='nav-item' href="/home">Home</div>
-			<div className='nav-item' href="/profile">Profile</div>
-			<div className='nav-item' href="/chats">Chats</div>
-			<div className='nav-item' href="/about">About</div>
-			<div className='nav-item' href="/contact">Contact</div>
-			<div className='nav-item' onClick={logOut} href="/login">Sign Out</div>
+			<div className='nav-item nav-brand' onClick={() => nav('/')}>La Balena Seguena</div>
+			<div className='nav-item' onClick={() => nav('/home')}>Home</div>
+			<div className='nav-item' onClick={() => nav('/profile')}>Profile</div>
+			<div className='nav-item' onClick={() => nav('/chats')}>Chats</div>
+			<div className='nav-item' onClick={() => nav('/about')}>About</div>
+			<div className='nav-item' onClick={() => nav('/contact')}>Contact</div>
+			<div className='nav-item' onClick={logOut}>Sign Out</div>
 		</div>
   	);
 }

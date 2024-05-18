@@ -6,13 +6,20 @@
 	box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
+:root {
+	--primary-color: #222831;
+	--secondary-color: #31363F;
+	--accent-color: #76ABAE;
+	--white-color: #EEEEEE;
+}
+
 .page-container {
 	width: 100%;
 	height: 100vh;
 }
 
 .page-color {
-	background-color:#e4e5f1;
+	background-color: var(--wh);
 }
 
 .page-font {

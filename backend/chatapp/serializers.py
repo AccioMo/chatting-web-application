@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import AppUser, Chat
+from .models import AppUser, Chat, Message
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class MuyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -23,3 +23,8 @@ class ChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
         fields = ('id', 'topic', 'chatters')
+
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ('id', 'chat', 'sender', 'timestamp', 'content')
