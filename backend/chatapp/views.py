@@ -83,19 +83,15 @@ def add_message(request):
 			return Response({"detail": "Message not valid"}, status=status.HTTP_400_BAD_REQUEST)
 	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
 
-# @api_view(['POST'])
-# def get_message(request):
-# 	chat = Chat.objects.filter(pk=request.data['chat_id']).first()
-# 	if chat:
-# 		message = MessageSerializer(data=request.data)
-# 		if message.is_valid():
-# 			message.save()
-# 			return Response({
-# 				"topic": chat.topic,
-# 				"chatters": chat.chatters,
-# 				"messages": chat.messages
-# 			})
-# 	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
+@api_view(['POST'])
+def get_messages(request):
+	messages = Message.objects.filter(chat=request.data['chat_id'])
+	if messages.exists():
+		return Response({
+			"success": True,
+			"messages": MessageSerializer(messages, many=True).data
+		})
+	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
 def generate_csrf(request):

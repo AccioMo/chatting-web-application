@@ -26,14 +26,10 @@
 	width: 100%;
 }
 
-textarea {
-	height: 3.5rem;
-	border: none;
-}
-
 .text-box {
 	display: flex;
 	padding: 1rem;
+	height: 3.5rem;
 	overflow-y: hidden;
 	border: none;
 	border-radius: .75rem;
