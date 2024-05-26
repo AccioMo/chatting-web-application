@@ -40,12 +40,11 @@ function LoginForm() {
 			console.log('csrf_token:', csrf_token);
 			api.defaults.headers.common["X-CSRFToken"] = csrf_token;
 			const record = await api.post('/api/login/', userData);
-			setCookie('uuid', record.data.uuid, 30 * 24 * 60)
 			const jwt_token = await api.post('/api/token/', userData,
 				{ 'Content-Type': 'application/json' }
 			);
-			setCookie('refresh_token', jwt_token.data.refresh, 30 * 24 * 60);
-			setCookie('access_token', jwt_token.data.access, 5);
+			setCookie('refresh_token', jwt_token.data.refresh, 30);
+			setCookie('access_token', jwt_token.data.access, 1);
 			// localStorage.setItem('authToken', JSON.stringify(jwt_token.data));
 			nav('/home');
 		}

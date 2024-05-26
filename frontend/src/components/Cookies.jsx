@@ -1,8 +1,8 @@
-import React from 'react'
+import { jwtDecode } from 'jwt-decode'
 
-const setCookie = (name, value, minutes) => {
+const setCookie = (name, value, days) => {
 	const expirationDate = new Date();
-	expirationDate.setDate(expirationDate.getDate() + minutes);
+	expirationDate.setDate(expirationDate.getDate() + days);
    
 	document.cookie = `${name}=${value}; expires=${expirationDate.toUTCString()}; path=/`;
 };
@@ -23,4 +23,11 @@ const deleteCookie = (name) => {
 	document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=None;Secure`;
 }
 
-export { setCookie, getCookie, deleteCookie };
+const validCookie = (token) => {
+	const decodedToken = jwtDecode(token);
+	let currentDate = new Date();
+	if (decodedToken.exp * 1000 > currentDate.getTime()) { return true }
+	else { return false }
+}
+
+export { setCookie, getCookie, deleteCookie, validCookie };

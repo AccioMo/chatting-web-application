@@ -27,12 +27,11 @@ function SignUpForm() {
 			};
 			api.defaults.headers.common['X-CSRFToken'] = csrf_token
 			const record = await api.post('/api/register/', userData);
-			sessionStorage.setItem('uuid', record.data.uuid)
 			const jwt_token = await api.post('/api/token/',
 				{ "username": data.username, "password": data.password },
 				{ 'Content-Type': 'application/json' }
 			);
-			setCookie('refresh_token', jwt_token.data.refresh, 1);
+			setCookie('refresh_token', jwt_token.data.refresh, 30);
 			setCookie('access_token', jwt_token.data.access, 1);
 			nav('/home');
 			return record.data['token'];

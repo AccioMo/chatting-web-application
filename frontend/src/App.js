@@ -7,9 +7,8 @@ import { Navigate } from 'react-router';
 import ChatPage from "./components/ChatPage.jsx";
 import AboutPage from "./components/AboutPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
-import { getCookie } from "./components/Cookies.jsx";
+import { getCookie, validCookie } from "./components/Cookies.jsx";
 import { refreshToken, verifyToken } from "./components/Auth.tsx";
-import axios from "axios";
 import './styles/App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -18,7 +17,11 @@ const PrivateRoute = ({ children }) => {
 	useEffect(() => {
 		const checkAuthentication = async () => {
 			try {
-				const response = await verifyToken();
+				let access_token = getCookie("access_token");
+				if (!access_token || validCookie(access_token) === false) {
+					access_token = await refreshToken();
+				};
+				const response = await verifyToken(access_token);
 				setIsAuthenticated(response.status === 200);
 				return (response.status === 200);
 			} catch (e) {

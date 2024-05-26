@@ -13,9 +13,11 @@ const Home = () => {
 		const getChats = async (retry = 1) => {
 			try {
 				const headers = {
-					"Authorization": `Bearer ${getCookie("access_token")}`,
+					Authorization: `Bearer ${getCookie("access_token")}`,
 				};
-				const chats = await api.get("/api/chats/", { headers: headers });
+				const chats = await api.get("/api/chats/", {
+					headers: headers,
+				});
 				return chats.data;
 			} catch (e) {
 				if (e.response && e.response.status == 401 && retry > 0) {
@@ -25,20 +27,20 @@ const Home = () => {
 				}
 			}
 		};
-		getChats().then((chats) => {
-			setChats(chats);
-		});
-	}, []);
+		if (chats === null) {
+			getChats().then((chats) => {
+				setChats(chats);
+			});
+		}
+	}, [chats]);
 	const newChat = async () => {
 		try {
 			const chat_data = {
 				topic: "shit",
 				username: "mzeggaf",
 			};
-			const response = await api.post(
-				"/api/create_chat",
-				{ body: chat_data }
-			);
+			const response = await api.post("/api/create_chat", chat_data);
+			setChats([ ...chats, response.data]);
 		} catch (e) {
 			console.log(e);
 		}
@@ -49,7 +51,8 @@ const Home = () => {
 			<div className="home-container">
 				<h1 className="welcome-header">landing page</h1>
 				<div className="chats-container">
-					{chats ? chats.map((chat) => (
+					{chats
+						? chats.map((chat) => (
 								<ChatContainer key={chat.id} chat={chat} />
 						  ))
 						: null}
