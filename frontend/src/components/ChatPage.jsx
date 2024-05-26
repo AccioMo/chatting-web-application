@@ -41,15 +41,15 @@ function ChatPage() {
 		<>
 			<NavBar />
 			<div className="chat-box">
-				<div className="messages-container">
+				<div className="conversation">
 					<MessageContext.Provider value={{ messages, setMessages }}>
 						<MessagesContainer chat_id={chat_id} uuid={uuid} />
 					</MessageContext.Provider>
 				</div>
 				<div className="container-of-container">
-					<div className="text-container border">
+					<div className="input-container border">
 						<textarea
-							className="text-box page-font"
+							className="input-box page-font"
 							value={value}
 							onChange={(e) => setValue(e.target.value)}
 							onKeyDown={handleKeyDown}

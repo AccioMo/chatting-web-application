@@ -1,12 +1,18 @@
 .navbar {
 	display: flex;
 	position: sticky;
+	top: 0;
+	z-index: 2;
 	padding: 7px 40px;
 	margin: 0;
 	width: 100%;
 	align-items: space-between;
 	justify-content: center;
 	background-color: var(--primary-color);
+	opacity: .75;
+	/* background-color: rgba(34, 40, 49, 0.9); */
+	box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(8px);
 }
 
 .nav-item {
