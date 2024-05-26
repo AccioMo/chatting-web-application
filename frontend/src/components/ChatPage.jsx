@@ -1,56 +1,56 @@
-import React from "react";
+import { useState, createContext } from "react";
 import NavBar from "./NavBar";
 import MessagesContainer from "./MessagesContainer";
-import { apiClient, refreshToken } from "./Auth";
+import { api, refreshToken } from "./Auth.tsx";
 import { getCookie, setCookie } from "./Cookies";
 import { useParams } from "react-router-dom";
+import { ws, send } from "./Socket.jsx";
 import "../styles/Chat.css";
+
+export const MessageContext = createContext();
 
 function ChatPage() {
 	const { chat_id } = useParams();
-	const [value, setValue] = React.useState("");
+	const [messages, setMessages] = useState(null);
+	const [value, setValue] = useState("");
+	ws.onmessage = (e) => {
+		console.log("message: ", e.data);
+		setMessages([...messages, JSON.parse(e.data)]);
+	};
 	const sendMessage = async (e) => {
 		const uuid = getCookie("uuid");
+		if (tokenExipred(getCookie("access_token"))) { refreshToken() };
 		if (!uuid) {
-			const access_token = getCookie("access_token");
-			if (access_token)
-			uuid = apiClient
-				.get("/api/auth", access_token)
-				.then(() => {
-					setCookie("uuid", uuid, 30);
-				})
-				.catch((e) => {
-					console.log(e);
-				});
+			const headers = {
+				Authorization: `Bearer ${getCookie("access_token")}`
+			};
+			uuid = await api.get("/api/auth/", { headers: headers });
+			setCookie("uuid", uuid, 30 * 24 * 60);
+			console.log("uuid:", uuid);
 		}
 		const data = {
 			chat_id: chat_id,
 			from: uuid,
 			content: e,
 		};
-		const response = apiClient
-			.post('api/add_message', data)
-			.then(() => {
-				return e;
-			})
-			.catch(() => {
-				console.log(e);
-			});
+		ws.send(JSON.stringify(data));
 	};
 	const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
+		if (event.key === "Enter") {
 			event.preventDefault();
 			const message = event.target.value;
-			event.target.value = "";
-            sendMessage(message);
-        }
-    };
+			setValue("");
+			sendMessage(message);
+		}
+	};
 	return (
 		<>
 			<NavBar />
 			<div className="chat-box">
 				<div className="messages-container">
-					<MessagesContainer chat_id={chat_id} />
+					<MessageContext.Provider value={{ messages, setMessages }}>
+						<MessagesContainer chat_id={chat_id} />
+					</MessageContext.Provider>
 				</div>
 				<div className="container-of-container">
 					<div className="text-container border">

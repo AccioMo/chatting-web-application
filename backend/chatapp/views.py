@@ -30,7 +30,7 @@ def login(request):
 	return Response({"detail": "Invalid Credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['POST'])
-def signup(request):
+def register(request):
 	serializer = UserSerializer(data=request.data)
 	if serializer.is_valid():
 		serializer.save()
@@ -65,31 +65,17 @@ def create_chat(request):
 	return Response(serializer.errors)
 
 @api_view(['POST'])
-def add_message(request):
-	chat = Chat.objects.filter(id=request.data['chat_id']).first()
-	if chat:
-		message_data = {}
-		message_data['chat'] = chat.pk
-		message_data['sender'] = AppUser.objects.filter(uuid=request.data['from']).first().pk
-		message_data['content'] = request.data['content']
-		message = MessageSerializer(data=message_data)
-		if message.is_valid():
-			message.save()
-			return Response({
-				"success": True,
-				"message": message.data
-			})
-		else:
-			return Response({"detail": "Message not valid"}, status=status.HTTP_400_BAD_REQUEST)
-	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
-
-@api_view(['POST'])
 def get_messages(request):
 	messages = Message.objects.filter(chat=request.data['chat_id'])
 	if messages.exists():
 		return Response({
 			"success": True,
 			"messages": MessageSerializer(messages, many=True).data
+		})
+	if Chat.objects.filter(id=request.data['chat_id']).exists():
+		return Response({
+			"success": True,
+			"messages": []
 		})
 	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -106,6 +92,24 @@ def find_user(request, username):
 			"username": user.first().username,
 			"uuid": user.first().uuid,
 		}})
+
+def save_message(data):
+	chat = Chat.objects.filter(id=data['chat_id']).first()
+	if chat:
+		message_data = {}
+		message_data['chat'] = chat.pk
+		message_data['sender'] = AppUser.objects.filter(uuid=data['from']).first().pk
+		message_data['content'] = data['content']
+		message = MessageSerializer(data=message_data)
+		if message.is_valid():
+			message.save()
+			return { "ok": True,
+				"message": message.data }
+		else:
+			return { "ok": False, 
+    			"detail": "Message not valid" }
+	return { "ok": False, 
+   			"detail": "Chat not found" }
 
 class UserView(viewsets.ModelViewSet):
 	serializer_class = UserSerializer

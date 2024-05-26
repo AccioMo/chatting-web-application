@@ -37,12 +37,11 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/users/<str:username>', views.find_user),
     path('api/create_chat', views.create_chat),
-    path('api/add_message', views.add_message),
     path('api/get_messages', views.get_messages),
     # path('api/get_message', views.get_message),
     
     re_path('csrf', views.generate_csrf),
     re_path('login', views.login),
-    re_path('signup', views.signup),
+    re_path('register', views.register),
     re_path('auth', views.auth)
 ]

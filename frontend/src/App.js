@@ -8,29 +8,21 @@ import ChatPage from "./components/ChatPage.jsx";
 import AboutPage from "./components/AboutPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import { getCookie } from "./components/Cookies.jsx";
-import { refreshToken, apiClient } from "./components/Auth.jsx";
+import { refreshToken, verifyToken } from "./components/Auth.tsx";
+import axios from "axios";
 import './styles/App.css';
 
 const PrivateRoute = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
-		const checkAuthentication = async (retry=1) => {
+		const checkAuthentication = async () => {
 			try {
-				const access_token = getCookie('access_token');
-				if (!access_token)
-					return (null)
-				const response = await apiClient.post('api/token/verify/', { 'token': access_token })
+				const response = await verifyToken();
 				setIsAuthenticated(response.status === 200);
 				return (response.status === 200);
 			} catch (e) {
-				if (e.response.status === 401 && retry > 0) {
-					return (
-						refreshToken()
-						.then( (e) => { return ( e ? checkAuthentication(retry - 1) : null ) })
-						.catch( () => { return (null) } )
-					);
-				}
+				console.error('error:', e);
 				return false;
 			}
 		};

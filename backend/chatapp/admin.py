@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import AppUser, Chat, Message
 
 class AppUserAdmin(admin.ModelAdmin):
-	list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'is_superuser', 'is_authenticated', 'date_joined')
+	list_display = ('uuid', 'username', 'email', 'first_name', 'last_name', 'is_staff', 'is_superuser', 'is_authenticated', 'date_joined')
 
 class ChatAdmin(admin.ModelAdmin):
     list_display = ('id', 'topic', 'display_chatters')

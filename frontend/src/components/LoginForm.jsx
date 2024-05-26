@@ -1,10 +1,8 @@
 import { React, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import '../styles/LoginPage.css';
-import { apiClient } from './Auth.jsx';
 import { setCookie, getCookie } from './Cookies.jsx';
 import { useNavigate } from 'react-router';
-
+import { api } from './Auth.tsx';
 
 function LoginForm() {
 	const nav = useNavigate();
@@ -13,10 +11,9 @@ function LoginForm() {
 		try {
 			const username = e.target.value;
 			const headers = {
-				'Content-Type': 'application/json',
 				'Authorization': `Bearer ${getCookie('access_token')}`
 			};
-			const user = await apiClient.get(`/api/users/${username}`, { headers });
+			const user = await api.get(`/api/users/${username}`, { headers });
 			console.log('User found:', user.data);
 			user.data.user_exists ? setButtonText('Login') : setButtonText('Sign Up');
 		} catch (error) {
@@ -25,11 +22,10 @@ function LoginForm() {
 	}
 	const [ csrf_token, setToken ] = useState('');
 	useEffect( () => {
-		const getCsrfToken = async () => {
-			const csrfToken = await apiClient.get('/api/csrf/');
-			setToken(csrfToken.data);
-		}
-		getCsrfToken();
+		api.get('/api/csrf/')
+		.then((e) => {
+			setToken(e.data);
+		});
 	}, []);
 	const logUserIn = async (e) => {
 		e.preventDefault();
@@ -41,14 +37,15 @@ function LoginForm() {
 				"username": username,
 				"password": password
 			};
-			apiClient.defaults.headers.common['X-CSRFToken'] = csrf_token
-			const record = await apiClient.post('/api/login/', userData)
-			setCookie('uuid', record.data.uuid, 30)
-			const jwt_token = await apiClient.post('/api/token/', userData,
+			console.log('csrf_token:', csrf_token);
+			api.defaults.headers.common["X-CSRFToken"] = csrf_token;
+			const record = await api.post('/api/login/', userData);
+			setCookie('uuid', record.data.uuid, 30 * 24 * 60)
+			const jwt_token = await api.post('/api/token/', userData,
 				{ 'Content-Type': 'application/json' }
 			);
-			setCookie('refresh_token', jwt_token.data.refresh, 1);
-			setCookie('access_token', jwt_token.data.access, 1);
+			setCookie('refresh_token', jwt_token.data.refresh, 30 * 24 * 60);
+			setCookie('access_token', jwt_token.data.access, 5);
 			// localStorage.setItem('authToken', JSON.stringify(jwt_token.data));
 			nav('/home');
 		}

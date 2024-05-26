@@ -1,8 +1,8 @@
 import React from 'react'
 
-const setCookie = (name, value, days) => {
+const setCookie = (name, value, minutes) => {
 	const expirationDate = new Date();
-	expirationDate.setDate(expirationDate.getDate() + days);
+	expirationDate.setDate(expirationDate.getDate() + minutes);
    
 	document.cookie = `${name}=${value}; expires=${expirationDate.toUTCString()}; path=/`;
 };

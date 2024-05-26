@@ -1,10 +1,9 @@
 import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import NavBar from "./NavBar.jsx";
-import PocketBase from "pocketbase";
 import ChatContainer from "./ChatContainer.jsx";
 import { setCookie, getCookie } from "./Cookies.jsx";
-import { refreshToken, apiClient } from "./Auth.jsx";
+import { refreshToken, api } from "./Auth.tsx";
 import "../styles/Home.css";
 
 const Home = () => {
@@ -14,15 +13,15 @@ const Home = () => {
 		const getChats = async (retry = 1) => {
 			try {
 				const headers = {
-					Authorization: `Bearer ${getCookie("access_token")}`,
+					"Authorization": `Bearer ${getCookie("access_token")}`,
 				};
-				const chats = await apiClient.get("/api/chats/", { headers });
+				const chats = await api.get("/api/chats/", { headers: headers });
 				return chats.data;
-			} catch (error) {
-				if (error.response.status === 401 && retry > 0) {
+			} catch (e) {
+				if (e.response && e.response.status == 401 && retry > 0) {
 					return refreshToken().then(() => getChats(retry - 1));
 				} else {
-					console.error("error: ", error);
+					console.error("error: ", e);
 				}
 			}
 		};
@@ -36,9 +35,9 @@ const Home = () => {
 				topic: "shit",
 				username: "mzeggaf",
 			};
-			const response = await apiClient.post(
+			const response = await api.post(
 				"/api/create_chat",
-				chat_data
+				{ body: chat_data }
 			);
 		} catch (e) {
 			console.log(e);
@@ -50,8 +49,7 @@ const Home = () => {
 			<div className="home-container">
 				<h1 className="welcome-header">landing page</h1>
 				<div className="chats-container">
-					{chats
-						? chats.map((chat) => (
+					{chats ? chats.map((chat) => (
 								<ChatContainer key={chat.id} chat={chat} />
 						  ))
 						: null}

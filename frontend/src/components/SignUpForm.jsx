@@ -1,17 +1,16 @@
 import { React, useEffect, useState } from 'react';
-import axios from 'axios'
 import '../styles/SignupPage.css';
 import { setCookie } from './Cookies';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
-
+import { api } from './Auth.tsx';
 
 function SignUpForm() {
 	const nav = useNavigate();
 	const [ csrf_token, setToken ] = useState('');
 	useEffect( () => {
 		const getCsrfToken = async () => {
-			const csrfToken = await axios.get('/api/csrf/');
+			const csrfToken = await api.get('/api/csrf/');
 			setToken(csrfToken.data);
 		}
 		getCsrfToken();
@@ -26,10 +25,10 @@ function SignUpForm() {
 				"username": data.username,
 				"password": data.password,
 			};
-			axios.defaults.headers.common['X-CSRFToken'] = csrf_token
-			const record = await axios.post('/api/signup/', userData);
+			api.defaults.headers.common['X-CSRFToken'] = csrf_token
+			const record = await api.post('/api/register/', userData);
 			sessionStorage.setItem('uuid', record.data.uuid)
-			const jwt_token = await axios.post('/api/token/',
+			const jwt_token = await api.post('/api/token/',
 				{ "username": data.username, "password": data.password },
 				{ 'Content-Type': 'application/json' }
 			);
