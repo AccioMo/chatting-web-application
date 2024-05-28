@@ -1,48 +1,42 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import NavBar from "./NavBar";
 import MessagesContainer from "./MessagesContainer";
-import { api, refreshToken } from "./Auth.tsx";
-import { getCookie, setCookie, validCookie } from "./Cookies";
+import { getCookie } from "./Cookies";
 import { useParams } from "react-router-dom";
-import { jwtDecode } from 'jwt-decode';
-import { ws } from "./Socket.jsx";
+import useWebSocket from "react-use-websocket";
+import { jwtDecode } from "jwt-decode";
 import "../styles/Chat.css";
 
 export const MessageContext = createContext();
 
 function ChatPage() {
 	const { chat_id } = useParams();
-	const [messages, setMessages] = useState(null);
 	const [value, setValue] = useState("");
 	const access_token = getCookie("access_token");
 	const decodedToken = jwtDecode(access_token);
 	const uuid = decodedToken.uuid;
-	ws.onmessage = (e) => {
-		console.log("message: ", e.data);
-		setMessages([...messages, JSON.parse(e.data)]);
-	};
-	const sendMessage = async (message) => {
-		const data = {
-			chat_id: chat_id,
-			from: uuid,
-			content: message,
-		};
-		ws.send(JSON.stringify(data));
-	};
+	const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
+		`ws://localhost:8000/ws/chat/${chat_id}`,
+		{ onOpen: () => console.log("ws: connection established") }
+	);
 	const handleKeyDown = (event) => {
 		if (event.key === "Enter") {
 			event.preventDefault();
 			const message = event.target.value;
+			if (message === "") return ;
 			setValue("");
-			sendMessage(message);
+			sendJsonMessage({
+				chat_id: chat_id,
+				from: uuid,
+				content: message,
+			});
 		}
 	};
 	return (
 		<>
-			<NavBar />
 			<div className="chat-box">
 				<div className="conversation">
-					<MessageContext.Provider value={{ messages, setMessages }}>
+					<MessageContext.Provider value={{ lastJsonMessage }}>
 						<MessagesContainer chat_id={chat_id} uuid={uuid} />
 					</MessageContext.Provider>
 				</div>

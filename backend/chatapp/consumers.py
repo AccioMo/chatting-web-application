@@ -5,7 +5,8 @@ from .views import save_message
 
 class ChatConsumer(WebsocketConsumer):
 	def connect(self):
-		self.chatroom_id = "chat-kkk"
+		self.chatroom_id = self.scope['url_route']['kwargs']['chat_id']
+		print(self.chatroom_id)
 		async_to_sync(self.channel_layer.group_add)(
 			self.chatroom_id,
 			self.channel_name

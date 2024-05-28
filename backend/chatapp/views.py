@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view
 from .serializers import MuyTokenObtainPairSerializer, UserSerializer, \
 	ChatSerializer, MessageSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -11,8 +11,6 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
 from .models import AppUser, Chat, Message
-
-# Create your views here.
 
 class MuyTokenObtainPairView(TokenObtainPairView):
 	serializer_class = MuyTokenObtainPairSerializer
@@ -77,6 +75,21 @@ def get_messages(request):
 			"success": True,
 			"messages": []
 		})
+	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
+def get_user_chats(request):
+	chats = Chat.objects.filter(chatters__uuid=request.user.uuid)
+	if chats.exists():
+		return Response({
+			"success": True,
+			"chats": ChatSerializer(chats, many=True).data
+		})
+	# if Chat.objects.filter(id=request.data['chat_id']).exists():
+	# 	return Response({
+	# 		"success": True,
+	# 		"messages": []
+	# 	})
 	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])

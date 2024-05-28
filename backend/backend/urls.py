@@ -25,9 +25,9 @@ from rest_framework_simplejwt.views import (
 )
 
 router = routers.DefaultRouter()
-router.register(r'chats', views.ChatView, 'chats')
-router.register(r'users', views.UserView, 'users')
-router.register(r'messages', views.MessageView, 'messages')
+# router.register(r'chats', views.ChatView, 'chats')
+# router.register(r'users', views.UserView, 'users')
+# router.register(r'messages', views.MessageView, 'messages')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,6 +38,7 @@ urlpatterns = [
     path('api/users/<str:username>', views.find_user),
     path('api/create_chat', views.create_chat),
     path('api/get_messages', views.get_messages),
+    path('api/get_user_chats', views.get_user_chats),
     # path('api/get_message', views.get_message),
     
     re_path('csrf', views.generate_csrf),

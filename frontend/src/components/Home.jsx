@@ -1,24 +1,26 @@
 import { React, useState, useEffect } from "react";
-import { useNavigate } from "react-router";
-import NavBar from "./NavBar.jsx";
+import SideBar from "./SideBar.jsx";
 import ChatContainer from "./ChatContainer.jsx";
 import { setCookie, getCookie } from "./Cookies.jsx";
 import { refreshToken, api } from "./Auth.tsx";
+import { jwtDecode } from "jwt-decode";
 import "../styles/Home.css";
 
 const Home = () => {
-	const nav = useNavigate();
 	const [chats, setChats] = useState(null);
+	const access_token = getCookie("access_token");
+	const decodedToken = jwtDecode(access_token);
+	const uuid = decodedToken.uuid;
 	useEffect(() => {
 		const getChats = async (retry = 1) => {
 			try {
 				const headers = {
 					Authorization: `Bearer ${getCookie("access_token")}`,
 				};
-				const chats = await api.get("/api/chats/", {
+				const chats = await api.get("/api/get_user_chats", {
 					headers: headers,
 				});
-				return chats.data;
+				return chats.data.chats;
 			} catch (e) {
 				if (e.response && e.response.status == 401 && retry > 0) {
 					return refreshToken().then(() => getChats(retry - 1));
@@ -46,25 +48,24 @@ const Home = () => {
 		}
 	};
 	return (
-		<>
-			<NavBar />
+		<div className="page-content">
+			<SideBar />
 			<div className="home-container">
-				<h1 className="welcome-header">landing page</h1>
 				<div className="chats-container">
 					{chats
 						? chats.map((chat) => (
-								<ChatContainer key={chat.id} chat={chat} />
+								<ChatContainer key={chat.id} uuid={uuid} chat={chat} />
 						  ))
 						: null}
 				</div>
-				<button onClick={newChat} className="new-chat-button">
+				{/* <button onClick={newChat} className="new-chat-button">
 					new chat
 				</button>
 				<button onClick={refreshToken} className="new-chat-button">
 					refresh
-				</button>
+				</button> */}
 			</div>
-		</>
+		</div>
 		// <GoogleOAuthProvider clientId={UIDD} >
 		// 	<div>
 		// 		<div className="input-field">

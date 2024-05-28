@@ -20,9 +20,14 @@ class UserSerializer(serializers.ModelSerializer):
 		fields = ('uuid', 'username', 'email', 'password', 'first_name', 'last_name', 'is_staff', 'is_superuser', 'is_authenticated', 'date_joined')
 
 class ChatSerializer(serializers.ModelSerializer):
+    chatters = UserSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Chat
         fields = ('id', 'topic', 'chatters')
+
+    def get_user(self, obj):
+        return obj.user.get_full_name()
 
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:

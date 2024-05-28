@@ -14,14 +14,16 @@ function NavBar() {
 		}
 	}
   	return (
-		<div className='navbar'>
-			<div className='nav-item nav-brand' onClick={() => nav('/')}>La Balena Seguena</div>
-			<div className='nav-item' onClick={() => nav('/home')}>Home</div>
-			<div className='nav-item' onClick={() => nav('/profile')}>Profile</div>
-			<div className='nav-item' onClick={() => nav('/chats')}>Chats</div>
-			<div className='nav-item' onClick={() => nav('/about')}>About</div>
-			<div className='nav-item' onClick={() => nav('/contact')}>Contact</div>
-			<div className='nav-item' onClick={logOut}>Sign Out</div>
+		<div className='navbar-container'>
+			<div className='navbar border'>
+				<div className='nav-item nav-brand' onClick={() => nav('/')}>La Balena Seguena</div>
+				<div className='nav-item' onClick={() => nav('/home')}>Home</div>
+				<div className='nav-item' onClick={() => nav('/profile')}>Profile</div>
+				<div className='nav-item' onClick={() => nav('/chats')}>Chats</div>
+				<div className='nav-item' onClick={() => nav('/about')}>About</div>
+				<div className='nav-item' onClick={() => nav('/contact')}>Contact</div>
+				<div className='nav-item' onClick={logOut}>Sign Out</div>
+			</div>
 		</div>
   	);
 }

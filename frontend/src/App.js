@@ -1,12 +1,13 @@
 import { React, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NavBar from "./components/NavBar.jsx";
 import LoginPage from "./components/LoginPage";
 import ProfilePage from "./components/ProfilePage";
 import Home from "./components/Home";
-import { Navigate } from 'react-router';
-import ChatPage from "./components/ChatPage.jsx";
+import ChatPage from "./components/ChatPage";
 import AboutPage from "./components/AboutPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
+import { Navigate } from 'react-router';
 import { getCookie, validCookie } from "./components/Cookies.jsx";
 import { refreshToken, verifyToken } from "./components/Auth.tsx";
 import './styles/App.css';
@@ -41,6 +42,7 @@ const App = () => {
 	return (
 		<div className='page-container page-color page-font'>
 			<BrowserRouter>
+				<NavBar />
 				<Routes>
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/signup" element={<SignUpPage />} />
@@ -48,7 +50,7 @@ const App = () => {
 					<Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
 					<Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
 					<Route path="/about" element={<PrivateRoute><AboutPage /></PrivateRoute>} />
-					<Route path="/chats" element={<PrivateRoute><ChatPage /></PrivateRoute>} />
+					{/* <Route path="/chats" element={<PrivateRoute><ChatPage /></PrivateRoute>} /> */}
 					<Route path="/chat/:chat_id" element={<PrivateRoute><ChatPage /></PrivateRoute>} />
 				</Routes>
 			</BrowserRouter>

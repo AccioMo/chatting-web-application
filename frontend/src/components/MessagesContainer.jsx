@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
-import { useEffect } from "react";
+import React from "react";
+import { useEffect, useContext, useState } from "react";
 import { getCookie, validCookie } from "./Cookies";
 import { refreshToken, api } from "./Auth.tsx";
 import { MessageContext } from "./ChatPage";
 import Message from "./Message";
 
 function MessagesContainer({ chat_id, uuid }) {
-	const { messages, setMessages } = React.useContext(MessageContext);
+	const [ messages, setMessages ] = useState(null);
+	const { lastJsonMessage } = useContext(MessageContext);
 	useEffect(() => {
 		const getMessages = async () => {
 			let access_token = getCookie("access_token");
@@ -33,8 +34,10 @@ function MessagesContainer({ chat_id, uuid }) {
 				.catch((e) => {
 					console.error(e);
 				});
+		} else if (lastJsonMessage.content) {
+			setMessages([...messages, lastJsonMessage]);
 		}
-	}, [messages]);
+	}, [lastJsonMessage]);
 
 	return (
 		<div className="messages-container">
