@@ -45,6 +45,7 @@ function LoginForm() {
 			);
 			setCookie('refresh_token', jwt_token.data.refresh, 30);
 			setCookie('access_token', jwt_token.data.access, 1);
+			setCookie('user', JSON.stringify(record.data), 1);
 			// localStorage.setItem('authToken', JSON.stringify(jwt_token.data));
 			nav('/home');
 		}

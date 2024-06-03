@@ -8,10 +8,3 @@
 	display: flex;
 	width: 100%;
 }
-
-.chats-container {
-	display: flex;
-	width: 100%;
-	padding-left: .8rem;
-	justify-content: space-around;
-}

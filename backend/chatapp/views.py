@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
+from django.db.models import Q
 from .models import AppUser, Chat, Message
 
 class MuyTokenObtainPairView(TokenObtainPairView):
@@ -77,20 +78,36 @@ def get_messages(request):
 		})
 	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
 
-@api_view(['GET'])
+@api_view(['POST'])
+def get_users(request):
+	query_by = request.data['query_by']
+	if query_by == 'all':
+		users = AppUser.objects.all()
+		return Response({
+			"success": True,
+			"users": UserSerializer(users, many=True).data
+		})
+	elif query_by == 'username':
+		users = AppUser.objects.filter(username__icontains=request.data['query'])
+		return Response({
+			"success": True,
+			"users": UserSerializer(users, many=True).data
+		})
+	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
 def get_user_chats(request):
-	chats = Chat.objects.filter(chatters__uuid=request.user.uuid)
+	user_1 = request.user
+	with_username = request.data['with']
+	user_2 = AppUser.objects.filter(username=with_username).first()
+	print(user_1, user_2)
+	chats = Chat.objects.filter(chatters=user_1).filter(chatters=user_2)
 	if chats.exists():
 		return Response({
 			"success": True,
 			"chats": ChatSerializer(chats, many=True).data
 		})
-	# if Chat.objects.filter(id=request.data['chat_id']).exists():
-	# 	return Response({
-	# 		"success": True,
-	# 		"messages": []
-	# 	})
-	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
+	return Response({"detail": "No common chats found"}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
 def generate_csrf(request):

@@ -4,6 +4,7 @@ import { getCookie, validCookie } from "./Cookies";
 import { refreshToken, api } from "./Auth.tsx";
 import { MessageContext } from "./ChatPage";
 import Message from "./Message";
+import "../styles/Message.css";
 
 function MessagesContainer({ chat_id, uuid }) {
 	const [ messages, setMessages ] = useState(null);

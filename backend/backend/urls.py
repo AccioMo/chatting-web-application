@@ -36,6 +36,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/users/<str:username>', views.find_user),
+    path('api/get_users', views.get_users),
     path('api/create_chat', views.create_chat),
     path('api/get_messages', views.get_messages),
     path('api/get_user_chats', views.get_user_chats),

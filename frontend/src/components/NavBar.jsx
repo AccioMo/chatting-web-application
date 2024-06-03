@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import { deleteCookie } from './Cookies';
+import { getCookie, deleteCookie } from './Cookies';
 import '../styles/NavBar.css';
 
 function NavBar() {
@@ -8,21 +8,23 @@ function NavBar() {
 		try {
 			deleteCookie('access_token');
 			deleteCookie('refresh_token');
+			deleteCookie('user');
 			nav('/login');
 		} catch (error) {
 			console.error('Logout error:', error);
 		}
-	}
+	};
+	const userdata = getCookie('user');
+	const username = userdata ? JSON.parse(userdata).user : 'anonymous';
   	return (
 		<div className='navbar-container'>
 			<div className='navbar border'>
-				<div className='nav-item nav-brand' onClick={() => nav('/')}>La Balena Seguena</div>
-				<div className='nav-item' onClick={() => nav('/home')}>Home</div>
-				<div className='nav-item' onClick={() => nav('/profile')}>Profile</div>
-				<div className='nav-item' onClick={() => nav('/chats')}>Chats</div>
-				<div className='nav-item' onClick={() => nav('/about')}>About</div>
-				<div className='nav-item' onClick={() => nav('/contact')}>Contact</div>
-				<div className='nav-item' onClick={logOut}>Sign Out</div>
+				<div className='nav-item nav-brand' onClick={() => nav('/')}>Logo</div>
+				<ul className='nav-items-array'>
+					<div className='nav-item accent-on-hover' onClick={() => nav('/chats')}>Chat with Human</div>
+					<div className='nav-item accent-on-hover' onClick={() => nav('/chats')}>Chat with AI</div>
+				</ul>
+				<div className='username-item accent-on-hover' onClick={logOut}>{username}</div>
 			</div>
 		</div>
   	);

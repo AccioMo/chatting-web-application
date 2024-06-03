@@ -10,27 +10,29 @@ function ChatContainer( {chat, uuid} ) {
   	return (
 		<div className='chat-container'>
 			<div onClick={navToChat} className='chat-box border'>
-				<div className='chat-header'>
-				with {chat.chatters.map((chatter) => {
-						if (chatter.uuid === uuid)
-							return null;
-						return (
-							<div key={chatter.uuid} className='chat-chatter'>
-								{chatter.username}
-							</div>
-						)
-					})}
-				</div>
-				<div className='chat-body'>
-					<div className='chat-topic'>
-						{chat.topic}
+				<div className='chat-inner-box'>
+					<div className='chat-header'>
+					{chat.chatters.map((chatter) => {
+							if (chatter.uuid === uuid)
+								return null;
+							return (
+								<div key={chatter.uuid} className='chat-chatter'>
+									{chatter.username}
+								</div>
+							)
+						})}
 					</div>
-					<div className='chat-text'>
-						bla bla
+					<div className='chat-body'>
+						<div className='chat-topic'>
+							Chatting about:
+						</div>
+						<div className='chat-text'>
+							{chat.topic}
+						</div>
 					</div>
-				</div>
-				<div className='button-container'>
-					<button className='chat-button'>Start Chat</button>
+					<div className='button-container'>
+						<button className='chat-button'>Creep In</button>
+					</div>
 				</div>
 			</div>
 		</div>

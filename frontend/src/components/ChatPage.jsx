@@ -34,7 +34,7 @@ function ChatPage() {
 	};
 	return (
 		<>
-			<div className="chat-box">
+			<div className="conversation-box">
 				<div className="conversation">
 					<MessageContext.Provider value={{ lastJsonMessage }}>
 						<MessagesContainer chat_id={chat_id} uuid={uuid} />

@@ -35,46 +35,22 @@ const Home = () => {
 			});
 		}
 	}, [chats]);
-	const newChat = async () => {
-		try {
-			const chat_data = {
-				topic: "shit",
-				username: "mzeggaf",
-			};
-			const response = await api.post("/api/create_chat", chat_data);
-			setChats([ ...chats, response.data]);
-		} catch (e) {
-			console.log(e);
-		}
-	};
+	// <div className="chats-container">
+	// 	{chats
+	// 		? chats.map((chat) => (
+	// 				<ChatContainer key={chat.id} uuid={uuid} chat={chat} />
+	// 		  ))
+	// 		: null}
+	// </div>
 	return (
 		<div className="page-content">
-			<SideBar />
 			<div className="home-container">
-				<div className="chats-container">
-					{chats
-						? chats.map((chat) => (
-								<ChatContainer key={chat.id} uuid={uuid} chat={chat} />
-						  ))
-						: null}
+				<div className="welcome-text-container">
+					<div>Welcome</div>
+					<div></div>
 				</div>
-				{/* <button onClick={newChat} className="new-chat-button">
-					new chat
-				</button>
-				<button onClick={refreshToken} className="new-chat-button">
-					refresh
-				</button> */}
 			</div>
 		</div>
-		// <GoogleOAuthProvider clientId={UIDD} >
-		// 	<div>
-		// 		<div className="input-field">
-		// 			<googleLogout
-		// 			onLogoutSuccess={() => nav('/')}
-		// 			></googleLogout>
-		// 		</div>
-		// 	</div>
-		// </GoogleOAuthProvider>
 	);
 };
 

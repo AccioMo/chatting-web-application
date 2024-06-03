@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/Chat.css'
+import '../styles/Message.css'
 
 function Message({ uuid, content, sender, seen}) {
 	const isUser = (sender) => {
