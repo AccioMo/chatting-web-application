@@ -1,24 +1,18 @@
-import React from 'react';
 import { useNavigate } from 'react-router';
-import '../styles/ChatContainer.css';
+import UserTag from './UserTag';
 
 function ChatContainer( {chat, uuid} ) {
 	const nav = useNavigate();
-	const navToChat = () => {
-		nav(`/chat/${chat.id}`);
-	}
   	return (
 		<div className='chat-container'>
-			<div onClick={navToChat} className='chat-box border'>
+			<div className='chat-box border'>
 				<div className='chat-inner-box'>
 					<div className='chat-header'>
 					{chat.chatters.map((chatter) => {
 							if (chatter.uuid === uuid)
 								return null;
 							return (
-								<div key={chatter.uuid} className='chat-chatter'>
-									{chatter.username}
-								</div>
+								<UserTag username={chatter.username}/>
 							)
 						})}
 					</div>
@@ -31,7 +25,7 @@ function ChatContainer( {chat, uuid} ) {
 						</div>
 					</div>
 					<div className='button-container'>
-						<button className='chat-button'>Creep In</button>
+						<button className='chat-button' onClick={() => nav(`/chat/${chat.id}`)} >Join</button>
 					</div>
 				</div>
 			</div>

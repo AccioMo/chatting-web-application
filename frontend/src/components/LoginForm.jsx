@@ -1,11 +1,13 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useContext } from 'react';
 import '../styles/LoginPage.css';
 import { setCookie, getCookie } from './Cookies.jsx';
 import { useNavigate } from 'react-router';
+import { AuthContext } from './Auth.tsx';
 import { api } from './Auth.tsx';
 
 function LoginForm() {
 	const nav = useNavigate();
+	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 	const [ buttonText, setButtonText ] = useState('Login');
 	const handleBlur = async (e) => {
 		try {
@@ -45,8 +47,8 @@ function LoginForm() {
 			);
 			setCookie('refresh_token', jwt_token.data.refresh, 30);
 			setCookie('access_token', jwt_token.data.access, 1);
-			setCookie('user', JSON.stringify(record.data), 1);
-			// localStorage.setItem('authToken', JSON.stringify(jwt_token.data));
+			setCookie('user', JSON.stringify(record.data), 30);
+			setIsAuthenticated(true);
 			nav('/home');
 		}
 		catch (error) {

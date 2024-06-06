@@ -14,6 +14,7 @@
 
 .chat-inner-box {
 	display: flex;
+	background-color: var(--white-color);
 	justify-content: space-between;
 	align-items: center;
 	overflow: hidden;
@@ -39,10 +40,11 @@
 }
 
 .chat-chatter {
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 600;
-	/* color: #cfddd6; */
+	color: var(--white-color);
 	background-color: var(--accent-color);
+	border: 1px solid var(--accent-color);
 	padding: .1rem .4rem;
 	margin-bottom: .2rem;
 	border-radius: .4rem;
@@ -52,7 +54,9 @@
 }
 
 .chat-chatter:hover {
-	opacity: 1;
+	color: var(--accent-color);
+	background-color: var(--white-color);
+	border: 1px solid var(--accent-color);
 }
 
 .chat-chatter::before {
@@ -90,19 +94,20 @@
 
 .chat-button {
 	background-color: var(--accent-color);
-	color: white;
-	border: none;
+	border: 1px solid var(--white-color);
+	color: var(--white-color);
 	border-radius: 10px;
 	padding: 14px 20px;
 	/* margin: 8px 8px; */
 	cursor: pointer;
-	opacity: 0.85;
 	width: 100%;
 	transition: all 0.3s;
 }
 
 .chat-button:hover {
-	opacity: 1;
+	background-color: var(--white-color);
+	border: 1px solid var(--accent-color);
+	color: var(--accent-color);
 }
 
 .chat-box {

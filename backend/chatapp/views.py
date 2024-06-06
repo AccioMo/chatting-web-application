@@ -57,7 +57,6 @@ def create_chat(request):
 	data['chatters'] = []
 	data['chatters'].append(AppUser.objects.filter(username=request.data['username']).first().pk)
 	serializer = ChatSerializer(data=data)
-	print(AppUser.objects.filter(username=request.data['username']).first())
 	if (serializer.is_valid()):
 		serializer.save()
 		return Response(serializer.data)
@@ -100,7 +99,6 @@ def get_user_chats(request):
 	user_1 = request.user
 	with_username = request.data['with']
 	user_2 = AppUser.objects.filter(username=with_username).first()
-	print(user_1, user_2)
 	chats = Chat.objects.filter(chatters=user_1).filter(chatters=user_2)
 	if chats.exists():
 		return Response({
@@ -108,6 +106,23 @@ def get_user_chats(request):
 			"chats": ChatSerializer(chats, many=True).data
 		})
 	return Response({"detail": "No common chats found"}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def get_user_info(request):
+	target_user = request.data['username']
+	target_user = AppUser.objects.filter(username=target_user)
+	if target_user.exists():
+		user = UserSerializer(target_user.first()).data
+		return Response({
+			"success": True,
+			"user": {
+				"username": user["username"],
+				"first_name": user["first_name"],
+				"last_name": user["last_name"],
+				"date_joined": user["date_joined"]
+			}
+		})
+	return Response({"detail": "invalid user"}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
 def generate_csrf(request):

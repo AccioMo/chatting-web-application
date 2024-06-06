@@ -1,14 +1,18 @@
 import { useNavigate } from 'react-router';
+import { useContext } from 'react';
+import { AuthContext } from './Auth.tsx';
 import { getCookie, deleteCookie } from './Cookies';
 import '../styles/NavBar.css';
 
 function NavBar() {
+	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 	const nav = useNavigate();
 	const logOut = () => {
 		try {
 			deleteCookie('access_token');
 			deleteCookie('refresh_token');
 			deleteCookie('user');
+			setIsAuthenticated(false);
 			nav('/login');
 		} catch (error) {
 			console.error('Logout error:', error);

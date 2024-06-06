@@ -1,20 +1,106 @@
-.sidebar {
+.profile-container {
 	display: flex;
+	/* flex-direction: column; */
+	justify-content: space-around;
+	padding: 1.8rem 0;
+	align-items: center;
+	overflow: hidden;
+}
+
+.round-picture {
+	border-radius: 50%;
+	border: 2px solid var(--primary-color);
+	/* background-color: var(--white-color); */
+}
+
+.picture-container {
+	padding: .8rem;
+}
+
+.profile-header {
+	display: flex;
+	background-color: var(--white-color);
+	flex-direction: column;
 	justify-content: center;
-	height: 100%;
-	color: var(--secondary-color);
-}
-
-.sidebar-list {
-	list-style-type: none;
-	padding: 1rem 2rem;
-}
-
-.sidebar-item {
-	padding: .75rem .5rem;
+	align-items: center;
+	width: 256px;
+	padding: .8rem 1.6rem;
 }
 
 .profile-picture {
 	width: 128px;
 	height: 128px;
+}
+
+.profile-info-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: .8rem 0;
+}
+
+.profile-username {
+	font-size: 1.2rem;
+	font-weight: 500;
+}
+
+.profile-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: .8rem 0;
+}
+
+.profile-header-left {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 256px;
+	padding: .8rem 0;
+}
+
+.profile-header-right {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 256px;
+	padding: .8rem 0;
+}
+
+.profile-actions {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	padding: .8rem 0;
+}
+
+.profile-action-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: .8rem 1.6rem;
+	cursor: pointer;
+	width: 100%;
+	transition: all 0.3s;
+}
+
+.profile-action-button {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	align-items: center;
+	padding: .6rem 1.6rem;
+	cursor: pointer;
+	background-color: var(--white-color);
+	transition: all 0.3s;
+}
+
+.profile-action-button:hover {
+	border-color: var(--light-accent-color);
 }

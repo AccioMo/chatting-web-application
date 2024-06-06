@@ -19,7 +19,7 @@ html, body, #root {
 	--primary-color: #222831;
 	--secondary-color: #31363F;
 	--accent-color: #76ABAE;
-	--light-accent-color: #d4f2f2;
+	--light-accent-color: #bbdede;
 	--white-color: #ffffff;
 }
 
@@ -45,7 +45,10 @@ html, body, #root {
 }
 
 .page-color {
-	background-color: var(--white-color);
+	background: radial-gradient(#76ABAE 15%, transparent 16%), repeating-linear-gradient(0deg, transparent 6.5%, #ffffff 7%, #ffffff 9%, transparent 10%), linear-gradient(45deg, transparent 49%, #76ABAE 49%, #76ABAE 51%, transparent 51%), linear-gradient(-45deg, transparent 49%, #76ABAE 49%, #76ABAE 51%, transparent 51%);
+	background-size: 2em 2em;
+	background-color: #ffffff;
+	opacity: 1
 }
 
 .page-font {

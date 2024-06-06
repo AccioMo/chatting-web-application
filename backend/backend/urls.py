@@ -40,6 +40,7 @@ urlpatterns = [
     path('api/create_chat', views.create_chat),
     path('api/get_messages', views.get_messages),
     path('api/get_user_chats', views.get_user_chats),
+    path('api/get_user_info', views.get_user_info),
     # path('api/get_message', views.get_message),
     
     re_path('csrf', views.generate_csrf),
