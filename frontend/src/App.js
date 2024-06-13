@@ -2,16 +2,18 @@ import { createContext, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar.jsx";
 import SideBar from "./components/SideBar.jsx";
-import LoginPage from "./components/LoginPage";
-import ProfilePage from "./components/ProfilePage";
+import LoginPage from "./components/Auth/LoginPage.jsx";
+import ProfilePage from "./components/Auth/ProfilePage.jsx";
 import Home from "./components/Home";
-import ChatPage from "./components/ChatPage";
+import ChatPage from "./components/Chat/ChatPage.jsx";
 import AboutPage from "./components/AboutPage.jsx";
-import SignUpPage from "./components/SignUpPage.jsx";
-import CommonChatsPage from "./components/CommonChatsPage.jsx";
+import SignUpPage from "./components/Auth/SignUpPage.jsx";
+import CommonChatsPage from "./components/Chat/CommonChatsPage.jsx";
+import AIChatPage from "./components/AIChatPage.jsx";
+import AIWelcomePage from "./components/AIWelcomePage.jsx";
 import { Navigate } from "react-router";
-import { getCookie, validCookie } from "./components/Cookies.jsx";
-import { api, refreshToken, verifyToken, AuthContext } from "./components/Auth.tsx";
+import { getCookie, validCookie } from "./components/Auth/Cookies.jsx";
+import { api, refreshToken, verifyToken, AuthContext } from "./components/Auth/Auth.tsx";
 import "./styles/App.css";
 
 const App = () => {
@@ -62,7 +64,7 @@ const App = () => {
 								element={<Navigate to="/login" />}
 							/>
 							<Route path="/login" element={<LoginPage />} />
-							<Route path="/signup" element={<SignUpPage />} />
+							<Route path="/register" element={<SignUpPage />} />
 						</Routes>
 					</AuthContext.Provider>
 				</BrowserRouter>
@@ -82,15 +84,16 @@ const App = () => {
 							<Routes>
 								<Route
 									path="/*"
-									element={<Navigate to="/home" />}
+									element={<Navigate to="/chat-with-human" />}
 								/>
-								<Route path="/home" element={<Home />} />
+								<Route path="/chat-with-human" element={<Home />} />
+								<Route path="/chat-with-ai" element={<AIWelcomePage />} />
+								<Route path="/chat-with-ai/:chat_id" element={<AIChatPage />} />
 								<Route
 									path="/profile"
 									element={<ProfilePage />}
 								/>
 								<Route path="/about" element={<AboutPage />} />
-								<Route path="/chats" element={<ChatPage />} />
 								<Route
 									path="/chat/:chat_id"
 									element={<ChatPage />}

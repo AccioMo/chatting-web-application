@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
-import NavBar from './NavBar'
-import '../styles/Profile.css'
+import NavBar from '../NavBar'
+import '../../styles/Profile.css'
 
 const ProfilePage = () => {
 	// const UID = process.env.REACT_APP_GOOGLE_ID;

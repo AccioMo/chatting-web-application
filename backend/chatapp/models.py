@@ -6,6 +6,9 @@ class AppUser(AbstractUser):
 	uuid = models.CharField(max_length=255, unique=True, primary_key=True, default=uuid4, editable=False)
 	user_permissions = models.ManyToManyField(Permission, related_name='appuser_permissions', blank=True)
 	groups = models.ManyToManyField(Group, related_name='appuser_set')
+ 
+	def __str__(self):
+		return self.username
 
 class Chat(models.Model):
 	id = models.CharField(max_length=255, unique=True, primary_key=True, default=uuid4, editable=False)

@@ -1,8 +1,8 @@
 import React from 'react';
-import '../styles/SignupPage.css';
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { useNavigate } from 'react-router';
 import SignUpForm from './SignUpForm';
+import '../../styles/SignupPage.css';
 
 
 function SignUpPage() {

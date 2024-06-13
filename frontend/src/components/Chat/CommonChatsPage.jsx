@@ -1,20 +1,20 @@
 import { createContext } from "react";
 import ChatContainer from "./ChatContainer";
-import Profile from "./Profile";
-import NewChatMenu from "./NewChatMenu";
+import Profile from "../Auth/Profile.jsx";
+import NewChatMenu from "./NewChatMenu.jsx";
 import { useParams, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { getCookie, validCookie } from "./Cookies";
-import { api, refreshToken } from "./Auth.tsx";
+import { getCookie, validCookie } from "../Auth/Cookies.jsx";
+import { api, refreshToken } from "../Auth/Auth.tsx";
+import "../../styles/Chat.css";
 
 export const NewChatMenuContext = createContext(null);
 
 function CommonChatsPage() {
 	const { username } = useParams();
 	const [commonChats, setCommonChats] = useState(null);
-	const [newChatMenu, setNewChatMenu] = useState(true);
+	const [newChatMenu, setNewChatMenu] = useState(false);
 	useEffect(() => {
-		console.log("commonChats: ", commonChats);
 		const getCommonChats = async () => {
 			let access_token = getCookie("access_token");
 			if (validCookie(access_token) === false) {
@@ -38,7 +38,7 @@ function CommonChatsPage() {
 			.catch((e) => {
 				console.error("error: ", e);
 			});
-	}, [username]);
+	}, [username, newChatMenu]);
 	return (
 		<div className={`page-content`}>
 			<NewChatMenuContext.Provider

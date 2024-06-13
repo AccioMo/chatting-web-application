@@ -3,6 +3,7 @@
 	height: 100%;
 	width: 20%;
 	background-color: var(--white-color);
+	min-width: 128px;
 }
 
 .sidebar-box {

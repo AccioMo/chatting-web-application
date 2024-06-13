@@ -2,7 +2,7 @@ import React from 'react';
 import LoginForm from './LoginForm';
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from 'react-router';
-import '../styles/LoginPage.css';
+import '../../styles/LoginPage.css';
 
 function LoginPage() {
 	const nav = useNavigate();

@@ -70,11 +70,21 @@ html, body, #root {
     }
 } */
 
-.page-font {
+div {
+	user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+}
+
+.page-font, input, textarea {
   font-family: "Quicksand", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 500;
+  word-spacing: normal;
   font-style: normal;
+  font-weight: 500;
+  font-size: .8rem;
 }
 
 .page-content-container {

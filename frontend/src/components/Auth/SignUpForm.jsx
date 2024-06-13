@@ -1,9 +1,9 @@
 import { React, useEffect, useState } from 'react';
-import '../styles/SignupPage.css';
-import { setCookie } from './Cookies';
+import { setCookie } from './Cookies.jsx';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { api } from './Auth.tsx';
+import '../../styles/SignupPage.css';
 
 function SignUpForm() {
 	const nav = useNavigate();

@@ -1,18 +1,16 @@
-import React from "react";
 import { useEffect, useContext, useState } from "react";
-import { getCookie, validCookie } from "./Cookies";
-import { refreshToken, api } from "./Auth.tsx";
-import { MessageContext } from "./ChatPage";
-import Message from "./Message";
-import "../styles/Message.css";
+import { getCookie, validCookie } from "../Auth/Cookies.jsx";
+import { refreshToken, api } from "../Auth/Auth.tsx";
+import Message from "./Message.jsx";
+import "../../styles/Message.css";
 
-function MessagesContainer({ chat_id, uuid }) {
+function MessagesContainer({ chat_id, uuid, lastMessage }) {
 	const [ messages, setMessages ] = useState(null);
-	const { lastJsonMessage } = useContext(MessageContext);
+	// const { lastMessage } = useContext(MessageContext);
 	useEffect(() => {
 		const getMessages = async () => {
 			let access_token = getCookie("access_token");
-			if (!access_token || validCookie(access_token) === false) {
+			if (validCookie(access_token) === false) {
 				access_token = await refreshToken();
 			}
 			const headers = {
@@ -35,10 +33,10 @@ function MessagesContainer({ chat_id, uuid }) {
 				.catch((e) => {
 					console.error(e);
 				});
-		} else if (lastJsonMessage.content) {
-			setMessages([...messages, lastJsonMessage]);
+		} else if (lastMessage.content) {
+			setMessages([...messages, lastMessage]);
 		}
-	}, [lastJsonMessage]);
+	}, [lastMessage]);
 
 	return (
 		<div className="messages-container">
@@ -46,10 +44,8 @@ function MessagesContainer({ chat_id, uuid }) {
 				? messages.map((message) => (
 						<Message
 							key={message.id}
-							uuid={uuid}
 							content={message.content}
-							sender={message.sender}
-							seen={false}
+							sender={message.sender.username}
 						/>
 					))
 				: null}

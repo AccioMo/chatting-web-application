@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import MuyTokenObtainPairSerializer, UserSerializer, \
+from .serializers import MuyTokenObtainPairSerializer, AppUserSerializer, \
 	ChatSerializer, MessageSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.middleware import csrf
@@ -22,7 +22,7 @@ def login(request):
 	if user.check_password(request.data['password']):
 		return Response({
 			"uuid": user.uuid,
-			"user": user.username,
+			"username": user.username,
 			"first_name": user.first_name,
 			"last_name": user.last_name
     	})
@@ -30,7 +30,7 @@ def login(request):
 
 @api_view(['POST'])
 def register(request):
-	serializer = UserSerializer(data=request.data)
+	serializer = AppUserSerializer(data=request.data)
 	if serializer.is_valid():
 		serializer.save()
 		user = AppUser.objects.get(username=serializer.data['username'])
@@ -44,7 +44,7 @@ def auth(request):
 	user = request.user
 	return Response({
 		"uuid": user.uuid,
-		"user": user.username,
+		"username": user.username,
 		"first_name": user.first_name,
 		"last_name": user.last_name,
 		"date_joined": user.date_joined
@@ -52,12 +52,16 @@ def auth(request):
 
 @api_view(['POST'])
 def create_chat(request):
-	data = {}
-	data['topic'] = request.data['topic']
-	data['chatters'] = []
+	response = {}
+	response['topic'] = request.data['topic']
+	response['chatters'] = [request.user.pk]
 	for chatter in request.data['chatters']:
-		data['chatters'].append(AppUser.objects.filter(username=chatter).first().pk)
-	serializer = ChatSerializer(data=data)
+		chat_user = AppUser.objects.filter(username=chatter).first()
+		response['chatters'].append(chat_user.pk)
+	if (len(response['chatters']) < 2):
+		return Response({"detail": "No such users"}, status=status.HTTP_404_NOT_FOUND)
+	print(response)
+	serializer = ChatSerializer(data=response)
 	if (serializer.is_valid()):
 		serializer.save()
 		return Response(serializer.data)
@@ -85,13 +89,13 @@ def get_users(request):
 		users = AppUser.objects.all()
 		return Response({
 			"success": True,
-			"users": UserSerializer(users, many=True).data
+			"users": AppUserSerializer(users, many=True).data
 		})
 	elif query_by == 'username':
 		users = AppUser.objects.filter(username__icontains=request.data['query'])
 		return Response({
 			"success": True,
-			"users": UserSerializer(users, many=True).data
+			"users": AppUserSerializer(users, many=True).data[0:3]
 		})
 	return Response({"detail": "Chat not found"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -113,7 +117,7 @@ def get_user_info(request):
 	target_user = request.data['username']
 	target_user = AppUser.objects.filter(username=target_user)
 	if target_user.exists():
-		user = UserSerializer(target_user.first()).data
+		user = AppUserSerializer(target_user.first()).data
 		return Response({
 			"success": True,
 			"user": {
@@ -158,7 +162,7 @@ def save_message(data):
    			"detail": "Chat not found" }
 
 class UserView(viewsets.ModelViewSet):
-	serializer_class = UserSerializer
+	serializer_class = AppUserSerializer
 	permission_classes = [permissions.IsAuthenticated]
 	queryset = AppUser.objects.all()
 

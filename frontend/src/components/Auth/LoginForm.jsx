@@ -1,9 +1,9 @@
 import { React, useEffect, useState, useContext } from 'react';
-import '../styles/LoginPage.css';
 import { setCookie, getCookie } from './Cookies.jsx';
 import { useNavigate } from 'react-router';
 import { AuthContext } from './Auth.tsx';
 import { api } from './Auth.tsx';
+import '../../styles/LoginPage.css';
 
 function LoginForm() {
 	const nav = useNavigate();

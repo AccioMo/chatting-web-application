@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { api, refreshToken } from "./Auth.tsx";
-import { getCookie, validCookie } from "./Cookies";
+import { api, refreshToken } from "./Auth/Auth.tsx";
+import { getCookie, validCookie } from "./Auth/Cookies.jsx";
 import { useNavigate } from "react-router";
 import "../styles/SideBar.css";
 

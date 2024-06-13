@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import UserTag from './UserTag';
+import UserTag from '../UserTag';
 
 function ChatContainer( {chat, uuid} ) {
 	const nav = useNavigate();
@@ -9,8 +9,6 @@ function ChatContainer( {chat, uuid} ) {
 				<div className='chat-inner-box'>
 					<div className='chat-header'>
 					{chat.chatters.map((chatter) => {
-							if (chatter.uuid === uuid)
-								return null;
 							return (
 								<UserTag username={chatter.username}/>
 							)

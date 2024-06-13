@@ -4,6 +4,7 @@
 	width: 100%;
 	flex-direction: column;
 	padding: .8rem 0;
+	transition: all ease-in 0.3s;
 }
 
 .home-container {

@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { api, refreshToken } from "./Auth.tsx";
-import { getCookie, validCookie } from "./Cookies";
-import { NewChatMenuContext } from "./CommonChatsPage";
+import { getCookie, validCookie } from "./Cookies.jsx";
+import { NewChatMenuContext } from "../Chat/CommonChatsPage.jsx";
 
 function Profile({ username }) {
 	const {newChatMenu, setNewChatMenu} = useContext(NewChatMenuContext);
