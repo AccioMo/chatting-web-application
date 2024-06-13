@@ -75,7 +75,7 @@ const App = () => {
 				<AuthContext.Provider
 					value={{ isAuthenticated, setIsAuthenticated }}
 				>
-					<div className="page-container page-color page-font">
+					<div className="page-container page-font">
 						<SideBar my_user={currentUser} />
 						<div className="page-content-container">
 							<NavBar />

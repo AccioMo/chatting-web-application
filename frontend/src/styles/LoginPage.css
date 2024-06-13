@@ -11,6 +11,7 @@
 	justify-content: space-evenly;
 	align-items: center;
 	padding: 40px 80px;
+	background-color: var(--white-color);
 	border: var(--primary-color) 1px ridge;
 	border-radius: 10px;
 	box-shadow: 02rem 2rem 2rem 2rem rgba(0, 0, 0, 0.1);

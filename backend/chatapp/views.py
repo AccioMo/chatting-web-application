@@ -55,7 +55,8 @@ def create_chat(request):
 	data = {}
 	data['topic'] = request.data['topic']
 	data['chatters'] = []
-	data['chatters'].append(AppUser.objects.filter(username=request.data['username']).first().pk)
+	for chatter in request.data['chatters']:
+		data['chatters'].append(AppUser.objects.filter(username=chatter).first().pk)
 	serializer = ChatSerializer(data=data)
 	if (serializer.is_valid()):
 		serializer.save()

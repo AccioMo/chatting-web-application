@@ -1,12 +1,91 @@
-.popup-menu {
+.popup-container {
+	display: flex;
 	position: absolute;
-	background-color: white;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	z-index: 100;
-	padding: 0;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	/* justify-self: center;
+	align-self: center; */
+	/* bottom: 50%; */
+	/* left: 50%; */
+	/* filter: blur(0); */
+	backdrop-filter: blur(8px);
+	z-index: 2;
+	/* background-color: var(--white-color); */
+	padding: 1rem;
 	margin: 0;
-	list-style: none;
-	display: none;
 }
+
+.popup-menu {
+	display: flex;
+	justify-content: center;
+	background-color: var(--white-color);
+	align-items: center;
+	padding: 1rem;
+	margin: 0;
+}
+
+.popup-body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	margin: 0;
+}
+
+.popup-body-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	margin: 0;
+}
+
+.popup-input-container {
+	display: flex;
+	flex-direction: column;
+	padding: .8rem .4rem;
+}
+
+.popup-input {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: .6rem .8rem;
+	margin: 2px;
+	transition: all 0.3s;
+	border: none;
+	border-bottom: 1px solid var(--primary-color);
+  }
+  
+  .popup-input::after {
+	content: "";
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0%;
+	height: 1px;
+	color: var(--primary-color);
+	background-color: var(--primary-color);
+	transition: all 0.3s;
+  }
+  
+  .popup-input:hover::after,
+  .popup-input:focus-within::after {
+	width: 100%;
+  }
+
+/* .input-border {
+	border-bottom: 1px solid var(--primary-color);
+}
+
+.input-border:focus {
+	border-bottom: 2px solid var(--accent-color);
+} */

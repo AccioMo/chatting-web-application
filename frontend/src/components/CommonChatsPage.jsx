@@ -12,7 +12,7 @@ export const NewChatMenuContext = createContext(null);
 function CommonChatsPage() {
 	const { username } = useParams();
 	const [commonChats, setCommonChats] = useState(null);
-	const [newChatMenu, setNewChatMenu] = useState(false);
+	const [newChatMenu, setNewChatMenu] = useState(true);
 	useEffect(() => {
 		console.log("commonChats: ", commonChats);
 		const getCommonChats = async () => {
@@ -40,11 +40,11 @@ function CommonChatsPage() {
 			});
 	}, [username]);
 	return (
-		<div className="page-content">
-			{newChatMenu && <NewChatMenu/>}
+		<div className={`page-content`}>
 			<NewChatMenuContext.Provider
 				value={{ newChatMenu, setNewChatMenu }}
-			>
+				>
+				{newChatMenu ? <NewChatMenu/> : null}
 				<Profile username={username} />
 			</NewChatMenuContext.Provider>
 			<div className="multiple-chats-container">
