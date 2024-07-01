@@ -22,7 +22,7 @@ function AIChatPage() {
 			Authorization: `Bearer ${access_token}`,
 		};
 		const response = await api
-			.post("/api/send_to_ai", { content: message }, { headers: headers })
+			.post("/api/message_ai", { content: message }, { headers: headers })
 			.then((e) => {
 				setMessages([...messages, e.data]);
 				setLastMessage(e.data);

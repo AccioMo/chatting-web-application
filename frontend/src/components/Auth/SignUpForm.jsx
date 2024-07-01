@@ -16,7 +16,7 @@ function SignUpForm() {
 		getCsrfToken();
 	}, []);
 	const { register, handleSubmit } = useForm();
-	const logUserIn = async (data) => {
+	const registerUser = async (data) => {
 		try {
 			const userData = {
 				"first_name": data.first_name,
@@ -33,6 +33,7 @@ function SignUpForm() {
 			);
 			setCookie('refresh_token', jwt_token.data.refresh, 30);
 			setCookie('access_token', jwt_token.data.access, 1);
+			setCookie('user', JSON.stringify(record.data), 30);
 			nav('/home');
 			return record.data['token'];
 		} catch (error) {
@@ -42,7 +43,7 @@ function SignUpForm() {
 	return (
 		<div>
 			<div className='sign-up-header'></div>
-			<form onSubmit={handleSubmit(logUserIn)} className='sign-up-form'>
+			<form onSubmit={handleSubmit(registerUser)} className='sign-up-form'>
 				<div className="input-field">
 					<label htmlFor="first_name">First Name</label>
 					<input required defaultValue='mo' className='sign-up-input' type="first_name" id="first_name" {...register("first_name")} />

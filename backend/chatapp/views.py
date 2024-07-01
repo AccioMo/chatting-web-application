@@ -25,7 +25,7 @@ def login(request):
 			"username": user.username,
 			"first_name": user.first_name,
 			"last_name": user.last_name
-    	})
+		})
 	return Response({"detail": "Invalid Credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['POST'])
@@ -66,6 +66,40 @@ def create_chat(request):
 		serializer.save()
 		return Response(serializer.data)
 	return Response(serializer.errors)
+
+from django.conf import settings
+import requests
+import json
+
+@api_view(['POST'])
+def message_ai(request):
+	message = request.data['content']
+	print(settings.OPENAI_API_KEY)
+	headers = {
+		"Content-Type": "application/json",
+		"Authorization": f"Bearer {settings.OPENAI_API_KEY}"
+	}
+	payload = {
+		"model": "gpt-3.5-turbo-0125",
+		"messages": [
+			{
+				"role": "system",
+				"content": "You are a helpful assistant called Bob."
+			},
+			{
+				"role": "user",
+				"content": message
+			}
+		]	
+	}
+	url = "https://api.openai.com/v1/chat/completions"
+	res = requests.post(url, headers=headers, data=json.dumps(payload)).json()
+	print(res)
+	response = res["choices"][0]["message"]["content"]
+	return Response({
+		"success": True,
+		"messages": response
+	})
 
 @api_view(['POST'])
 def get_messages(request):
@@ -136,8 +170,8 @@ def generate_csrf(request):
 
 @api_view(['GET'])
 def find_user(request, username):
-    user = AppUser.objects.filter(username=username)
-    if user.exists():
+	user = AppUser.objects.filter(username=username)
+	if user.exists():
    		return Response({'user_exists': user.exists(), 'data': {
 			"username": user.first().username,
 			"uuid": user.first().uuid,
@@ -157,7 +191,7 @@ def save_message(data):
 				"message": message.data }
 		else:
 			return { "ok": False, 
-    			"detail": "Message not valid" }
+				"detail": "Message not valid" }
 	return { "ok": False, 
    			"detail": "Chat not found" }
 

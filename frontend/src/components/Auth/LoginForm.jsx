@@ -52,11 +52,11 @@ function LoginForm() {
 			nav('/home');
 		}
 		catch (error) {
-			// if (error.response.status === 404)
-			// 	console.log('incorrect password');
-			// else if (error.response.status === 500)
-			// 	console.log('username not found');
-			// else
+			if (error.response.status === 404)
+				console.log('incorrect password');
+			else if (error.response.status === 500)
+				console.log('username not found');
+			else
 				console.error('Login error:', error);
 		}
 	}
