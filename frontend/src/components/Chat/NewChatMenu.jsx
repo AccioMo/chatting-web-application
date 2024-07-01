@@ -3,6 +3,7 @@ import { NewChatMenuContext } from "./CommonChatsPage";
 import { api, refreshToken } from "../Auth/Auth.tsx";
 import { getCookie, validCookie } from "../Auth/Cookies.jsx";
 import SearchUsersInput from "../Other/SearchUsersInput.jsx";
+import SubmitButton from "../SubmitButton.jsx";
 import "../../styles/PopupMenu.css";
 
 function NewChatMenu() {
@@ -18,7 +19,7 @@ function NewChatMenu() {
 		const headers = {
 			Authorization: `Bearer ${access_token}`,
 		};
-		const chatters = e.target.elements.chatters.value.split(", ");
+		const chatters = e.target.elements.chatters.value.trim().split(" ");
 		const topic = e.target.elements.topic.value;
 		const response = api
 			.post(
@@ -33,7 +34,7 @@ function NewChatMenu() {
 		<div
 			className="popup-container"
 			onClick={(e) => {
-				if (e.target.className == "popup-container")
+				if (e.target.className === "popup-container")
 					setNewChatMenu(false);
 			}}
 		>
@@ -59,12 +60,7 @@ function NewChatMenu() {
 								</div>
 							</div>
 							<div className="popup-body-content-item">
-								<button
-									className="popup-body-content-item-button"
-									type="submit"
-								>
-									Create Chat
-								</button>
+								<SubmitButton />
 							</div>
 						</form>
 					</div>

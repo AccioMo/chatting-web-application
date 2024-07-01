@@ -23,7 +23,7 @@ function ChatContainer( {chat, uuid} ) {
 						</div>
 					</div>
 					<div className='button-container'>
-						<button className='chat-button' onClick={() => nav(`/chat/${chat.id}`)} >Join</button>
+						<button className='chat-button' onClick={() => nav(`/chat/${chat.id}`)}>Join</button>
 					</div>
 				</div>
 			</div>
