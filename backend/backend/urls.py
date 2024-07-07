@@ -41,6 +41,7 @@ urlpatterns = [
     path('api/get_messages', views.get_messages),
     path('api/get_user_chats', views.get_user_chats),
     path('api/get_user_info', views.get_user_info),
+    # path('api/chat_with_ai', views.chat_with_ai),
     path('api/message_ai', views.message_ai),
     # path('api/get_message', views.get_message),
     

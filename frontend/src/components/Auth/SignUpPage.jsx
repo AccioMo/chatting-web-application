@@ -8,7 +8,6 @@ import '../../styles/SignupPage.css';
 function SignUpPage() {
 	const nav = useNavigate();
 	const googleSignUp = async () => {
-		// pb.authStore.clear();
 		nav("/home");
 	}
 	return (

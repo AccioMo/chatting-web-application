@@ -37,7 +37,7 @@ def register(request):
 		user.set_password(serializer.data['password'])
 		user.save()
 		return Response({"success": True, "user": serializer.data})
-	return Response(serializer.errors)
+	return Response({"success": True, "message": serializer.errors})
 
 @api_view(['GET'])
 def auth(request):
@@ -60,7 +60,6 @@ def create_chat(request):
 		response['chatters'].append(chat_user.pk)
 	if (len(response['chatters']) < 2):
 		return Response({"detail": "No such users"}, status=status.HTTP_404_NOT_FOUND)
-	print(response)
 	serializer = ChatSerializer(data=response)
 	if (serializer.is_valid()):
 		serializer.save()
@@ -71,10 +70,13 @@ from django.conf import settings
 import requests
 import json
 
+# @api_view(['POST'])
+# def chat_with_ai(request):
+    
+
 @api_view(['POST'])
 def message_ai(request):
 	message = request.data['content']
-	print(settings.OPENAI_API_KEY)
 	headers = {
 		"Content-Type": "application/json",
 		"Authorization": f"Bearer {settings.OPENAI_API_KEY}"
@@ -98,7 +100,7 @@ def message_ai(request):
 	response = res["choices"][0]["message"]["content"]
 	return Response({
 		"success": True,
-		"messages": response
+		"message": response
 	})
 
 @api_view(['POST'])

@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import ChatContainer from "./ChatContainer";
-import Profile from "../Auth/Profile.jsx";
+import Profile from "../Profile/Profile.jsx";
 import NewChatMenu from "./NewChatMenu.jsx";
 import { useParams, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
@@ -29,6 +29,7 @@ function CommonChatsPage() {
 			const chats = await api.post("/api/get_user_chats", payload, {
 				headers: headers,
 			});
+			console.log(chats.status);
 			return chats.data.chats;
 		};
 		getCommonChats()
@@ -36,7 +37,8 @@ function CommonChatsPage() {
 				setCommonChats(chats);
 			})
 			.catch((e) => {
-				console.error("error: ", e);
+				setCommonChats([]);
+				console.error(e);
 			});
 	}, [username, newChatMenu]);
 	return (

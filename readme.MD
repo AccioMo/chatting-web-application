@@ -3,13 +3,14 @@
 # Backend
 ```
 cd backend
-pip3 install django
-pip3 install daphne
-pip3 install django-jazzmin
+pip install django
+pip install daphne
+pip install django-jazzmin
 pip install channels
 pip install djangorestframework
 pip install djangorestframework-simplejwt
-pip3 install django-cors-headers
+pip install django-cors-headers
+pip install python-dotenv
 python manage.py runserver
 ```
 

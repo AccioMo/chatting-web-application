@@ -3,9 +3,19 @@ import '../styles/AIChatPage.css'
 
 function AIWelcomePage() {
 	const nav = useNavigate();
+	const handleClick = () => {
+		const headers = {
+			Authorization: `Bearer ${access_token}`,
+		};
+		api.post("api/chat_with_ai", { bot: "bob" }, { headers: headers })
+		.then((e) => {
+			console.log('Chat created:', e.data);
+			nav(`/chat-with-ai/bob`);
+		})
+	}
   return (
 	<div className="flex-page">
-		<div onClick={() => nav("/chat-with-ai/bob")}>hello</div>
+		<div onClick={() => handleClick()}>hello</div>
 	</div>
   )
 }

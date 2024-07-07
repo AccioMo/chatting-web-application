@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import ChatInput from "./Chat/ChatInput";
 import Message from "./Chat/Message";
@@ -24,7 +24,7 @@ function AIChatPage() {
 		const response = await api
 			.post("/api/message_ai", { content: message }, { headers: headers })
 			.then((e) => {
-				setMessages([...messages, e.data]);
+				setMessages([...messages, e.data.message]);
 				setLastMessage(e.data);
 			})
 			.catch((e) => {

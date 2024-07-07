@@ -12,6 +12,7 @@
 	align-items: center;
 	/* max-width: 512px; */
 	padding: 24px 24px;
+	background-color: var(--white-color);
 	border: var(--primary-color) 1px ridge;
 	border-radius: 10px;
 	box-shadow: 02rem 2rem 2rem 2rem rgba(0, 0, 0, 0.1);
