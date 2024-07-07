@@ -1,8 +1,9 @@
-import React from "react";
+import { forwardRef } from "react";
 import { getCookie } from "../Auth/Cookies";
 import "../../styles/Message.css";
 
-function Message({ sender, content, seen }) {
+const Message = forwardRef((props, ref) => {
+	const { sender, content } = props;
 	const user = getCookie("user");
 	const username = user ? JSON.parse(user).username : null;
 	const isUser = (sender) => {
@@ -14,6 +15,7 @@ function Message({ sender, content, seen }) {
 	};
 	return (
 		<div
+			ref={ref}
 			className={`${isUser(sender) ? "right" : "left"} message-outer-box`}
 		>
 			<div
@@ -32,6 +34,6 @@ function Message({ sender, content, seen }) {
 			</div>
 		</div>
 	);
-}
+});
 
 export default Message;

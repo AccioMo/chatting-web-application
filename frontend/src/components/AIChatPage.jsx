@@ -12,8 +12,10 @@ function AIChatPage() {
 	const user = getCookie("user");
 	const uuid = user ? JSON.parse(user).uuid : null;
 	const [messages, setMessages] = useState([]);
-	const [lastMessage, setLastMessage] = useState([]);
+	const [lastMessage, setLastMessage] = useState({});
 	const handleSendMessage = async (message) => {
+		setMessages([...messages, message]);
+		setLastMessage({ content: message, sender: JSON.parse(user) });
 		let access_token = getCookie("access_token");
 		if (validCookie(access_token) === false) {
 			access_token = await refreshToken();
@@ -22,10 +24,11 @@ function AIChatPage() {
 			Authorization: `Bearer ${access_token}`,
 		};
 		const response = await api
-			.post("/api/message_ai", { content: message }, { headers: headers })
+			.post("/api/message_ai", { chat_id: chat_id, content: message }, { headers: headers })
 			.then((e) => {
 				setMessages([...messages, e.data.message]);
-				setLastMessage(e.data);
+				setLastMessage(e.data.message);
+				console.log("message sent:", e.data.message, lastMessage);
 			})
 			.catch((e) => {
 				console.error(e);

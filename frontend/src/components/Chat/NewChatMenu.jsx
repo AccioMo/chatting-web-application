@@ -24,7 +24,7 @@ function NewChatMenu() {
 		const response = api
 			.post(
 				"/api/create_chat",
-				{ chatters: chatters, topic: topic },
+				{ chatters: chatters, topic: topic, bot: false },
 				{ headers: headers }
 			)
 			.then(() => setNewChatMenu(false))

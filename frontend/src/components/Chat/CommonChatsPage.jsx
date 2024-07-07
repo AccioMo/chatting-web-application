@@ -25,6 +25,7 @@ function CommonChatsPage() {
 			};
 			const payload = {
 				with: username,
+				bot: false,
 			};
 			const chats = await api.post("/api/get_user_chats", payload, {
 				headers: headers,

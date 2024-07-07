@@ -19,7 +19,7 @@ function NavBar() {
 		}
 	};
 	const userdata = getCookie('user');
-	const username = userdata ? JSON.parse(userdata).user : 'anonymous';
+	const username = userdata ? JSON.parse(userdata).username : 'anonymous';
   	return (
 		<div className='navbar-container'>
 			<div className='navbar border'>

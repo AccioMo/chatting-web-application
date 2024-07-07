@@ -1,13 +1,17 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getCookie, validCookie } from "../Auth/Cookies.jsx";
 import { refreshToken, api } from "../Auth/Auth.tsx";
 import Message from "./Message.jsx";
 import "../../styles/Message.css";
 
 function MessagesContainer({ chat_id, uuid, lastMessage }) {
-	const [ messages, setMessages ] = useState(null);
-	// const { lastMessage } = useContext(MessageContext);
+	const [messages, setMessages] = useState(null);
+	const messagesEndRef = useRef(null);
+	const scrollToBottom = () => {
+		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+	};
 	useEffect(() => {
+		console.log("lastMessage:", messages || "null");
 		const getMessages = async () => {
 			let access_token = getCookie("access_token");
 			if (validCookie(access_token) === false) {
@@ -37,17 +41,23 @@ function MessagesContainer({ chat_id, uuid, lastMessage }) {
 			setMessages([...messages, lastMessage]);
 		}
 	}, [lastMessage]);
+	useEffect(scrollToBottom, [messages]);
 
 	return (
 		<div className="messages-container">
 			{messages
-				? messages.map((message) => (
+				? messages.map((message, index) => (
 						<Message
-							key={message.id}
+							key={index}
 							content={message.content}
 							sender={message.sender.username}
+							ref={
+								index === messages.length - 1
+									? messagesEndRef
+									: null
+							}
 						/>
-					))
+				  ))
 				: null}
 		</div>
 	);

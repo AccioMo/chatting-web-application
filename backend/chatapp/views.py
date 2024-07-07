@@ -53,8 +53,8 @@ def auth(request):
 @api_view(['POST'])
 def create_chat(request):
 	response = {}
-	response['topic'] = request.data['topic']
 	response['chatters'] = [request.user.pk]
+	response['topic'] = request.data['topic']
 	for chatter in request.data['chatters']:
 		chat_user = AppUser.objects.filter(username=chatter).first()
 		response['chatters'].append(chat_user.pk)
@@ -70,37 +70,46 @@ from django.conf import settings
 import requests
 import json
 
-# @api_view(['POST'])
-# def chat_with_ai(request):
-    
-
 @api_view(['POST'])
 def message_ai(request):
 	message = request.data['content']
+	save_message({
+		"chat_id": request.data['chat_id'],
+		"from": request.user.uuid,
+		"content": message
+	})
+	chat_messages = Message.objects.filter(chat=request.data['chat_id'])
+	messages = [{
+		"role": "system",
+		"content": "You are a helpful assistant called Bob."
+	}]
+	if chat_messages.exists():
+		chat_messages = MessageSerializer(chat_messages, many=True).data
+		for msg in chat_messages:
+			sender = msg["sender"]
+			messages.append({
+				"role": "assistant" if sender == "AI" else "user",
+				"content": msg["content"]
+			})
 	headers = {
 		"Content-Type": "application/json",
 		"Authorization": f"Bearer {settings.OPENAI_API_KEY}"
 	}
 	payload = {
 		"model": "gpt-3.5-turbo-0125",
-		"messages": [
-			{
-				"role": "system",
-				"content": "You are a helpful assistant called Bob."
-			},
-			{
-				"role": "user",
-				"content": message
-			}
-		]	
+		"messages": messages
 	}
 	url = "https://api.openai.com/v1/chat/completions"
 	res = requests.post(url, headers=headers, data=json.dumps(payload)).json()
-	print(res)
 	response = res["choices"][0]["message"]["content"]
+	ret_message = save_message({
+		"chat_id": request.data['chat_id'],
+		"from": AppUser.objects.filter(username="AI").first().uuid,
+		"content": response
+	})
 	return Response({
 		"success": True,
-		"message": response
+		"message": ret_message["message"]
 	})
 
 @api_view(['POST'])
