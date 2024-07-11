@@ -56,7 +56,7 @@ function Profile({ username }) {
 							{profile?.first_name + " " + profile?.last_name}
 						</div>
 					</div>
-					{/* <div className="profile-actions">
+					<div className="profile-actions">
 						<div className="profile-action-container">
 							<div
 								className="profile-action-button border"
@@ -67,10 +67,10 @@ function Profile({ username }) {
 						</div>
 						<div className="profile-action-container">
 							<div className="profile-action-button border">
-								Friend
+								Add Friend
 							</div>
 						</div>
-					</div> */}
+					</div>
 				</div>
 			</div>
 		</div>
