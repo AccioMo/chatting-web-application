@@ -6,7 +6,7 @@ import SearchUsersInput from "../Other/SearchUsersInput.jsx";
 import SubmitButton from "../SubmitButton.jsx";
 import "../../styles/PopupMenu.css";
 
-function NewChatMenu() {
+function NewChatMenu({ chatWith }) {
 	const topicRef = useRef();
 	const { newChatMenu, setNewChatMenu } = useContext(NewChatMenuContext);
 
@@ -48,7 +48,7 @@ function NewChatMenu() {
 							className="popup-body-content"
 							onSubmit={handleSubmit}
 						>
-							<SearchUsersInput />
+							<SearchUsersInput defaultValue={chatWith} />
 							<div className="popup-input-container" onClick={() => topicRef.current.focus()}>
 								<div className="popup-input">
 									<input

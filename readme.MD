@@ -3,6 +3,7 @@
 # Backend
 ```
 cd backend
+pip install requests
 pip install django
 pip install daphne
 pip install django-jazzmin

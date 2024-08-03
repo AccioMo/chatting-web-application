@@ -101,6 +101,8 @@ def message_ai(request):
 	}
 	url = "https://api.openai.com/v1/chat/completions"
 	res = requests.post(url, headers=headers, data=json.dumps(payload)).json()
+	if res.status != 200:
+		return Response({"detail": "AI not available"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
 	response = res["choices"][0]["message"]["content"]
 	ret_message = save_message({
 		"chat_id": request.data['chat_id'],
@@ -137,7 +139,7 @@ def get_users(request):
 			"users": AppUserSerializer(users, many=True).data
 		})
 	elif query_by == 'username':
-		users = AppUser.objects.filter(username__icontains=request.data['query'])
+		users = AppUser.objects.filter(username__istartswith=request.data['query'])
 		return Response({
 			"success": True,
 			"users": AppUserSerializer(users, many=True).data[0:3]

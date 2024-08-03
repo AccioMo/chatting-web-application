@@ -5,10 +5,10 @@ import { refreshToken, api } from "../Auth/Auth.tsx";
 
 export const AutoCompleteContext = createContext(null);
 
-function SearchUsersInput() {
+function SearchUsersInput({ defaultValue = "" }) {
 	const withRef = useRef();
 	const [matchingUsers, setMatchingUsers] = useState([]);
-	const [value, setValue] = useState("");
+	const [value, setValue] = useState(defaultValue + " ");
 	useEffect(() => {
 		withRef.current.focus();
 	}, []);

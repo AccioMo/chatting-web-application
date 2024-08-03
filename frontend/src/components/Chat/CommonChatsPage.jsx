@@ -47,7 +47,7 @@ function CommonChatsPage() {
 			<NewChatMenuContext.Provider
 				value={{ newChatMenu, setNewChatMenu }}
 				>
-				{newChatMenu ? <NewChatMenu/> : null}
+				{newChatMenu ? <NewChatMenu chatWith={username} /> : null}
 				<Profile username={username} />
 			</NewChatMenuContext.Provider>
 			<div className="multiple-chats-container">
