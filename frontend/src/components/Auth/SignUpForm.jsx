@@ -11,11 +11,11 @@ function SignUpForm() {
 	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 	const [csrf_token, setToken] = useState("");
 	useEffect(() => {
-		const getCsrfToken = async () => {
-			const csrfToken = await api.get("/api/csrf/");
+		api.get("/api/csrf/").then((csrfToken) => {
 			setToken(csrfToken.data);
-		};
-		getCsrfToken();
+		}).catch((error) => {
+			console.error("CSRF error:", error);
+		});
 	}, []);
 	const { register, handleSubmit } = useForm();
 	const registerUser = async (data) => {
