@@ -8,7 +8,7 @@ import "../../styles/SignupPage.css";
 
 function SignUpForm() {
 	const nav = useNavigate();
-	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+	const { setIsAuthenticated } = useContext(AuthContext);
 	const [csrf_token, setToken] = useState("");
 	useEffect(() => {
 		api.get("/api/csrf/").then((csrfToken) => {

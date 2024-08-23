@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import ChatInput from "./Chat/ChatInput";
-import Message from "./Chat/Message";
 import MessagesContainer from "./Chat/MessagesContainer.jsx";
 import { api, refreshToken } from "./Auth/Auth.tsx";
 import "../styles/AIChatPage.css";
@@ -23,8 +22,11 @@ function AIChatPage() {
 		const headers = {
 			Authorization: `Bearer ${access_token}`,
 		};
-		const response = await api
-			.post("/api/message_ai", { chat_id: chat_id, content: message }, { headers: headers })
+		api.post(
+			"/api/message_ai",
+			{ chat_id: chat_id, content: message },
+			{ headers: headers }
+		)
 			.then((e) => {
 				setMessages([...messages, e.data.message]);
 				setLastMessage(e.data.message);

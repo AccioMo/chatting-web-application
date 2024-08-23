@@ -1,9 +1,3 @@
-import { React, useState, useEffect } from "react";
-import SideBar from "./SideBar.jsx";
-import ChatContainer from "./Chat/ChatContainer.jsx";
-import { setCookie, getCookie } from "./Auth/Cookies.jsx";
-import { refreshToken, api } from "./Auth/Auth.tsx";
-import { jwtDecode } from "jwt-decode";
 import "../styles/Home.css";
 
 const Home = () => {

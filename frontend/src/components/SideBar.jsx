@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { api, refreshToken } from "./Auth/Auth.tsx";
 import { getCookie, validCookie } from "./Auth/Cookies.jsx";
 import { useNavigate } from "react-router";
@@ -30,7 +30,7 @@ function SideBar( { my_user } ) {
 			return users.data.users;
 		};
 		if (users.length > 0) return;
-		const users_record = getUsers().then((users) => {
+		getUsers().then((users) => {
 			setUsers(users);
 			console.log(users);
 		});

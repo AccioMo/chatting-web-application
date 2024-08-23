@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 import { NewChatMenuContext } from "./CommonChatsPage";
 import { api, refreshToken } from "../Auth/Auth.tsx";
 import { getCookie, validCookie } from "../Auth/Cookies.jsx";
@@ -8,7 +8,7 @@ import "../../styles/PopupMenu.css";
 
 function NewChatMenu({ chatWith }) {
 	const topicRef = useRef();
-	const { newChatMenu, setNewChatMenu } = useContext(NewChatMenuContext);
+	const { setNewChatMenu } = useContext(NewChatMenuContext);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -21,7 +21,7 @@ function NewChatMenu({ chatWith }) {
 		};
 		const chatters = e.target.elements.chatters.value.trim().split(" ");
 		const topic = e.target.elements.topic.value;
-		const response = api
+		api
 			.post(
 				"/api/create_chat",
 				{ chatters: chatters, topic: topic, bot: false },

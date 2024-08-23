@@ -40,7 +40,7 @@ function MessagesContainer({ chat_id, uuid, lastMessage }) {
 		} else if (lastMessage.content) {
 			setMessages([...messages, lastMessage]);
 		}
-	}, [lastMessage]);
+	}, [lastMessage, chat_id, messages, uuid]);
 	useEffect(scrollToBottom, [messages]);
 
 	return (

@@ -5,7 +5,7 @@ import { NewChatMenuContext } from "../Chat/CommonChatsPage.jsx";
 import profilePicture from "../../images/profile.png"
 
 function Profile({ username }) {
-	const { newChatMenu, setNewChatMenu } = useContext(NewChatMenuContext);
+	const { setNewChatMenu } = useContext(NewChatMenuContext);
 	const [profile, setProfile] = useState(null);
 	useEffect(() => {
 		const getUserInfo = async () => {

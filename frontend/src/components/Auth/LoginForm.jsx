@@ -1,5 +1,5 @@
 import { React, useEffect, useState, useContext } from "react";
-import { setCookie, getCookie } from "./Cookies.jsx";
+import { setCookie } from "./Cookies.jsx";
 import { useNavigate } from "react-router";
 import { AuthContext } from "./Auth.tsx";
 import { api } from "./Auth.tsx";
@@ -7,7 +7,7 @@ import "../../styles/LoginPage.css";
 
 function LoginForm() {
 	const nav = useNavigate();
-	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+	const { setIsAuthenticated } = useContext(AuthContext);
 	const [csrf_token, setToken] = useState("");
 	useEffect(() => {
 		api.get("/api/csrf/")

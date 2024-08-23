@@ -2,7 +2,7 @@ import { createContext } from "react";
 import ChatContainer from "./ChatContainer";
 import Profile from "../Profile/Profile.jsx";
 import NewChatMenu from "./NewChatMenu.jsx";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { getCookie, validCookie } from "../Auth/Cookies.jsx";
 import { api, refreshToken } from "../Auth/Auth.tsx";
@@ -45,7 +45,7 @@ function CommonChatsPage() {
 	return (
 		<div className={`page-content`}>
 			<NewChatMenuContext.Provider
-				value={{ newChatMenu, setNewChatMenu }}
+				value={{ setNewChatMenu }}
 				>
 				{newChatMenu ? <NewChatMenu chatWith={username} /> : null}
 				<Profile username={username} />

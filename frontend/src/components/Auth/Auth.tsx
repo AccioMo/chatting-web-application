@@ -35,7 +35,6 @@ const refreshToken = async () => {
 };
 
 const AuthContext = createContext({
-	isAuthenticated: false,
 	setIsAuthenticated: () => {},
 });
 

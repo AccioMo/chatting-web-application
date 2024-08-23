@@ -24,13 +24,14 @@ function SearchUsersInput({ defaultValue = "" }) {
 			(event.key === "Enter" ||
 				event.key === "ArrowRight" ||
 				event.key === "Tab") &&
-				matchingUsers.length > 0
+			matchingUsers.length > 0
 		) {
 			event.preventDefault();
 			const message = event.target.value;
 			const previousMatches = value.split(" ").slice(0, -1).join(" ");
 			if (message !== "" && matchingUsers[0] !== "") {
-				if (previousMatches) setValue(previousMatches + " " + matchingUsers[0] + " ");
+				if (previousMatches)
+					setValue(previousMatches + " " + matchingUsers[0] + " ");
 				else setValue(matchingUsers[0] + " ");
 				setMatchingUsers([]);
 			}
@@ -45,12 +46,11 @@ function SearchUsersInput({ defaultValue = "" }) {
 		const headers = {
 			Authorization: `Bearer ${access_token}`,
 		};
-		const response = api
-			.post(
-				"/api/get_users",
-				{ query_by: "username", query: username },
-				{ headers: headers }
-			)
+		api.post(
+			"/api/get_users",
+			{ query_by: "username", query: username },
+			{ headers: headers }
+		)
 			.then((response) => {
 				if (response.data.users.length === 0) setMatchingUsers([]);
 				else

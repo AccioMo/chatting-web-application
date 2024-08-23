@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router';
-import { useState } from 'react';
 import UserTag from '../UserTag';
 
 function ChatContainer( {chat} ) {

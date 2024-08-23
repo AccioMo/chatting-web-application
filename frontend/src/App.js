@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar.jsx";
 import SideBar from "./components/SideBar.jsx";
@@ -48,7 +48,7 @@ const App = () => {
 		checkAuthentication()
 			.then(() => setIsLoading(false))
 			.catch((e) => console.error("error:", e));
-	}, [isAuthenticated]);
+	}, [isAuthenticated, currentUser]);
 	if (isLoading) {
 		return <div>Loading...</div>;
 	} else if (!isAuthenticated) {
@@ -75,7 +75,7 @@ const App = () => {
 		<div className="large-container page-color page-font">
 			<BrowserRouter>
 				<AuthContext.Provider
-					value={{ isAuthenticated, setIsAuthenticated }}
+					value={{ setIsAuthenticated }}
 				>
 					<div className="page-container page-font">
 						<SideBar my_user={currentUser} />

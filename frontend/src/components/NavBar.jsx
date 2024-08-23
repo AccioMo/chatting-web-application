@@ -5,7 +5,7 @@ import { getCookie, deleteCookie } from './Auth/Cookies.jsx';
 import '../styles/NavBar.css';
 
 function NavBar() {
-	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+	const { setIsAuthenticated } = useContext(AuthContext);
 	const nav = useNavigate();
 	const logOut = () => {
 		try {
