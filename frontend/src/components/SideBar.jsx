@@ -4,7 +4,7 @@ import { getCookie, validCookie } from "./Auth/Cookies.jsx";
 import { useNavigate } from "react-router";
 import "../styles/SideBar.css";
 
-function SideBar( { my_user } ) {
+function SideBar({ my_user }) {
 	const nav = useNavigate();
 	const [users, setUsers] = useState([]);
 	useEffect(() => {
@@ -32,7 +32,6 @@ function SideBar( { my_user } ) {
 		if (users.length > 0) return;
 		getUsers().then((users) => {
 			setUsers(users);
-			console.log(users);
 		});
 	}, [users]);
 	if (!getCookie("access_token")) return null;
@@ -49,14 +48,7 @@ function SideBar( { my_user } ) {
 				<ul className="sidebar-items">
 					{users
 						? users.map((user) => {
-							console.log("user: ", user.username);
-							console.log("my-user: ", my_user.username);
-								if (
-									user.username ===
-									my_user.username
-								)
-									return null;
-								return (
+								return user?.username !== my_user?.username ? (
 									<li
 										key={user.uuid}
 										className="sidebar-element-container"
@@ -70,7 +62,7 @@ function SideBar( { my_user } ) {
 											{user.username}
 										</div>
 									</li>
-								);
+								) : null;
 						  })
 						: null}
 				</ul>

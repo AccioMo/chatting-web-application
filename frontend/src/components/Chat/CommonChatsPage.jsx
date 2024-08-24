@@ -30,7 +30,6 @@ function CommonChatsPage() {
 			const chats = await api.post("/api/get_user_chats", payload, {
 				headers: headers,
 			});
-			console.log(chats.status);
 			return chats.data.chats;
 		};
 		getCommonChats()
@@ -38,8 +37,14 @@ function CommonChatsPage() {
 				setCommonChats(chats);
 			})
 			.catch((e) => {
+				if (e.response.status === 401) {
+					console.error("Unauthorized");
+				} else if (e.response.status === 404) {
+					console.error("No common chats found");
+				} else {
+					console.error(e);
+				}
 				setCommonChats([]);
-				console.error(e);
 			});
 	}, [username, newChatMenu]);
 	return (
@@ -51,11 +56,11 @@ function CommonChatsPage() {
 				<Profile username={username} />
 			</NewChatMenuContext.Provider>
 			<div className="multiple-chats-container">
-				{commonChats
+				{commonChats?.length > 0
 					? commonChats.map((chat) => (
 							<ChatContainer key={chat.id} chat={chat} />
 					  ))
-					: null}
+					: "No common chats found"}
 			</div>
 		</div>
 	);

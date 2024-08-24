@@ -1,0 +1,9 @@
+requests
+django
+daphne
+django-jazzmin
+channels
+djangorestframework
+djangorestframework-simplejwt
+django-cors-headers
+python-dotenv

@@ -9,9 +9,9 @@ function ChatContainer( {chat} ) {
 			<div className='chat-box border'>
 				<div className='chat-inner-box'>
 					<div className='chat-header'>
-					{chat.chatters.map((chatter) => {
+					{chat.chatters.map((chatter, index) => {
 							return (
-								<UserTag username={chatter.username}/>
+								<UserTag key={index} username={chatter.username}/>
 							)
 						})}
 					</div>

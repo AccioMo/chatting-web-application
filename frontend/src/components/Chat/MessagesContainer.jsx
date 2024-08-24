@@ -5,13 +5,12 @@ import Message from "./Message.jsx";
 import "../../styles/Message.css";
 
 function MessagesContainer({ chat_id, uuid, lastMessage }) {
-	const [messages, setMessages] = useState(null);
+	const [messages, setMessages] = useState([]);
 	const messagesEndRef = useRef(null);
 	const scrollToBottom = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 	};
 	useEffect(() => {
-		console.log("lastMessage:", messages || "null");
 		const getMessages = async () => {
 			let access_token = getCookie("access_token");
 			if (validCookie(access_token) === false) {
@@ -29,30 +28,31 @@ function MessagesContainer({ chat_id, uuid, lastMessage }) {
 			});
 			return response;
 		};
-		if (messages === null) {
-			getMessages()
-				.then((e) => {
-					setMessages(e.data.messages);
-				})
-				.catch((e) => {
-					console.error(e);
-				});
-		} else if (lastMessage.content) {
-			setMessages([...messages, lastMessage]);
-		}
-	}, [lastMessage, chat_id, messages, uuid]);
+		getMessages()
+			.then((e) => {
+				setMessages(e.data.messages);
+			})
+			.catch((e) => {
+				console.error(e);
+			});
+	}, [chat_id, uuid]);
+
+	useEffect(() => {
+		setMessages(messages => [...messages, lastMessage]);
+	}, [lastMessage]);
+
 	useEffect(scrollToBottom, [messages]);
 
 	return (
 		<div className="messages-container">
-			{messages
+			{messages?.length > 0
 				? messages.map((message, index) => (
 						<Message
 							key={index}
-							content={message.content}
-							sender={message.sender.username}
+							content={message?.content}
+							sender={message?.sender?.username}
 							ref={
-								index === messages.length - 1
+								index === messages?.length - 1
 									? messagesEndRef
 									: null
 							}

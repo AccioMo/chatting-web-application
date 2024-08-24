@@ -13,7 +13,12 @@ import AIChatPage from "./components/AIChatPage.jsx";
 import AIWelcomePage from "./components/AIWelcomePage.jsx";
 import { Navigate } from "react-router";
 import { getCookie, validCookie } from "./components/Auth/Cookies.jsx";
-import { api, refreshToken, verifyToken, AuthContext } from "./components/Auth/Auth.tsx";
+import {
+	api,
+	refreshToken,
+	verifyToken,
+	AuthContext,
+} from "./components/Auth/Auth.tsx";
 import "./styles/App.css";
 
 const App = () => {
@@ -27,18 +32,17 @@ const App = () => {
 				setIsAuthenticated(false);
 				return false;
 			}
-			console.log("access_token: ", access_token);
 			if (validCookie(access_token) === false) {
 				access_token = await refreshToken();
 			}
 			const response = await verifyToken(access_token);
 			setIsAuthenticated(response.status === 200);
 			if (response.status === 200) {
-				setCurrentUser(getCookie("user"));
-				if (!currentUser) {
-					const headers = {
-						Authorization: `Bearer ${access_token}`,
-					};
+				let curr_user = getCookie("user");
+				curr_user = JSON.parse(curr_user);
+				if (curr_user) setCurrentUser(curr_user);
+				else {
+					const headers = { Authorization: `Bearer ${access_token}` };
 					const user = await api.get("/api/auth", { headers });
 					setCurrentUser(user.data);
 				}
@@ -48,7 +52,7 @@ const App = () => {
 		checkAuthentication()
 			.then(() => setIsLoading(false))
 			.catch((e) => console.error("error:", e));
-	}, [isAuthenticated, currentUser]);
+	}, [isAuthenticated]);
 	if (isLoading) {
 		return <div>Loading...</div>;
 	} else if (!isAuthenticated) {
@@ -74,9 +78,7 @@ const App = () => {
 	return (
 		<div className="large-container page-color page-font">
 			<BrowserRouter>
-				<AuthContext.Provider
-					value={{ setIsAuthenticated }}
-				>
+				<AuthContext.Provider value={{ setIsAuthenticated }}>
 					<div className="page-container page-font">
 						<SideBar my_user={currentUser} />
 						<div className="page-content-container">
@@ -86,9 +88,18 @@ const App = () => {
 									path="/*"
 									element={<Navigate to="/chat-with-human" />}
 								/>
-								<Route path="/chat-with-human" element={<Home />} />
-								<Route path="/chat-with-ai" element={<AIWelcomePage />} />
-								<Route path="/chat-with-ai/:chat_id" element={<AIChatPage />} />
+								<Route
+									path="/chat-with-human"
+									element={<Home />}
+								/>
+								<Route
+									path="/chat-with-ai"
+									element={<AIWelcomePage />}
+								/>
+								<Route
+									path="/chat-with-ai/:chat_id"
+									element={<AIChatPage />}
+								/>
 								<Route
 									path="/profile"
 									element={<ProfilePage />}
