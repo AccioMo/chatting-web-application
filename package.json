@@ -2,7 +2,7 @@
   "name": "chat-app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "cht-backend-f0cgb5g5ckgub0eh.westeurope-01.azurewebsites.net",
+  "proxy": "https://cht-backend-f0cgb5g5ckgub0eh.westeurope-01.azurewebsites.net/",
   "dependencies": {
     "@greatsumini/react-facebook-login": "^3.3.3",
     "@react-oauth/google": "^0.12.1",
