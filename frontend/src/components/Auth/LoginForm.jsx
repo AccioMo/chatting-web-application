@@ -1,4 +1,4 @@
-import { React, useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { setCookie } from "./Cookies.jsx";
 import { useNavigate } from "react-router";
 import { AuthContext } from "./Auth.tsx";
@@ -8,16 +8,16 @@ import "../../styles/LoginPage.css";
 function LoginForm() {
 	const nav = useNavigate();
 	const { setIsAuthenticated } = useContext(AuthContext);
-	const [csrf_token, setToken] = useState("");
-	useEffect(() => {
-		api.get("/api/csrf/")
-			.then((e) => {
-				setToken(e.data);
-			})
-			.catch((e) => {
-				console.error("CSRF error:", e);
-			});
-	}, []);
+	// const [csrf_token, setToken] = useState("");
+	// useEffect(() => {
+		// api.get("/api/csrf/")
+		// 	.then((e) => {
+		// 		setToken(e.data);
+		// 	})
+		// 	.catch((e) => {
+		// 		console.error("CSRF error:", e);
+		// 	});
+	// }, []);
 	const logUserIn = async (e) => {
 		e.preventDefault();
 		try {
@@ -28,8 +28,8 @@ function LoginForm() {
 				username: username,
 				password: password,
 			};
-			console.log("csrf_token:", csrf_token);
-			api.defaults.headers.common["X-CSRFToken"] = csrf_token;
+			// console.log("csrf_token:", csrf_token);
+			// api.defaults.headers.common["X-CSRFToken"] = csrf_token;
 			const record = await api.post("/api/login/", userData);
 			const jwt_token = await api.post("/api/token/", userData, {
 				"Content-Type": "application/json",
@@ -70,7 +70,7 @@ function LoginForm() {
 				<input
 					type="hidden"
 					name="csrfmiddlewaretoken"
-					value={csrf_token}
+					// value={csrf_token}
 				/>
 				<div className="input-field">
 					<button className="login-button" type="submit">
