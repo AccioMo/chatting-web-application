@@ -12,7 +12,7 @@ function ChatPage() {
 	const decodedToken = jwtDecode(access_token);
 	const uuid = decodedToken.uuid;
 	const { sendJsonMessage, lastJsonMessage } = useWebSocket(
-		`ws://localhost:8000/ws/chat/${chat_id}`,
+		`${process.env.REACT_APP_WS_URL}${chat_id}`,
 		{ onOpen: () => console.log("ws: connection established") }
 	);
 	const handleSendMessage = (message) => {
@@ -22,6 +22,7 @@ function ChatPage() {
 			content: message,
 		});
 	};
+	console.log("kk", process.env.REACT_APP_WS_URL)
 	return (
 		<>
 			<div className="conversation-box">

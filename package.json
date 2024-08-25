@@ -2,7 +2,7 @@
   "name": "chat-app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://cht-backend-f0cgb5g5ckgub0eh.westeurope-01.azurewebsites.net/",
+  "proxy": "http://localhost:8000",
   "dependencies": {
     "@greatsumini/react-facebook-login": "^3.3.3",
     "@react-oauth/google": "^0.12.1",
@@ -25,6 +25,7 @@
     "react-scripts": "5.0.1",
     "react-search-autocomplete": "^8.5.2",
     "react-use-websocket": "^4.8.1",
+    "serve": "^14.2.3",
     "tw-elements-react": "^1.0.0-alpha2",
     "web-vitals": "^2.1.4"
   },

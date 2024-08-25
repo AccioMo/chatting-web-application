@@ -3,7 +3,7 @@ import { createContext } from "react";
 import axios from "axios";
 
 const api = axios.create({
-	baseURL: "https://cht-backend-f0cgb5g5ckgub0eh.westeurope-01.azurewebsites.net/",
+	baseURL: process.env.REACT_APP_API_URL,
 	headers: {
 		"Content-Type": "application/json",
 		Accept: "application/json",
