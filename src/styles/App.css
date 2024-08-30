@@ -79,7 +79,7 @@ div {
 	-o-user-select: none;
 }
 
-.page-font, input, textarea {
+.page-font, input, textarea, button {
   font-family: "Quicksand", sans-serif;
   font-optical-sizing: auto;
   word-spacing: normal;

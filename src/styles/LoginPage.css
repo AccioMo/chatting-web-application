@@ -8,13 +8,15 @@
 
 .login-container {
 	display: flex;
+	position: relative;
+	overflow: hidden;
 	justify-content: space-evenly;
 	align-items: center;
 	padding: 40px 80px;
 	background-color: var(--white-color);
 	border: var(--primary-color) 1px ridge;
-	border-radius: 10px;
-	box-shadow: 02rem 2rem 2rem 2rem rgba(0, 0, 0, 0.1);
+	border-radius: 46px;
+	box-shadow: 2rem 2rem 2rem 2rem rgba(0, 0, 0, 0.2);
 }
 
 .login-header {
@@ -31,7 +33,7 @@
 	justify-content: center;
 	align-items: center;
 	padding: 1.5rem;
-	margin-top: 2.35rem;
+	margin: 1.8rem 2rem;
 }
 
 .login-input {
@@ -42,25 +44,42 @@
 	margin: 10px 0;
 	border: 1px solid var(--primary-color);
 	border-color: var(--primary-color);
-	border-radius: 10px;
-	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 64px;
+	box-shadow: inset 4px 4px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.corner-button {
+	position: absolute;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	bottom: 0;
+	right: 0;
+	padding: 4px 16px;
+	transform: translate(40%, 50%);
+	box-shadow: inset 8px 4px 8px 0 rgba(0, 0, 0, 0.15);
+	background-color: var(--light-accent-color);
+	border: 1px solid var(--primary-color);
+	border-color: var(--primary-color);
+	border-radius: 50px;
+	transition: all 0.2s;
 }
 
 .login-button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 10px 20px;
-	margin: 24px 0 0;
-	border: 1px solid var(--primary-color);
-	border-color: var(--primary-color);
-	border-radius: 10px;
-	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+	text-align: center;
+	background: transparent;
+	font-size: medium;
+	border: none;
+	padding: 16px 24px;
 }
 
 .login-button:hover {
-	background-color: #d2d3db;
 	cursor: pointer;
+}
+
+.corner-button:hover {
+	cursor: pointer;
+	box-shadow: inset 16px 8px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .login-sep {

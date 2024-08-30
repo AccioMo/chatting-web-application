@@ -7,7 +7,6 @@ function LoginPage() {
 		<div className='login-page'>
 			<div className='login-container'>
 				<LoginForm />
-				<h3 className='login-sep'>OR</h3>
 			</div>
 		</div>
 	)
