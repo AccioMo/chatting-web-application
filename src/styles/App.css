@@ -27,6 +27,7 @@ html, body, #root {
 	--light-accent-color: #bbdede;
 	--dark-accent-color: #4c8484;
 	--white-color: #ffffff;
+	--red-color: #e7acac;
 }
 
 .large-container {
@@ -56,20 +57,6 @@ html, body, #root {
     /* animation: gradient 15s ease infinite; */
     /* height: 100vh; */
 }
-
-/* @keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
- 
-    50% {
-        background-position: 100% 50%;
-    }
- 
-    100% {
-        background-position: 0% 50%;
-    }
-} */
 
 div {
 	user-select: none;
