@@ -68,7 +68,7 @@ const App = () => {
 								element={<Navigate to="/login" />}
 							/>
 							<Route path="/login" element={<LoginPage />} />
-							<Route path="/register" element={<SignUpPage />} />
+							<Route path="/join" element={<SignUpPage />} />
 						</Routes>
 					</AuthContext.Provider>
 				</BrowserRouter>

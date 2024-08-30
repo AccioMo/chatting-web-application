@@ -1,9 +1,47 @@
 .login-page {
 	display: flex;
-	justify-content: center;
+	justify-content: space-evenly;
 	align-items: center;
 	height: 100%;
 	width: 100vw;
+}
+
+.home-door {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.register-door {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.home-icon {
+	display: flex;
+	cursor: pointer;
+	justify-content: center;
+	align-items: center;
+	width: 48px;
+	height: 48px;
+	border-radius: 100px;
+	padding: .5rem;
+	box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.15);
+	background-color: white;
+}
+
+.register-icon {
+	display: flex;
+	cursor: pointer;
+	justify-content: center;
+	align-items: center;
+	width: 48px;
+	height: 48px;
+	border-radius: 100px;
+	padding: .5rem;
+	box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.15);
+	background-color: white;
 }
 
 .login-container {
@@ -14,7 +52,7 @@
 	align-items: center;
 	padding: 32px 72px;
 	background-color: var(--white-color);
-	border: var(--primary-color) 1px ridge;
+	/* border: var(--primary-color) 1px ridge; */
 	border-radius: 46px;
 	box-shadow: 2rem 2rem 2rem 2rem rgba(0, 0, 0, 0.2);
 }
@@ -44,8 +82,8 @@
 	width: 212px;
 	padding: 10px 20px;
 	margin: 10px 0;
-	border: 1px solid var(--primary-color);
-	border-color: var(--primary-color);
+	border: 2px solid var(--primary-color);
+	border-color: #9c9c9c;
 	border-radius: 64px;
 	box-shadow: inset 4px 4px 4px 0 rgba(0, 0, 0, 0.15);
 	transition: all 0.2s;
@@ -63,6 +101,30 @@
 
 .login-label {
 	padding: 0 16px;
+	font-weight: 600;
+}
+
+
+.join-form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 32px;
+	padding: .8rem 0rem;
+}
+
+.email-field {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: .8rem .8rem;
+}
+
+.email-input {
+	width: 80%;
+}
+
+.input-field {
+	width: 100%;
 }
 
 .corner-button {
@@ -75,8 +137,8 @@
 	padding: 4px 24px;
 	transform: translate(40%, 50%);
 	background-color: var(--light-accent-color);
-	border: 1px solid var(--primary-color);
-	border-color: var(--primary-color);
+	/* border: 1px solid var(--primary-color); */
+	/* border-color: var(--primary-color); */
 	box-shadow: inset 8px 0px 8px 0 rgba(0, 0, 0, 0.2);
 	border-radius: 50px;
 	transition: all 0.3s;
@@ -88,6 +150,8 @@
 	font-size: 14px;
 	border: none;
 	padding: 16px 24px;
+	color: white;
+	font-weight: 700;
 }
 
 .login-button:hover {

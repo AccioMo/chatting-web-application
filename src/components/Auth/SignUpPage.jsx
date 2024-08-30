@@ -1,20 +1,24 @@
-import React from 'react';
+import { useNavigate } from "react-router";
 import SignUpForm from './SignUpForm';
+import Icon from '../UI/Icons';
 import '../../styles/SignupPage.css';
 
-
 function SignUpPage() {
+	const nav = useNavigate();
 	return (
-		<div className='sign-up-page'>
-			<div className='sign-up-container'>
+		<div className='login-page'>
+			<div className="home-door">
+				<div className="home-icon">
+					<Icon.Home onClick={() => nav("/home")} />
+				</div>
+			</div>
+			<div className='login-container'>
 				<SignUpForm />
-				{/* <h3 className='login-sep'>OR</h3>
-				<div className='oauth-container'>
-					<div onClick={googleSignUp} className='oauth-google'>
-						<FaGoogle color='black' size={16} />
-						Continue with Google
-					</div>
-				</div> */}
+			</div>
+			<div className="register-door">
+				<div className="register-icon">
+					<Icon.Create onClick={() => nav("/join")} />
+				</div>
 			</div>
 		</div>
   )
