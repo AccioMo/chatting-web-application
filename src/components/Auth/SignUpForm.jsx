@@ -27,7 +27,7 @@ function SignUpForm() {
 			const userData = {
 				first_name: data.first_name,
 				last_name: data.last_name,
-				email: data.email,
+				email: data.email || null,
 				username: data.username,
 				password: data.password,
 			};
@@ -114,7 +114,6 @@ function SignUpForm() {
 						Where can we reach you? (optional)
 					</label>
 					<input
-						required
 						placeholder="Email"
 						className="login-input email-input"
 						type="email"

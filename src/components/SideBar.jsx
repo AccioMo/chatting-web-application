@@ -36,12 +36,12 @@ function SideBar({ my_user }) {
 	}, [users]);
 	if (!getCookie("access_token")) return null;
 	return (
-		<div className="sidebar-container border">
+		<div className="sidebar-container">
 			<div className="sidebar-box">
 				<div className="users-search-bar-container">
 					<input
 						placeholder="Search users..."
-						className="users-search-bar border"
+						className="users-search-bar"
 						type="search"
 					/>
 				</div>

@@ -6,7 +6,7 @@ function ChatContainer( {chat} ) {
     const hasAI = chat.chatters.some(chatter => chatter.username === "AI");
   	return (
 		<div className='chat-container'>
-			<div className='chat-box border'>
+			<div className='chat-box'>
 				<div className='chat-inner-box'>
 					<div className='chat-header'>
 					{chat.chatters.map((chatter, index) => {

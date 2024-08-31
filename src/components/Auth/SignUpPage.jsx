@@ -17,7 +17,7 @@ function SignUpPage() {
 			</div>
 			<div className="register-door">
 				<div className="register-icon">
-					<Icon.Create onClick={() => nav("/join")} />
+					<Icon.Create onClick={() => nav("/login")} />
 				</div>
 			</div>
 		</div>

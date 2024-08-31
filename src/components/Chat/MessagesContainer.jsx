@@ -38,7 +38,9 @@ function MessagesContainer({ chat_id, uuid, lastMessage }) {
 	}, [chat_id, uuid]);
 
 	useEffect(() => {
-		setMessages(messages => [...messages, lastMessage]);
+		console.log(lastMessage);
+		if (lastMessage?.content?.length > 0)
+			setMessages(messages => [...messages, lastMessage]);
 	}, [lastMessage]);
 
 	useEffect(scrollToBottom, [messages]);

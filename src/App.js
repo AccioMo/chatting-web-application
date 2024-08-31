@@ -65,7 +65,18 @@ const App = () => {
 						<Routes>
 							<Route
 								path="/*"
-								element={<Navigate to="/login" />}
+								element={<Navigate to="/" />}
+							/>
+							<Route
+								path="/"
+								element={
+									<div className="page-container page-font">
+										<div className="page-content-container">
+											<NavBar />
+											<Home />
+										</div>
+									</div>
+								}
 							/>
 							<Route path="/login" element={<LoginPage />} />
 							<Route path="/join" element={<SignUpPage />} />

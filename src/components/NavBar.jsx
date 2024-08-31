@@ -22,7 +22,7 @@ function NavBar() {
 	const username = userdata ? JSON.parse(userdata).username : 'anonymous';
   	return (
 		<div className='navbar-container'>
-			<div className='navbar border'>
+			<div className='navbar rounded'>
 				<div className='nav-item nav-brand' onClick={() => nav('/')}>Logo</div>
 				<ul className='nav-items-array'>
 					<div className='nav-item accent-on-hover' onClick={() => nav('/chat-with-human')}>Chat with Human</div>

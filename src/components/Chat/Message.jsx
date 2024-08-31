@@ -19,7 +19,7 @@ const Message = forwardRef((props, ref) => {
 			className={`${isUser(sender) ? "right" : "left"} message-outer-box`}
 		>
 			<div
-				className={`border ${
+				className={` ${
 					isUser(sender) ? "sender-me" : "sender-other"
 				} message-inner-box`}
 			>
