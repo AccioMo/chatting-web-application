@@ -1,5 +1,6 @@
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 import { getCookie } from "../Auth/Cookies";
+import ReactMarkdown from 'react-markdown'
 import "../../styles/Message.css";
 
 const Message = forwardRef((props, ref) => {
@@ -24,12 +25,12 @@ const Message = forwardRef((props, ref) => {
 				} message-inner-box`}
 			>
 				<div className="message-content-box">
-					<div className="message-content">{content}</div>
+					<div className="message-content">
+						<ReactMarkdown>{content}</ReactMarkdown>
+					</div>
 				</div>
 				<div className="message-meta">
-					<div className="message-sender">
-						{sender}
-					</div>
+					<div className="message-sender">{sender}</div>
 				</div>
 			</div>
 		</div>

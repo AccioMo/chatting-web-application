@@ -2,10 +2,42 @@ import { useNavigate } from "react-router";
 import { api, refreshToken } from "./Auth/Auth.tsx";
 import { getCookie, validCookie } from "./Auth/Cookies";
 import "../styles/AIChatPage.css";
+import { useEffect, useState, createContext } from "react";
+import Icon from "./UI/Icons";
+import NewBotMenu from "./NewBotMenu";
+
+export const NewBotMenuContext = createContext();
 
 function AIWelcomePage() {
 	const nav = useNavigate();
-	const handleClick = async () => {
+	const [bots, setBots] = useState([]);
+	const [createBotMenu, setCreateBotMenu] = useState(false);
+	useEffect(() => {
+		let access_token = getCookie("access_token");
+		if (validCookie(access_token) === false) {
+			access_token = refreshToken()
+				.then((e) => {
+					return e;
+				})
+				.catch((e) => {
+					console.error(e);
+				});
+		}
+		const headers = {
+			Authorization: `Bearer ${access_token}`,
+		};
+		api.get("/api/get_bots", {
+			headers: headers,
+		})
+			.then((chats) => {
+				setBots(chats.data.bots);
+			})
+			.catch((e) => {
+				console.error(e);
+			});
+	}, [bots]);
+
+	const handleClick = async (bot_username) => {
 		let access_token = getCookie("access_token");
 		if (validCookie(access_token) === false) {
 			access_token = await refreshToken();
@@ -13,26 +45,24 @@ function AIWelcomePage() {
 		const headers = {
 			Authorization: `Bearer ${access_token}`,
 		};
-		const payload = {
-			with: "AI",
-		};
-		api.post("/api/get_user_chats", payload, {
-			headers: headers,
-		})
-			.then((chats) => {
-				nav(`/chat-with-ai/${chats.data.chats[0].id}`);
-				return;
+		api.post(
+			"api/get_user_chats",
+			{ with: bot_username },
+			{ headers: headers }
+		)
+			.then((e) => {
+				console.log("Chat found:", e.data);
+				nav(`/chat-ai/${bot_username}/${e.data.chats[0].id}`);
 			})
 			.catch((e) => {
-				console.error(e);
 				api.post(
 					"api/create_chat",
-					{ topic: "bot", chatters: ["AI"] },
+					{ ai: true, chatters: [bot_username] },
 					{ headers: headers }
 				)
 					.then((e) => {
 						console.log("Chat created:", e.data);
-						nav(`/chat-with-ai/${e.data.id}`);
+						nav(`/chat-ai/${bot_username}/${e.data.id}`);
 					})
 					.catch((e) => {
 						console.error(e);
@@ -40,8 +70,62 @@ function AIWelcomePage() {
 			});
 	};
 	return (
-		<div className="flex-page">
-			<div onClick={() => handleClick()}>hello</div>
+		<div className="bot-page-container">
+			<div className="bot-page">
+				{bots.map((bot) => {
+					return (
+						<div className="bot-container">
+							<div className="bot-outer-box">
+								<div className="bot-picture">
+									<img
+										className="bot-img"
+										fill="cover"
+										src={
+											"http://localhost:8000" +
+											bot.picture
+										}
+										alt="bot"
+									/>
+								</div>
+								<div className="bot-inner-box">
+									<div className="bot-name-container">
+										<div className="bot-name">
+											{bot.username}
+										</div>
+									</div>
+									<div className="bot-description-container">
+										<div className="bot-description">
+											{bot.description}
+										</div>
+									</div>
+									<div className="corner-button">
+										<div
+											className="login-button"
+											onClick={() =>
+												handleClick(bot.username)
+											}
+										>
+											Chat
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					);
+				})}
+				<div className="create-bot-container">
+					<div className="home-door">
+						<div className="home-icon">
+							<Icon.Create
+								onClick={() => setCreateBotMenu(true)}
+							/>
+						</div>
+					</div>
+					<NewBotMenuContext.Provider value={{ setCreateBotMenu }}>
+						{createBotMenu ? <NewBotMenu /> : null}
+					</NewBotMenuContext.Provider>
+				</div>
+			</div>
 		</div>
 	);
 }

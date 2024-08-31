@@ -7,7 +7,7 @@ import "../styles/AIChatPage.css";
 import { getCookie, validCookie } from "./Auth/Cookies";
 
 function AIChatPage() {
-	const { chat_id } = useParams();
+	const { chat_id, bot_username } = useParams();
 	const user = getCookie("user");
 	const uuid = user ? JSON.parse(user).uuid : null;
 	const [messages, setMessages] = useState([]);
@@ -24,7 +24,7 @@ function AIChatPage() {
 		};
 		api.post(
 			"/api/message_ai",
-			{ chat_id: chat_id, content: message },
+			{ chat_id: chat_id, content: message, to: bot_username },
 			{ headers: headers }
 		)
 			.then((e) => {

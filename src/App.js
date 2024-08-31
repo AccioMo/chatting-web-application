@@ -104,11 +104,11 @@ const App = () => {
 									element={<Home />}
 								/>
 								<Route
-									path="/chat-with-ai"
+									path="/chat-ai"
 									element={<AIWelcomePage />}
 								/>
 								<Route
-									path="/chat-with-ai/:chat_id"
+									path="/chat-ai/:bot_username/:chat_id"
 									element={<AIChatPage />}
 								/>
 								<Route

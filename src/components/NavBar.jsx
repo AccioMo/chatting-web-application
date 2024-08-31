@@ -26,7 +26,7 @@ function NavBar() {
 				<div className='nav-item nav-brand' onClick={() => nav('/')}>Logo</div>
 				<ul className='nav-items-array'>
 					<div className='nav-item accent-on-hover' onClick={() => nav('/chat-with-human')}>Chat with Human</div>
-					<div className='nav-item accent-on-hover' onClick={() => nav('/chat-with-ai')}>Chat with AI</div>
+					<div className='nav-item accent-on-hover' onClick={() => nav('/chat-ai')}>Chat with AI</div>
 				</ul>
 				<div className='username-item accent-on-hover' onClick={logOut}>{username}</div>
 			</div>

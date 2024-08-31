@@ -24,7 +24,7 @@ function ChatContainer( {chat} ) {
 						</div>
 					</div>
 					<div className='button-container'>
-						<button className='chat-button' onClick={() => nav(`/${(hasAI?"chat-with-ai/":"chat/") + chat.id}`)}>Join</button>
+						<button className='chat-button' onClick={() => nav(`/${(hasAI?"chat-ai/":"chat/") + chat.id}`)}>Join</button>
 					</div>
 				</div>
 			</div>
