@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router";
 import { api, refreshToken } from "./Auth/Auth.tsx";
 import { getCookie, validCookie } from "./Auth/Cookies";
-import "../styles/AIChatPage.css";
 import { useEffect, useState, createContext } from "react";
 import Icon from "./UI/Icons";
 import NewBotMenu from "./NewBotMenu";
+import "../styles/AIChatPage.css";
 
 export const NewBotMenuContext = createContext();
 
@@ -32,7 +32,7 @@ function AIWelcomePage() {
             .catch((e) => {
                 console.error(e);
             });
-    }, [bots, createBotMenu]);
+    }, [createBotMenu]);
 
     const handleClick = async (bot_username) => {
         let access_token = getCookie("access_token");
@@ -111,7 +111,7 @@ function AIWelcomePage() {
                     );
                 })}
                 <div className="create-bot-container">
-                    <div className="home-door">
+                    <div className="">
                         <div className="home-icon">
                             <Icon.Create
                                 onClick={() => setCreateBotMenu(true)}
