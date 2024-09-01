@@ -7,17 +7,17 @@ function SignUpPage() {
 	const nav = useNavigate();
 	return (
 		<div className='login-page'>
-			<div className="home-door">
+			<div className="home-door" onClick={() => nav("/home")}>
 				<div className="home-icon">
-					<Icon.Home onClick={() => nav("/home")} />
+					<Icon.Home />
 				</div>
 			</div>
-			<div className='login-container'>
+			<div className="login-cover">
 				<SignUpForm />
 			</div>
-			<div className="register-door">
+			<div className="register-door" onClick={() => nav("/login")}>
 				<div className="register-icon">
-					<Icon.Create onClick={() => nav("/login")} />
+					<Icon.Login />
 				</div>
 			</div>
 		</div>

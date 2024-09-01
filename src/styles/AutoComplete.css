@@ -1,7 +1,7 @@
 .auto-complete {
 	display: flex;
 	position: absolute;
-	overflow: scroll;
+	overflow: hidden;
 	top: 0;
 	left: 0;
 	z-index: 0;
@@ -12,7 +12,7 @@
 .auto-complete-value {
 	position: relative;
 	display: flex;
-	overflow: scroll;
+	overflow: hidden;
 	line-height: 1rem;
 	word-spacing: normal;
 	border: none;

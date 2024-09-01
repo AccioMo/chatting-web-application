@@ -1,27 +1,38 @@
 .page-content {
-	display: flex;
-	height: 100%;
-	width: 100%;
-	flex-direction: column;
-	padding: .8rem 0;
-	transition: all ease-in 0.3s;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    padding: 0.8rem 0;
+    transition: all ease-in 0.3s;
 }
 
 .home-container {
-	display: flex;
-	width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.welcome {
+    font-size: x-large;
+    font-weight: 600;
+    color: aliceblue;
+    max-width: 396px;
+    text-align: center;
+    text-shadow: 16px 16px 16px rgba(0, 0, 0, 0.1);
 }
 
 .rounded {
-	border-radius: 56px;
+    border-radius: 56px;
 }
 
 .border {
-	border: 1px solid black;
-	border-color: #000000;
-	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid black;
+    border-color: #000000;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .blur {
-	filter: blur(5px);
+    filter: blur(5px);
 }
