@@ -60,7 +60,7 @@ function NewChatMenu({ chatWith }) {
 								</div>
 							</div>
 							<div className="popup-body-content-item">
-								<SubmitButton />
+								<SubmitButton>Create</SubmitButton>
 							</div>
 						</form>
 					</div>

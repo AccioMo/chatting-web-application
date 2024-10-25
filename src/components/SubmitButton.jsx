@@ -1,10 +1,10 @@
 import "../styles/SubmitButton.css";
 
-function SubmitButton() {
+function SubmitButton({ children, ...props }) {
 	return (
 		<div className="submit-button-outer">
 			<div className="submit-button-inner">
-				<button className="submit-button" type="submit">Submit</button>
+				<button {...props} className="submit-button" type="submit">{children}</button>
 			</div>
 		</div>
 	);

@@ -12,6 +12,18 @@ function AIWelcomePage() {
     const nav = useNavigate();
     const [bots, setBots] = useState([]);
     const [createBotMenu, setCreateBotMenu] = useState(false);
+	const deleteBot = async (bot) => {
+		let access_token = getCookie("access_token");
+		if (validCookie(access_token) === false) {
+			access_token = await refreshToken();
+		}
+		const headers = {
+			Authorization: `Bearer ${access_token}`,
+		};
+		return api.post(`/api/delete_user`, { username: bot.username }, {
+			headers: headers,
+		}).then(() => {bots.splice(bots.indexOf(bot), 1); setBots([...bots]);})
+	};
     useEffect(() => {
         const getBots = async () => {
             let access_token = getCookie("access_token");
@@ -73,6 +85,9 @@ function AIWelcomePage() {
                     return (
                         <div className="bot-container">
                             <div className="bot-outer-box">
+							<div className="delete-button" onClick={() => deleteBot(bot)}>
+								<Icon.Delete />
+							</div>
                                 <div className="bot-picture">
                                     <img
                                         className="bot-img"

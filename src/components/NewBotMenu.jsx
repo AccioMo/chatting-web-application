@@ -17,10 +17,10 @@ function NewBotMenu() {
 		const headers = {
 			Authorization: `Bearer ${access_token}`,
 		};
-		const payload = { 
+		const payload = {
 			username: data.username,
 			description: data.description
-		 };
+		};
 		api
 			.post(
 				"/api/create_bot",
@@ -41,7 +41,7 @@ function NewBotMenu() {
 			<div className="popup-menu">
 				<div className="popup">
 					<div className="popup-header">
-						<h1>New Chat</h1>
+						<h1>Name your bot</h1>
 					</div>
 					<div className="popup-body">
 						<form
@@ -57,6 +57,8 @@ function NewBotMenu() {
 										{...register("username")}
 									/>
 								</div>
+							</div>
+							<div className="popup-input-container" >
 								<div className="popup-input">
 									<input
 										name="topic"
@@ -67,7 +69,7 @@ function NewBotMenu() {
 								</div>
 							</div>
 							<div className="popup-body-content-item">
-								<SubmitButton />
+								<SubmitButton>Create</SubmitButton>
 							</div>
 						</form>
 					</div>

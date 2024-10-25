@@ -60,7 +60,9 @@ function CommonChatsPage() {
 					? commonChats.map((chat) => (
 							<ChatContainer key={chat.id} chat={chat} />
 					  ))
-					: "No common chats found"}
+					: <div className="welcome">
+					No common chats found
+				</div>}
 			</div>
 		</div>
 	);

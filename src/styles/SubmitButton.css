@@ -1,17 +1,15 @@
 .submit-button-outer {
-	padding: .4rem;
-}
-
-.submit-button-inner {
-	padding: .8rem;
+	margin-top: 1.2rem;
+	margin-bottom: .6rem;
+	padding: 0 1.2rem;
 }
 
 .submit-button {
 	background-color: var(--accent-color);
 	color: white;
 	border: none;
-	border-radius: 5px;
-	padding: .7rem 1.2rem;
+	border-radius: 32px;
+	padding: .8rem 1.4rem;
 	cursor: pointer;
 	border: 1px solid transparent;
 	transition: all 0.1s;

@@ -27,6 +27,7 @@
 	margin: 1rem;
 	background-color: var(--white-color);
 	box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.2);
+	border: transparent 2px solid;
 	border-radius: 32px;
 }
 
@@ -37,6 +38,23 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
+}
+
+.delete-button {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+	opacity: 0.4;
+	transform: translate(-25%, 25%);
+	transition: opacity .3s;
+}
+
+.delete-button:hover {
+	opacity: 0.8;
 }
 
 .bot-picture {
@@ -55,13 +73,6 @@
 	object-fit: cover;
 	height: 100%;
 	width: 100%;
-}
-
-.bot-name-container {
-	/* display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center; */
 }
 
 .bot-name {
