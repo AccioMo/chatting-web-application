@@ -26,28 +26,24 @@ function ChatInput({ onSend }) {
 		};
 	}, []);
 	return (
-		<div className="container-of-container">
-			<div className="input-container">
-				<textarea
-					className="input-box"
-					value={value}
-					onChange={(e) => setValue(e.target.value)}
-					onKeyDown={handleKeyDown}
-					placeholder="Type a message..."
-				/>
-			</div>
-			<div className="send-button-container">
-				<button
-					className="send-button"
-					onClick={() => {
-						if (value === "") return;
-						onSend(value);
-						setValue("");
-					}}
-				>
-					Send
-				</button>
-			</div>
+		<div className="input-container">
+			<textarea
+				className="input-box"
+				value={value}
+				onChange={(e) => setValue(e.target.value)}
+				onKeyDown={handleKeyDown}
+				placeholder="Type a message..."
+			/>
+			<button
+				className="send-button"
+				onClick={() => {
+					if (value === "") return;
+					onSend(value);
+					setValue("");
+				}}
+			>
+				Send
+			</button>
 		</div>
 	);
 }

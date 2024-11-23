@@ -1,14 +1,17 @@
 .navbar-container {
-	display: flex;
+	position: sticky;
+	z-index: 10;
+	width: 100%;
+	/* background-color: var(--light-accent-color); */
 	justify-content: center;
+	padding-bottom: 0.5rem;
 	align-items: center;
 }
 
 .navbar {
 	display: flex;
-	position: sticky;
-	top: 0;
-	z-index: 2;
+	position: relative;
+	z-index: 100;
 	height: 56px;
 	padding: 7px 40px;
 	margin: 0;
@@ -16,6 +19,22 @@
 	justify-content: space-between;
 	background-color: var(--white-color);
 	box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar-container::before {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	transform: translateY(100%);
+	height: 2rem;
+	width: 100%;
+	background-color: var(--light-accent-color);
+	background: linear-gradient(
+		to top,
+		transparent 0%,
+		var(--light-accent-color) 100%
+	);
 }
 
 .username-item {

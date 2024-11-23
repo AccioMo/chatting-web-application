@@ -37,7 +37,6 @@ function SideBar({ my_user }) {
 	if (!getCookie("access_token")) return null;
 	return (
 		<div className="sidebar-container">
-			<div className="sidebar-box">
 				<div className="users-search-bar-container">
 					<input
 						placeholder="Search users..."
@@ -66,7 +65,6 @@ function SideBar({ my_user }) {
 						  })
 						: null}
 				</ul>
-			</div>
 		</div>
 	);
 }

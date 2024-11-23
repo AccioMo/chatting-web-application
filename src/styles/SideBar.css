@@ -1,11 +1,13 @@
 .sidebar-container {
 	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
 	height: 100%;
 	width: 20%;
 	min-width: 228px;
 	padding-right: .8rem;
 }
-
+/* 
 .sidebar-box {
 	display: flex;
 	width: 100%;
@@ -13,12 +15,11 @@
 	flex-direction: column;
 	justify-content:flex-start;
 	align-items: center;
-}
+} */
 
 .users-search-bar-container {
 	display: flex;
 	width: 100%;
-	padding: 0 1.2rem;
 	margin-bottom: .8rem;
 	flex-direction: column;
 	justify-content: center;
@@ -40,9 +41,7 @@
 .sidebar-items {
 	position: relative;
 	list-style: none;
-	overflow-y: scroll;
 	width: 100%;
-	padding: 0 1.2rem;
 	padding-bottom: .8rem;
 }
 

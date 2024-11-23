@@ -49,17 +49,17 @@ function MessagesContainer({ chat_id, uuid, lastMessage }) {
 		<div className="messages-container">
 			{messages?.length > 0
 				? messages.map((message, index) => (
-						<Message
-							key={index}
-							content={message?.content}
-							sender={message?.sender?.username}
-							ref={
-								index === messages?.length - 1
-									? messagesEndRef
-									: null
-							}
-						/>
-				  ))
+					<Message
+						key={index}
+						content={message?.content}
+						sender={message?.sender?.username}
+						ref={
+							index === messages?.length - 1
+								? messagesEndRef
+								: null
+						}
+					/>
+				))
 				: null}
 		</div>
 	);

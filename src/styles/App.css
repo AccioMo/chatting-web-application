@@ -11,51 +11,36 @@ input {
 	border: none;
 }
 
-html, body, #root {
-	height: 100%;
+body {
+	/* overflow-y: hidden; */
 	line-height: 1.5;
+	background-color: var(--light-accent-color);
 }
 
 /* body, #root, .page-container {
-	min-height: 100%;
+	height: 100%;
 } */
 
 :root {
 	--primary-color: #222831;
 	--secondary-color: #31363F;
-	--accent-color: #76ABAE;
-	--light-accent-color: #bbdede;
-	--dark-accent-color: #4c8484;
+	--accent-color: #656377;
+	--light-accent-color: #273043;
+	--dark-accent-color: #ffffff;
 	--white-color: #ffffff;
 	--red-color: #e7acac;
-}
 
-.large-container {
-	display: flex;
-	/* flex-direction: column; */
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	/* overflow: hidden; */
+	--platinum-color: #e4e5eb;
+	--silver-color: #d9d9d9;
 }
 
 .page-container {
 	display: flex;
-	/* flex-direction: column; */
-	justify-content: flex-start;
-	align-items: flex-start;
-	padding: .8rem;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
 	width: 100%;
-	height: 100%;
-	/* overflow: auto; */
-}
-
-.page-color {
-    background: linear-gradient(180deg, var(--light-accent-color), var(--light-accent-color));
-    /* background-size: 400% 400%; */
-    /* animation: gradient 15s ease infinite; */
-    /* height: 100vh; */
+	height: 100vh;
 }
 
 .no-select {
@@ -81,9 +66,9 @@ textarea {
 
 .page-content-container {
 	display: flex;
+	height: 100%;
+	/* position: relative; */
 	flex-direction: column;
 	/* padding: 0 0 0 .8rem;s */
 	width: 100%;
-	height: 100%;
-	/* overflow: hidden; */
 }
