@@ -1,11 +1,10 @@
 .sidebar-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
+	flex: 1;
+	overflow-y: auto;
 	height: 100%;
 	width: 20%;
 	min-width: 228px;
-	padding-right: .8rem;
+	/* padding-right: .8rem; */
 }
 /* 
 .sidebar-box {
