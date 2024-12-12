@@ -96,7 +96,7 @@ function AIWelcomePage() {
                                             process.env.REACT_APP_API_URL +
                                             bot.picture
                                         }
-                                        alt="bot"
+                                        alt="█▄▄ █▀█ ▀█▀ █▄█ █▄█  █"
                                     />
                                 </div>
                                 <div className="bot-inner-box">

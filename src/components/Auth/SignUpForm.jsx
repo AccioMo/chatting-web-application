@@ -58,7 +58,7 @@ function SignUpForm() {
     //   style={{
     //     borderColor: joinError
     //       ? "var(--red-color)"
-    //       : "var(--light-accent-color)",
+    //       : "var(--primary-color)",
     //   }}
     >
       <form onSubmit={handleSubmit(registerUser)}>
@@ -136,7 +136,7 @@ function SignUpForm() {
           style={{
             backgroundColor: joinError
               ? "var(--red-color)"
-              : "var(--light-accent-color)",
+              : "var(--primary-color)",
           }}
         >
           <button className="login-button" type="submit">

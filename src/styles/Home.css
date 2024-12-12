@@ -40,7 +40,7 @@
 }
 
 .bubble-button:hover {
-	border-color: var(--light-accent-color);
+	border-color: var(--primary-color);
 }
 
 .flex-center {

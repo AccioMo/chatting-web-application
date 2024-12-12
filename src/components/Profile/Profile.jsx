@@ -3,6 +3,7 @@ import { api, refreshToken } from "../Auth/Auth.tsx";
 import { getCookie, validCookie } from "../Auth/Cookies.jsx";
 import { NewChatMenuContext } from "../Chat/CommonChatsPage.jsx";
 import profilePicture from "../../images/profile.png"
+import SubmitButton from "../SubmitButton.jsx";
 
 function Profile({ username }) {
 	const { setNewChatMenu } = useContext(NewChatMenuContext);
@@ -57,19 +58,8 @@ function Profile({ username }) {
 						</div>
 					</div>
 					<div className="profile-actions">
-						<div className="profile-action-container">
-							<div
-								className="profile-action-button border"
-								onClick={() => setNewChatMenu(true)}
-							>
-								New Chat
-							</div>
-						</div>
-						<div className="profile-action-container">
-							<div className="profile-action-button border">
-								Add Friend
-							</div>
-						</div>
+							<SubmitButton onClick={() => setNewChatMenu(true)}>New Chat</SubmitButton>
+							<SubmitButton>Add Friend</SubmitButton>
 					</div>
 				</div>
 			</div>

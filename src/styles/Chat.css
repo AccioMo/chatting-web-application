@@ -20,25 +20,19 @@
 .chat-container {
 	display: flex;
 	position: relative;
-	min-width: 64px;
-	max-height: 128px;
+	min-width: 324px;
+	min-height: 120px;
 }
 
 .chat-box {
 	display: flex;
-	justify-content: space-between;
-	width: 100%;
-}
-
-.chat-inner-box {
-	display: flex;
-	background-color: var(--white-color);
+	background-color: var(--secondary-color);
 	justify-content: space-between;
 	align-items: center;
 	overflow: hidden;
 	padding: .8rem;
 	width: 100%;
-	border-radius: 32px;
+	border-radius: 28px;
 	box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -55,7 +49,7 @@
 .chat-chatter {
 	font-size: 13px;
 	font-weight: 600;
-	color: var(--white-color);
+	color: var(--text-color);
 	background-color: var(--accent-color);
 	border: 1px solid var(--accent-color);
 	padding: .1rem .4rem;
@@ -67,9 +61,8 @@
 }
 
 .chat-chatter:hover {
-	color: var(--accent-color);
-	background-color: var(--white-color);
-	border: 1px solid var(--accent-color);
+	opacity: 0.80;
+	border: 1px solid var(--text-color);
 }
 
 .chat-chatter::before {
@@ -83,8 +76,8 @@
 	font-size: 16px;
 	justify-content: center;
 	align-items: center;
-	padding: 10px 20px;
-	overflow-y: auto;
+	color: var(--text-color);
+	/* overflow-y: auto; */
 }
 
 .chat-footer {
@@ -103,7 +96,7 @@
 .chat-text {
 	font-size: 16px;
 	padding: 10px 20px;
-	background-color: var(--white-color);
+	background-color: var(--secondary-color);
 }
 
 .button-container {
@@ -114,8 +107,8 @@
 
 .chat-button {
 	background-color: var(--accent-color);
-	border: 1px solid var(--white-color);
-	color: var(--white-color);
+	border: 1px solid var(--secondary-color);
+	color: var(--text-color);
 	border-radius: 10px;
 	padding: 14px 20px;
 	/* margin: 8px 8px; */
@@ -125,7 +118,7 @@
 }
 
 .chat-button:hover {
-	background-color: var(--white-color);
+	background-color: var(--secondary-color);
 	border: 1px solid var(--accent-color);
-	color: var(--accent-color);
+	color: var(--text-color);
 }

@@ -85,7 +85,7 @@ function LoginForm() {
                     style={{
                         backgroundColor: loginError
                             ? "var(--red-color)"
-                            : "var(--light-accent-color)",
+                            : "var(--primary-color)",
                     }}
                 >
                     <button className="login-button" type="submit">

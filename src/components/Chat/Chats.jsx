@@ -2,9 +2,6 @@ import React from 'react'
 
 function Chats() {
 	const [chats, setChats] = useState(null);
-	// const access_token = getCookie("access_token");
-	// const decodedToken = jwtDecode(access_token);
-	// const uuid = decodedToken.uuid;
 	useEffect(() => {
 		const getChats = async (retry = 1) => {
 			try {

@@ -4,11 +4,12 @@
 	justify-content: space-around;
 	padding-bottom: 1.2rem;
 	align-items: center;
+	color: var(--text-color);
 }
 
 .round-picture {
 	border: 1px solid var(--primary-color);
-	background-color: var(--white-color);
+	background-color: var(--secondary-color);
 }
 
 .picture-container {
@@ -21,7 +22,7 @@
 	justify-content: center;
 	/* align-items: center; */
 	position: relative;
-	background-color: var(--white-color);
+	background-color: var(--secondary-color);
 	width: 100%;
 	height: 256px;
 	border-radius: 32px;
@@ -62,8 +63,8 @@
 	height: 100%;
 	background: repeating-linear-gradient(
 		45deg,
-		var(--light-accent-color) 10px,
-		var(--light-accent-color) 12px,
+		var(--primary-color) 10px,
+		var(--primary-color) 12px,
 		transparent 12px,
 		transparent 20px
 		);
@@ -80,7 +81,7 @@
 .profile-actions {
 	position: absolute;
 	display: flex;
-	padding: .4rem 0;
+	padding: .8rem 1.2rem;
 }
 
 .profile-action-container {
@@ -100,11 +101,11 @@
 	align-items: center;
 	padding: .6rem 1.6rem;
 	cursor: pointer;
-	background-color: var(--white-color);
+	background-color: var(--accent-color);
 	border-radius: 56px;
 	transition: all 0.3s;
 }
 
 .profile-action-button:hover {
-	border-color: var(--light-accent-color);
+	opacity: 0.80;
 }

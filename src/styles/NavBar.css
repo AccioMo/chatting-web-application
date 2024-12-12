@@ -2,7 +2,7 @@
 	position: sticky;
 	z-index: 10;
 	width: 100%;
-	/* background-color: var(--light-accent-color); */
+	/* background-color: var(--primary-color); */
 	justify-content: center;
 	padding-bottom: 0.5rem;
 	align-items: center;
@@ -17,7 +17,7 @@
 	margin: 0;
 	width: 100%;
 	justify-content: space-between;
-	background-color: var(--white-color);
+	background-color: var(--secondary-color);
 	box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -27,21 +27,21 @@
 	bottom: 0;
 	right: 0;
 	transform: translateY(100%);
-	height: 2rem;
+	height: 1rem;
 	width: 100%;
-	background-color: var(--light-accent-color);
+	background-color: var(--primary-color);
 	background: linear-gradient(
 		to top,
 		transparent 0%,
-		var(--light-accent-color) 100%
+		var(--primary-color) 100%
 	);
 }
 
 .username-item {
-	color: var(--primary-color);
 	padding: 10px 20px;	
 	cursor: pointer;
 	font-weight: 750;
+	color: var(--text-color);
 }
 
 .nav-items-array {
@@ -52,7 +52,7 @@
 
 .nav-item {
 	padding: 10px 20px;
-	color: var(--primary-color);
+	color: var(--text-color);
 	text-decoration: none;
 	cursor: pointer;
 }

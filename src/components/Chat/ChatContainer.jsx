@@ -28,8 +28,7 @@ function ChatContainer({ chat }) {
 	}
 	return (
 		<div className='chat-container'>
-			<div className='chat-box'>
-				<div className='chat-inner-box'>
+				<div className='chat-box'>
 					<div className='chat-header'>
 						{chat.chatters.map((chatter, index) => {
 							return (
@@ -51,7 +50,6 @@ function ChatContainer({ chat }) {
 						</SubmitButton>
 					</div>
 				</div>
-			</div>
 		</div>
 	)
 }

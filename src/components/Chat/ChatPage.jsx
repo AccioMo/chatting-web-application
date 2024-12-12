@@ -26,11 +26,11 @@ function ChatPage() {
 	return (
 		<>
 			<div className="conversation-box">
-					<MessagesContainer
-						uuid={uuid}
-						chat_id={chat_id}
-						lastMessage={lastJsonMessage}
-					/>
+				<MessagesContainer
+					uuid={uuid}
+					chat_id={chat_id}
+					lastMessage={lastJsonMessage}
+				/>
 				<ChatInput onSend={handleSendMessage} />
 			</div>
 		</>

@@ -38,13 +38,11 @@ function AIChatPage() {
 	};
 	return (
 		<div className="conversation-box">
-			<div className="conversation">
-				<MessagesContainer
-					uuid={uuid}
-					chat_id={chat_id}
-					lastMessage={lastMessage}
-				/>
-			</div>
+			<MessagesContainer
+				uuid={uuid}
+				chat_id={chat_id}
+				lastMessage={lastMessage}
+			/>
 			<ChatInput onSend={handleSendMessage} />
 		</div>
 	);

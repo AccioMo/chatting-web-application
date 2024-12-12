@@ -8,6 +8,7 @@
 
 .popup-container {
 	display: flex;
+	color: var(--text-color);
 	z-index: 1;
 	position: absolute;
 	justify-content: center;
@@ -19,16 +20,18 @@
 	backdrop-filter: blur(8px);
 	z-index: 100;
 	padding: 1rem;
-	margin: 0;
+	border: 1px solid var(--text-color);
+	transition: all 0.5s;
 }
 
 .popup-menu {
 	display: flex;
 	justify-content: center;
-	background-color: var(--white-color);
-	border-radius: 56px;
+	background-color: var(--secondary-color);
+	border-radius: 32px;
 	align-items: center;
 	padding: 1.6rem;
+	border: 1px solid var(--text-color);
 	box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -59,6 +62,11 @@
 	padding: .8rem .4rem;
 }
 
+input {
+	color: var(--text-color);
+	background-color: var(--secondary-color);
+}
+
 .popup-input {
 	position: relative;
 	display: flex;
@@ -69,9 +77,15 @@
 	font-size: .8rem;
 	transition: all 0.3s;
 	border: none;
+	color: var(--text-color);
+	background-color: var(--secondary-color);
 	border-bottom: 1px solid var(--primary-color);
   }
   
+  .popup-body-content-item {
+	margin-top: 1.5rem;
+  }
+
   .popup-input::after {
 	content: "";
 	display: block;
@@ -80,7 +94,7 @@
 	left: 0;
 	width: 0%;
 	height: 2px;
-	color: var(--primary-color);
+	color: var(--text-color);
 	background-color: var(--primary-color);
 	transition: all 0.3s;
   }
