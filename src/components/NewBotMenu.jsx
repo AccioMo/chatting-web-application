@@ -38,7 +38,7 @@ function NewBotMenu() {
 					setCreateBotMenu(false);
 			}}
 		>
-			<div className="popup-menu">
+			<div className="popup-menu shadow">
 				<div className="popup">
 					<div className="popup-header">
 						<h1>Name your bot</h1>

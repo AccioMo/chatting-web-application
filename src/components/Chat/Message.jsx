@@ -22,7 +22,7 @@ const Message = forwardRef((props, ref) => {
 			<div
 				className={` ${
 					isUser(sender) ? "sender-me" : "sender-other"
-				} message-inner-box`}
+				} shadow message-inner-box`}
 			>
 				<div className="message-content-box">
 					<div className="message-content">

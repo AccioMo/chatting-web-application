@@ -27,7 +27,6 @@
 	margin: 1rem;
 	color: var(--text-color);
 	background-color: var(--secondary-color);
-	box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.2);
 	border: transparent 2px solid;
 	border-radius: 32px;
 }

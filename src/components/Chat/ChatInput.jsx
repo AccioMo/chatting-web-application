@@ -28,14 +28,14 @@ function ChatInput({ onSend }) {
 	return (
 		<div className="input-container">
 			<textarea
-				className="input-box"
+				className="input-box shadow"
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
 				onKeyDown={handleKeyDown}
 				placeholder="Type a message..."
 			/>
 			<button
-				className="send-button"
+				className="send-button shadow"
 				onClick={() => {
 					if (value === "") return;
 					onSend(value);

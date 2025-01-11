@@ -1,14 +1,14 @@
 :root {
-	--primary-color: #2a1b24;
-	--secondary-color: #130913;
-	--text-color: #cccccc;
+	--primary-color: #E6E6E9;
+	--secondary-color: #F4F4F6;/* hsla(300, 36%, 42%, 0.015); */
+	--text-color: #424242;
 	--accent-color: #151317;
 
 	--dark-accent-color: #ffffff;
 	--red-color: #e7acac;
 
-	--platinum-color: #2f3037;
-	--silver-color: #1b181b;
+	--platinum-color: #ffffff;
+	--silver-color: #ffffff;
 }
 
 * {
@@ -72,4 +72,9 @@ textarea {
 	flex-direction: column;
 	/* padding: 0 0 0 .8rem; */
 	width: 100%;
+}
+
+
+.shadow {
+	box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
 }

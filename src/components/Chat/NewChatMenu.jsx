@@ -38,7 +38,7 @@ function NewChatMenu({ chatWith }) {
 					setNewChatMenu(false);
 			}}
 		>
-			<div className="popup-menu">
+			<div className="popup-menu shadow">
 				<div className="popup">
 					<div className="popup-header">
 						<h1>New Chat</h1>

@@ -35,7 +35,7 @@ function Profile({ username }) {
 	}, [username]);
 	return (
 		<div className="profile-container">
-			<div className="profile-header">
+			<div className="profile-header shadow">
 				<div className="banner-top">
 					<div className="banner-picture"></div>
 				</div>
