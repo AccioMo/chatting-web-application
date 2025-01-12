@@ -51,7 +51,7 @@ function LoginForm() {
         }
     };
     return (
-        <div className="login-container">
+        <div className="login-container shadow">
             <form onSubmit={logUserIn} className="login-form">
                 <div className="input-field">
                     <label className="login-label" htmlFor="username">

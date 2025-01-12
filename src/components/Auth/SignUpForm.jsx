@@ -54,7 +54,7 @@ function SignUpForm() {
   };
   return (
     <div
-      className="login-container"
+      className="login-container shadow"
     //   style={{
     //     borderColor: joinError
     //       ? "var(--red-color)"
