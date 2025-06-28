@@ -22,7 +22,6 @@ function ChatPage() {
 			content: message,
 		});
 	};
-	console.log("kk", process.env.REACT_APP_WS_URL)
 	return (
 		<>
 			<div className="conversation-box">

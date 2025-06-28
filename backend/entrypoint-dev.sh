@@ -16,6 +16,6 @@ print('Superuser created or updated.')
   "
 fi
 
-# Start Daphne ASGI server for WebSocket support in production
-echo "Starting Daphne ASGI server..."
+# Start Daphne ASGI server for WebSocket support
+echo "Starting Daphne ASGI server with WebSocket support..."
 exec daphne -b 0.0.0.0 -p 8000 backend.asgi:application

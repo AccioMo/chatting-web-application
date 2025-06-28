@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=backend.settings
+      - CORS_ORIGIN_WHITELIST=http://localhost:3000
+      - ALLOWED_HOSTS=localhost backend
+      - SECRET_KEY=your-django-secret-key
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DEBUG=True
+    volumes:
+      - ./backend:/app
+      - backend_static:/app/staticfiles
+      - backend_data:/app/db_data
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules  # Anonymous volume to prevent node_modules from being overwritten
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # For Windows file watching
+      - REACT_APP_API_URL=http://localhost:8000
+      - REACT_APP_WS_URL=ws://localhost:8000/ws/chat/
+      - WATCHPACK_POLLING=true  # Additional polling for file changes
+    depends_on:
+      - backend
+    stdin_open: true  # Keep STDIN open for React dev server
+    tty: true        # Allocate a pseudo-TTY
+    restart: unless-stopped
+
+volumes:
+  backend_static:
+  backend_data:
