@@ -11,7 +11,27 @@ A modern, real-time chatting application built with React and Django. Connect wi
 - **Cross-platform**: Works on desktop and mobile browsers
 - **Docker Support**: Easy deployment with Docker containers
 
-## 🚀 Quick Start
+## � Screenshots
+
+<div align="center">
+
+### Login & Authentication
+![Login Page](Screenshot-0.png)
+![Chat Interface](Screenshot-1.png)
+
+
+### User Dashboard
+![User Dashboard](Screenshot-2.png)
+
+### Chat Management
+![Chat Management](Screenshot-3.png)
+
+### Chat Interface
+![Profile Settings](Screenshot-4.png)
+
+</div>
+
+## �🚀 Quick Start
 
 ### Prerequisites
 
@@ -23,12 +43,12 @@ A modern, real-time chatting application built with React and Django. Connect wi
 1. **Clone the repository**
    ```bash
    git clone <your-repo-url>
-   cd cryptochat
+   cd crypt-connect
    ```
 
 2. **Start the development environment**
-   ```powershell
-   .\start-dev.ps1
+   ```bash
+   docker-compose -f docker-compose.dev.yml up --build
    ```
 
 3. **Access the application**
@@ -39,15 +59,25 @@ A modern, real-time chatting application built with React and Django. Connect wi
 ### Production Setup
 
 1. **Start production environment**
-   ```powershell
-   .\start-app.ps1
+   ```bash
+   docker-compose up --build
    ```
 
 ### Local Development (without Docker)
 
-1. **Start without Docker**
-   ```powershell
-   .\start-local.ps1
+1. **Backend Setup**
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   python manage.py migrate
+   python manage.py runserver
+   ```
+
+2. **Frontend Setup** (in a new terminal)
+   ```bash
+   cd frontend
+   npm install
+   npm start
    ```
 
 ## 🏗️ Architecture
@@ -69,7 +99,7 @@ A modern, real-time chatting application built with React and Django. Connect wi
 ## 📁 Project Structure
 
 ```
-cryptochat/
+crypt-connect/
 ├── backend/                 # Django backend
 │   ├── backend/            # Django project settings
 │   ├── chatapp/           # Main chat application
@@ -87,16 +117,16 @@ cryptochat/
 │   └── Dockerfile       # Production Docker config
 ├── docker-compose.yml    # Production Docker Compose
 ├── docker-compose.dev.yml # Development Docker Compose
-└── start-*.ps1          # Startup scripts
+└── LICENSE              # Project license
 ```
 
-## 🔧 Development Scripts
+## 🔧 Development Commands
 
-| Script | Purpose | Environment |
-|--------|---------|-------------|
-| `start-dev.ps1` | Development with Docker + live reload | Development |
-| `start-app.ps1` | Production build with Docker | Production |
-| `start-local.ps1` | Local development without Docker | Development |
+| Command | Purpose | Environment |
+|---------|---------|-------------|
+| `docker-compose -f docker-compose.dev.yml up --build` | Development with Docker + live reload | Development |
+| `docker-compose up --build` | Production build with Docker | Production |
+| Manual setup (see Local Development section) | Local development without Docker | Development |
 
 ## 🌐 API Endpoints
 
@@ -164,7 +194,7 @@ OPENAI_API_KEY=your-openai-key (optional)
 ## 🚦 Troubleshooting
 
 ### WebSocket 404 Errors
-- Ensure you're using the development setup (`start-dev.ps1`)
+- Ensure you're using the development setup (`docker-compose -f docker-compose.dev.yml up`)
 - Check that Daphne server is running (not Gunicorn)
 - Verify WebSocket URL format: `ws://localhost:8000/ws/chat/<chat_id>`
 
@@ -174,9 +204,9 @@ OPENAI_API_KEY=your-openai-key (optional)
 - Check port availability (3000, 8000)
 
 ### Development Setup
-- For Windows: Use PowerShell scripts provided
-- For live reload: Use `start-dev.ps1` (not `start-app.ps1`)
-- For fastest development: Use `start-local.ps1` (requires local Python/Node.js)
+- For Windows: Use the Docker commands provided above
+- For live reload: Use `docker-compose -f docker-compose.dev.yml up` (not production setup)
+- For fastest development: Use manual setup (requires local Python/Node.js)
 
 ## 🤝 Contributing
 
