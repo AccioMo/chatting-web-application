@@ -51,7 +51,7 @@ A modern, real-time chatting application built with React and Django. Connect wi
    docker-compose -f docker-compose.dev.yml up --build
    ```
 
-3. **Access the application**
+3. **Access the application (locally)**
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:8000
    - Admin Panel: http://localhost:8000/admin
