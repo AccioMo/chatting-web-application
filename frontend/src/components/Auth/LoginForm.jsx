@@ -59,7 +59,7 @@ function LoginForm() {
                     </label>
                     <input
                         className="login-input"
-						placeholder="m9r9b"
+						placeholder="Username"
                         type="username"
                         id="username"
                     />
@@ -70,7 +70,7 @@ function LoginForm() {
                     </label>
                     <input
                         className="login-input"
-						placeholder="password123"
+						placeholder="Password"
                         type="password"
                         id="password"
                     />

@@ -16,18 +16,20 @@ A modern, real-time chatting application built with React and Django. Connect wi
 <div align="center">
 
 ### Login & Authentication
-![Login Page](Screenshot-0.png)
-![Chat Interface](Screenshot-1.png)
-
-
-### User Dashboard
-![User Dashboard](Screenshot-2.png)
-
-### Chat Management
-![Chat Management](Screenshot-3.png)
-
-### Chat Interface
-![Profile Settings](Screenshot-4.png)
+<table>
+  <tr>
+    <td><img src="Screenshot-0.png" alt="Login Page" width="400"/></td>
+    <td><img src="Screenshot-1.png" alt="Chat Interface" width="400"/></td>
+  </tr>
+  <tr>
+    <td><img src="Screenshot-2.png" alt="User Dashboard" width="400"/></td>
+    <td><img src="Screenshot-4.png" alt="Chat Management" width="400"/></td>
+  </tr>
+  <tr>
+    <td><img src="Screenshot-3.png" alt="Profile Settings" width="400"/></td>
+    <td></td>
+  </tr>
+</table>
 
 </div>
 
@@ -42,13 +44,13 @@ A modern, real-time chatting application built with React and Django. Connect wi
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
-   cd crypt-connect
+   git clone git@github.com:AccioMo/chatting-web-application.git
+   cd chatting-web-application
    ```
 
-2. **Start the development environment**
+2. **Start the application environment**
    ```bash
-   docker-compose -f docker-compose.dev.yml up --build
+   docker-compose -f docker-compose.yml up --build
    ```
 
 3. **Access the application (locally)**
